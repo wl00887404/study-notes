@@ -13,3 +13,14 @@
 ---
 
 ## C++
+
+```bash
+sudo apt-get install build-essential
+sudo apt-get install libgl1-mesa-dev
+sudo apt-get install libglu1-mesa-dev
+sudo apt-get install libglut-dev
+```
+
+```bash
+g++ hello_window.cxx -lGL -lGLU -lglut
+```
