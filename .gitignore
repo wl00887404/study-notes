@@ -3,5 +3,5 @@ cmake_install.cmake
 CMakeFiles
 Makefile
 bin
-a.out
+*.out
 .vscode
