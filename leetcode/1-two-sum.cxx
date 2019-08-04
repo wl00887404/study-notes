@@ -1,5 +1,6 @@
 #include <iostream>
 #include <vector>
+#include <unordered_map>
 using namespace std;
 
 class Solution
@@ -7,15 +8,19 @@ class Solution
 public:
   vector<int> twoSum(vector<int> &nums, int target)
   {
-    for (int i = 0; i < nums.size(); i++)
+    unordered_map<int, int> map;
+    int length = nums.size();
+
+    for (int i = 0; i < length; i++)
     {
-      for (int j = i + 1; j < nums.size(); j++)
+      int x = nums[i];
+      int rest = target - x;
+      if (map.count(rest))
       {
-        if ((nums[i] + nums[j]) == target)
-        {
-          return {i, j};
-        }
+        return {i, map[rest]};
       }
+
+      map[nums[i]] = i;
     }
 
     return {};

@@ -13,6 +13,11 @@ class Solution
 public:
   ListNode *addTwoNumbers(ListNode *l1, ListNode *l2)
   {
+    if (l1->val == 0 && l1->next == nullptr)
+      return l2;
+    if (l2->val == 0 && l2->next == nullptr)
+      return l1;
+
     ListNode *head = new ListNode(0);
     ListNode *pointer = head;
     ListNode *prev = nullptr;
@@ -20,7 +25,7 @@ public:
     while (l1 != nullptr || l2 != nullptr)
     {
       ListNode *next = new ListNode(0);
-      
+
       int val1 = l1 == nullptr ? 0 : l1->val;
       int val2 = l2 == nullptr ? 0 : l2->val;
 
