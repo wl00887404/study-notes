@@ -2,10 +2,8 @@
 #include <vector>
 using namespace std;
 
-int abs(int x)
-{
-  return x < 0 ? x * -1 : x;
-}
+// 很酷的逼近法
+// https://leetcode.wang/leetCode-11-Container-With-Most-Water.html
 
 int min(int x, int y)
 {
@@ -18,19 +16,38 @@ public:
   int maxArea(vector<int> &height)
   {
     int result = 0;
+    int width = height.size() - 1;
+    vector<int>::iterator begin = height.begin();
+    vector<int>::iterator end = height.end() - 1;
 
-    for (int i = 0; i < height.size(); i++)
+    while (begin != end)
     {
-      for (int j = i + 1; j < height.size(); j++)
+      int volume = min(*begin, *end) * width;
+
+      if (volume > result)
       {
-        int volume = abs(i - j) * min(height[i], height[j]);
-        if (volume > result)
-        {
-          result = volume;
-        }
+        result = volume;
       }
+
+      if (*begin > *end)
+      {
+        end--;
+        width--;
+        continue;
+      }
+
+      begin++;
+      width--;
     }
 
     return result;
   }
-};
+} solution;
+
+int main()
+{
+  vector<int> target = {1, 8, 6, 2, 5, 4, 8, 3, 7};
+  cout << solution.maxArea(target) << endl;
+
+  return 0;
+}
