@@ -8,14 +8,10 @@ public:
   string longestCommonPrefix(vector<string> &strs)
   {
     if (strs.size() == 0)
-    {
       return "";
-    }
 
     if (strs.size() == 1)
-    {
       return strs[0];
-    }
 
     const char *pointers[strs.size() - 1];
     const char *ref = strs[0].c_str();
@@ -31,9 +27,7 @@ public:
       for (int i = 1; i < strs.size(); i++)
       {
         if (*pointers[i - 1] != *ref)
-        {
           return result;
-        }
 
         pointers[i - 1]++;
       }

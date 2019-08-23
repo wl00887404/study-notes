@@ -25,9 +25,7 @@ public:
       int volume = min(*begin, *end) * width;
 
       if (volume > result)
-      {
         result = volume;
-      }
 
       if (*begin > *end)
       {

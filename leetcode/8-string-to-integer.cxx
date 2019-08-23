@@ -14,9 +14,7 @@ public:
     const int min = numeric_limits<int>::min();
 
     while (*pointer == ' ')
-    {
       pointer++;
-    }
 
     if (*pointer == '+')
     {
@@ -33,20 +31,15 @@ public:
       int charCode = (int)*pointer;
 
       if (charCode < 48 || charCode > 57)
-      {
         break;
-      }
 
       result = result * 10 + (charCode - 48) * sign;
 
       if (result > max)
-      {
         return max;
-      }
+
       if (result < min)
-      {
         return min;
-      }
 
       pointer++;
     }

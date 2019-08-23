@@ -4,9 +4,7 @@ public:
   bool isPalindrome(int x)
   {
     if (x < 0)
-    {
       return false;
-    }
 
     long long converted = 0;
     int copied = x;
@@ -20,9 +18,7 @@ public:
     }
 
     if (x == converted)
-    {
       return true;
-    }
 
     return false;
   }

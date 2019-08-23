@@ -21,9 +21,7 @@ public:
 
       result += ones;
       if (result > max || result < min)
-      {
         return 0;
-      }
     }
 
     return result;
