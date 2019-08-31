@@ -23,43 +23,35 @@ public:
     {
       for (int i = 0; i + (length - 1) < s.length(); i++)
       {
-        if (isPalindrome(s, i, i + (length - 1)))
-          return s.substr(i, length);
+        int j = 0;
+        int to = i + length - 1;
+        
+        while (true)
+        {
+          if (s[i + j] != s[to - j])
+            break;
+
+          if ((i + j) == (to - j) || (i + j + 1) == (to - j))
+            return s.substr(i, length);
+
+          j++;
+        }
       }
     }
 
     return string({s[0]});
   }
-
-  bool isPalindrome(string s, int from, int to)
-  {
-    while (true)
-    {
-      if (s[from] != s[to])
-        return false;
-
-      if (from == to || from + 1 == to)
-        break;
-
-      from++;
-      to--;
-    }
-
-    return true;
-  }
 } solution;
 
 int main()
 {
-  // cout << solution.longestPalindrome("babad") << endl;  // bab
-  // cout << solution.longestPalindrome("cbbd") << endl; // bb
-  // cout << solution.longestPalindrome("ac") << endl;     // a
-  // cout << solution.longestPalindrome("ccc") << endl;    // ccc
-  // cout << solution.longestPalindrome("abcba") << endl;  // a
-  // cout << solution.longestPalindrome("abacab") << endl; // bacab
-  cout << solution.longestPalindrome("zudfweormatjycujjirzjpyrmaxurectxrtqedmmgergwdvjmjtstdhcihacqnothgttgqfywcpgnuvwglvfiuxteopoyizgehkwuvvkqxbnufkcbodlhdmbqyghkojrgokpwdhtdrwmvdegwycecrgjvuexlguayzcammupgeskrvpthrmwqaqsdcgycdupykppiyhwzwcplivjnnvwhqkkxildtyjltklcokcrgqnnwzzeuqioyahqpuskkpbxhvzvqyhlegmoviogzwuiqahiouhnecjwysmtarjjdjqdrkljawzasriouuiqkcwwqsxifbndjmyprdozhwaoibpqrthpcjphgsfbeqrqqoqiqqdicvybzxhklehzzapbvcyleljawowluqgxxwlrymzojshlwkmzwpixgfjljkmwdtjeabgyrpbqyyykmoaqdambpkyyvukalbrzoyoufjqeftniddsfqnilxlplselqatdgjziphvrbokofvuerpsvqmzakbyzxtxvyanvjpfyvyiivqusfrsufjanmfibgrkwtiuoykiavpbqeyfsuteuxxjiyxvlvgmehycdvxdorpepmsinvmyzeqeiikajopqedyopirmhymozernxzaueljjrhcsofwyddkpnvcvzixdjknikyhzmstvbducjcoyoeoaqruuewclzqqqxzpgykrkygxnmlsrjudoaejxkipkgmcoqtxhelvsizgdwdyjwuumazxfstoaxeqqxoqezakdqjwpkrbldpcbbxexquqrznavcrprnydufsidakvrpuzgfisdxreldbqfizngtrilnbqboxwmwienlkmmiuifrvytukcqcpeqdwwucymgvyrektsnfijdcdoawbcwkkjkqwzffnuqituihjaklvthulmcjrhqcyzvekzqlxgddjoir") << endl; // bacab
-  // cout << solution.isPalindrome("aca", 0, 2) << endl;
-  // cout << solution.isPalindrome("abcda", 0, 4) << endl;
+  cout << solution.longestPalindrome("babad") << endl;  // bab
+  cout << solution.longestPalindrome("cbbd") << endl;   // bb
+  cout << solution.longestPalindrome("ac") << endl;     // a
+  cout << solution.longestPalindrome("ccc") << endl;    // ccc
+  cout << solution.longestPalindrome("abcba") << endl;  // abcba
+  cout << solution.longestPalindrome("abacab") << endl; // bacab
+  cout << solution.longestPalindrome("zudfweormatjycujjirzjpyrmaxurectxrtqedmmgergwdvjmjtstdhcihacqnothgttgqfywcpgnuvwglvfiuxteopoyizgehkwuvvkqxbnufkcbodlhdmbqyghkojrgokpwdhtdrwmvdegwycecrgjvuexlguayzcammupgeskrvpthrmwqaqsdcgycdupykppiyhwzwcplivjnnvwhqkkxildtyjltklcokcrgqnnwzzeuqioyahqpuskkpbxhvzvqyhlegmoviogzwuiqahiouhnecjwysmtarjjdjqdrkljawzasriouuiqkcwwqsxifbndjmyprdozhwaoibpqrthpcjphgsfbeqrqqoqiqqdicvybzxhklehzzapbvcyleljawowluqgxxwlrymzojshlwkmzwpixgfjljkmwdtjeabgyrpbqyyykmoaqdambpkyyvukalbrzoyoufjqeftniddsfqnilxlplselqatdgjziphvrbokofvuerpsvqmzakbyzxtxvyanvjpfyvyiivqusfrsufjanmfibgrkwtiuoykiavpbqeyfsuteuxxjiyxvlvgmehycdvxdorpepmsinvmyzeqeiikajopqedyopirmhymozernxzaueljjrhcsofwyddkpnvcvzixdjknikyhzmstvbducjcoyoeoaqruuewclzqqqxzpgykrkygxnmlsrjudoaejxkipkgmcoqtxhelvsizgdwdyjwuumazxfstoaxeqqxoqezakdqjwpkrbldpcbbxexquqrznavcrprnydufsidakvrpuzgfisdxreldbqfizngtrilnbqboxwmwienlkmmiuifrvytukcqcpeqdwwucymgvyrektsnfijdcdoawbcwkkjkqwzffnuqituihjaklvthulmcjrhqcyzvekzqlxgddjoir") << endl;
 
   return 0;
 }
