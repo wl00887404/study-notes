@@ -4,18 +4,17 @@
 
 using namespace std;
 
-unordered_map<char, char> parentheses_map = {
-    {')', '('},
-    {']', '['},
-    {'}', '{'},
-};
-
 class Solution
 {
 public:
   bool isValid(string s)
   {
     stack<char> stack;
+    unordered_map<char, char> parentheses_map = {
+        {')', '('},
+        {']', '['},
+        {'}', '{'},
+    };
 
     for (int i = 0; i < s.length(); i++)
     {
