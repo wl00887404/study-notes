@@ -2,44 +2,54 @@
 using namespace std;
 
 /*
- * 幹幹幹幹幹 終於看懂了
- * 要找的是 aba cdeedc 這種組合
- *  
- * from to length
- * 0    5  5
- * 0    4  4
- * 1    5  4
+ * brute force: cd9542015c
  */
+
+int max(int x, int y)
+{
+  return x > y ? x : y;
+}
 
 class Solution
 {
 public:
   string longestPalindrome(string s)
   {
-    if (s.length() == 0)
-      return "";
 
-    for (int length = s.length(); length > 1; length--)
+    int from = 0;
+    int length = 0;
+
+    for (int i = 0; i < s.length(); i++)
     {
-      for (int i = 0; i + (length - 1) < s.length(); i++)
+      int palindromeLength = max(
+          getPalindromeLength(s, i, i),
+          getPalindromeLength(s, i, i + 1));
+
+      if (palindromeLength > length)
       {
-        int j = 0;
-        int to = i + length - 1;
-        
-        while (true)
-        {
-          if (s[i + j] != s[to - j])
-            break;
-
-          if ((i + j) == (to - j) || (i + j + 1) == (to - j))
-            return s.substr(i, length);
-
-          j++;
-        }
+        length = palindromeLength;
+        from = i - palindromeLength / 2 - palindromeLength % 2 + 1;
       }
     }
 
-    return string({s[0]});
+    return s.substr(from, length);
+  }
+
+  int getPalindromeLength(string s, int left, int right)
+  {
+    while (true)
+    {
+      if (left < 0 || right > s.length() - 1)
+        break;
+
+      if (s[left] != s[right])
+        break;
+
+      left--;
+      right++;
+    }
+
+    return right - left - 1;
   }
 } solution;
 
@@ -51,7 +61,8 @@ int main()
   cout << solution.longestPalindrome("ccc") << endl;    // ccc
   cout << solution.longestPalindrome("abcba") << endl;  // abcba
   cout << solution.longestPalindrome("abacab") << endl; // bacab
-  cout << solution.longestPalindrome("zudfweormatjycujjirzjpyrmaxurectxrtqedmmgergwdvjmjtstdhcihacqnothgttgqfywcpgnuvwglvfiuxteopoyizgehkwuvvkqxbnufkcbodlhdmbqyghkojrgokpwdhtdrwmvdegwycecrgjvuexlguayzcammupgeskrvpthrmwqaqsdcgycdupykppiyhwzwcplivjnnvwhqkkxildtyjltklcokcrgqnnwzzeuqioyahqpuskkpbxhvzvqyhlegmoviogzwuiqahiouhnecjwysmtarjjdjqdrkljawzasriouuiqkcwwqsxifbndjmyprdozhwaoibpqrthpcjphgsfbeqrqqoqiqqdicvybzxhklehzzapbvcyleljawowluqgxxwlrymzojshlwkmzwpixgfjljkmwdtjeabgyrpbqyyykmoaqdambpkyyvukalbrzoyoufjqeftniddsfqnilxlplselqatdgjziphvrbokofvuerpsvqmzakbyzxtxvyanvjpfyvyiivqusfrsufjanmfibgrkwtiuoykiavpbqeyfsuteuxxjiyxvlvgmehycdvxdorpepmsinvmyzeqeiikajopqedyopirmhymozernxzaueljjrhcsofwyddkpnvcvzixdjknikyhzmstvbducjcoyoeoaqruuewclzqqqxzpgykrkygxnmlsrjudoaejxkipkgmcoqtxhelvsizgdwdyjwuumazxfstoaxeqqxoqezakdqjwpkrbldpcbbxexquqrznavcrprnydufsidakvrpuzgfisdxreldbqfizngtrilnbqboxwmwienlkmmiuifrvytukcqcpeqdwwucymgvyrektsnfijdcdoawbcwkkjkqwzffnuqituihjaklvthulmcjrhqcyzvekzqlxgddjoir") << endl;
 
+  // cout << solution.getPalindromeLength("abcbar", 2, 2) << endl;
+  // cout << solution.getPalindromeLength("bc", 0, 1) << endl;
   return 0;
 }
