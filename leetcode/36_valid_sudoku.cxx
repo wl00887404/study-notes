@@ -1,87 +1,65 @@
 #include <iostream>
 #include <vector>
-#include <unordered_set>
 using namespace std;
 
-unordered_set<char> s;
-
-bool isJiugonggeValid(int x, int y, vector<vector<char>> &board)
-{
-  if (!s.empty())
-    s.clear();
-
-  for (int i = 0; i < 3; i++)
-    for (int j = 0; j < 3; j++)
-    {
-      char target = board[3 * x + i][3 * y + j];
-
-      if (target == '.')
-        continue;
-
-      if (s.count(target))
-        return false;
-
-      s.insert(target);
-    }
-
-  return true;
-}
-
-bool isRowValid(int y, vector<vector<char>> &board)
-{
-  if (!s.empty())
-    s.clear();
-
-  for (int i = 0; i < 9; i++)
-  {
-    char target = board[i][y];
-
-    if (target == '.')
-      continue;
-
-    if (s.count(target))
-      return false;
-
-    s.insert(target);
-  }
-
-  return true;
-}
-
-bool isColumnValid(int x, vector<vector<char>> &board)
-{
-  if (!s.empty())
-    s.clear();
-
-  for (int i = 0; i < 9; i++)
-  {
-    char target = board[x][i];
-
-    if (target == '.')
-      continue;
-
-    if (s.count(target))
-      return false;
-
-    s.insert(target);
-  }
-
-  return true;
-}
+/*
+ * 很神奇的填坑法呢
+ * https://leetcode.wang/leetCode-36-Valid-Sudoku.html
+ */
 
 class Solution
 {
 public:
   bool isValidSudoku(vector<vector<char>> &board)
   {
+    bool rows[9][9] = {false};
+    bool columns[9][9] = {false};
+    bool boxes[3][3][9] = {false};
+
     for (int i = 0; i < 9; i++)
     {
-      bool isValid = isRowValid(i, board) && isColumnValid(i, board) && isJiugonggeValid(i / 3, i % 3, board);
+      for (int j = 0; j < 9; j++)
+      {
+        if (board[i][j] == '.')
+          continue;
 
-      if (!(isValid))
-        return false;
+        int target = board[i][j] - '1';
+
+        if (rows[i][target])
+          return false;
+
+        rows[i][target] = true;
+
+        if (columns[j][target])
+          return false;
+
+        columns[j][target] = true;
+
+        if (boxes[i / 3][j / 3][target])
+          return false;
+
+        boxes[i / 3][j / 3][target] = true;
+      }
     }
 
     return true;
   }
-};
+} solution;
+
+int main()
+{
+  vector<vector<char>> board = {
+      {'.', '8', '7', '6', '5', '4', '3', '2', '1'},
+      {'2', '.', '.', '.', '.', '.', '.', '.', '.'},
+      {'3', '.', '.', '.', '.', '.', '.', '.', '.'},
+      {'4', '.', '.', '.', '.', '.', '.', '.', '.'},
+      {'5', '.', '.', '.', '.', '.', '.', '.', '.'},
+      {'6', '.', '.', '.', '.', '.', '.', '.', '.'},
+      {'7', '.', '.', '.', '.', '.', '.', '.', '.'},
+      {'8', '.', '.', '.', '.', '.', '.', '.', '.'},
+      {'9', '.', '.', '.', '.', '.', '.', '.', '.'}};
+
+  cout << solution.isValidSudoku(board) << endl;
+
+  return 0;
+}
