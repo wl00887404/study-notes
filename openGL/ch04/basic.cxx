@@ -1,10 +1,9 @@
-#include <iostream>
 #include <GL/glut.h>
+#include <iostream>
 using namespace std;
 void display();
 
-int main(int argc, char *argv[])
-{
+int main(int argc, char *argv[]) {
   glutInit(&argc, argv);
   glutInitDisplayMode(GLUT_RGBA | GLUT_DOUBLE | GLUT_DEPTH);
   glutInitWindowPosition(100, 100);
@@ -17,8 +16,7 @@ int main(int argc, char *argv[])
   return 0;
 }
 
-void display()
-{
+void display() {
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
   glColor3f(1.0, 0.0, 0.0);
   glBegin(GL_TRIANGLES);

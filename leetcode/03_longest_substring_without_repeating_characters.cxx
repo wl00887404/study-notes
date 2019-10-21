@@ -10,14 +10,14 @@ using namespace std;
  * >  bca      1    3     3      0
  *    bcad     1    4     4
  *    bcade    1    5     5
- * >      ed   5    6     2      4 
- * 
+ * >      ed   5    6     2      4
+ *
  * 找到重複時
  *   deprecated = map[c] - from
  *   length = length - deprecated
- *           = length - map[c] + from 
+ *           = length - map[c] + from
  *   from = map[c] + 1
- * 
+ *
  * abba
  *         from  index length  map[c]
  *   a     0     0     1
@@ -26,25 +26,19 @@ using namespace std;
  * >   ba  2     3     2
  */
 
-class Solution
-{
-public:
-  int lengthOfLongestSubstring(string s)
-  {
+class Solution {
+ public:
+  int lengthOfLongestSubstring(string s) {
     unordered_map<char, int> map;
     int i = 0;
     int length = 0;
     int from = 0;
     int result = 0;
 
-    for (int i = 0; i < s.length(); i++)
-    {
-
+    for (int i = 0; i < s.length(); i++) {
       char c = s[i];
-      if (map.count(c) && map[c] >= from)
-      {
-        if (length > result)
-          result = length;
+      if (map.count(c) && map[c] >= from) {
+        if (length > result) result = length;
 
         length -= map[c] - from;
         from = map[c] + 1;
@@ -61,12 +55,11 @@ public:
   }
 } solution;
 
-int main()
-{
-  cout << solution.lengthOfLongestSubstring("abcabcbb") << endl;        // 3
-  cout << solution.lengthOfLongestSubstring("amqpcsrumjjufpu") << endl; // 8
-  cout << solution.lengthOfLongestSubstring("dvdf") << endl;            // 3
-  cout << solution.lengthOfLongestSubstring("abba") << endl;            // 2
+int main() {
+  cout << solution.lengthOfLongestSubstring("abcabcbb") << endl;         // 3
+  cout << solution.lengthOfLongestSubstring("amqpcsrumjjufpu") << endl;  // 8
+  cout << solution.lengthOfLongestSubstring("dvdf") << endl;             // 3
+  cout << solution.lengthOfLongestSubstring("abba") << endl;             // 2
 
   return 0;
 }

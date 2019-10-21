@@ -1,14 +1,12 @@
 #include <iostream>
-#include <unordered_map>
 #include <stack>
+#include <unordered_map>
 
 using namespace std;
 
-class Solution
-{
-public:
-  bool isValid(string s)
-  {
+class Solution {
+ public:
+  bool isValid(string s) {
     stack<char> stack;
     unordered_map<char, char> parentheses_map = {
         {')', '('},
@@ -16,18 +14,15 @@ public:
         {'}', '{'},
     };
 
-    for (int i = 0; i < s.length(); i++)
-    {
+    for (int i = 0; i < s.length(); i++) {
       char c = s[i];
 
-      if (!parentheses_map.count(c))
-      {
+      if (!parentheses_map.count(c)) {
         stack.push(c);
         continue;
       }
 
-      if (!stack.empty() && parentheses_map[c] == stack.top())
-      {
+      if (!stack.empty() && parentheses_map[c] == stack.top()) {
         stack.pop();
         continue;
       }

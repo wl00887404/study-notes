@@ -1,29 +1,23 @@
 #include <iostream>
 using namespace std;
 
-struct ListNode
-{
+struct ListNode {
   int val;
   ListNode *next;
   ListNode(int x) : val(x), next(NULL) {}
 };
 
-class Solution
-{
-public:
-  ListNode *addTwoNumbers(ListNode *l1, ListNode *l2)
-  {
-    if (l1->val == 0 && l1->next == nullptr)
-      return l2;
-    if (l2->val == 0 && l2->next == nullptr)
-      return l1;
+class Solution {
+ public:
+  ListNode *addTwoNumbers(ListNode *l1, ListNode *l2) {
+    if (l1->val == 0 && l1->next == nullptr) return l2;
+    if (l2->val == 0 && l2->next == nullptr) return l1;
 
     ListNode *head = new ListNode(0);
     ListNode *pointer = head;
     ListNode *prev = nullptr;
 
-    while (l1 != nullptr || l2 != nullptr)
-    {
+    while (l1 != nullptr || l2 != nullptr) {
       ListNode *next = new ListNode(0);
 
       int val1 = l1 == nullptr ? 0 : l1->val;
@@ -31,8 +25,7 @@ public:
 
       int val = val1 + val2 + pointer->val;
 
-      if (val > 9)
-      {
+      if (val > 9) {
         next->val += 1;
         val %= 10;
       }
@@ -46,8 +39,7 @@ public:
       pointer = pointer->next;
     }
 
-    if (pointer->val == 0)
-    {
+    if (pointer->val == 0) {
       prev->next = nullptr;
     }
 
@@ -55,19 +47,15 @@ public:
   }
 } solution;
 
-class Console
-{
-public:
+class Console {
+ public:
   Console() {}
 
-  void log(ListNode *node)
-  {
+  void log(ListNode *node) {
     cout << "[";
-    while (node != nullptr)
-    {
+    while (node != nullptr) {
       cout << node->val;
-      if (node->next != nullptr)
-      {
+      if (node->next != nullptr) {
         cout << ", ";
       }
       node = node->next;
@@ -76,9 +64,7 @@ public:
   }
 } console;
 
-int main()
-{
-
+int main() {
   ListNode nodes1[] = {
       ListNode(2),
       ListNode(4),
@@ -91,8 +77,7 @@ int main()
       ListNode(4),
   };
 
-  for (int i = 0; i < 2; i++)
-  {
+  for (int i = 0; i < 2; i++) {
     nodes1[i].next = &nodes1[i + 1];
     nodes2[i].next = &nodes2[i + 1];
   }

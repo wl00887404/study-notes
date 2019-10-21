@@ -1,8 +1,7 @@
-#include <iostream>
 #include <GL/glew.h>
 #include <GL/glut.h>
+#include <iostream>
 using namespace std;
-
 
 // 下面這些不知道再幹麻
 GLuint triangle_buffer;
@@ -10,18 +9,7 @@ GLuint triangle_vao;
 GLuint program;
 
 static const GLfloat triangle_vertices[] = {
-    -0.4f,
-    -0.4f,
-    0.0f,
-    1.0f,
-    0.0f,
-    0.4f,
-    0.0f,
-    1.0f,
-    0.4f,
-    -0.4f,
-    0.0f,
-    1.0f,
+    -0.4f, -0.4f, 0.0f, 1.0f, 0.0f, 0.4f, 0.0f, 1.0f, 0.4f, -0.4f, 0.0f, 1.0f,
 };
 
 char *vsSource = R"glsl(
@@ -48,8 +36,7 @@ char *fsSource = R"glsl(
 void init();
 void display();
 
-int main(int argc, char *argv[])
-{
+int main(int argc, char *argv[]) {
   glutInit(&argc, argv);
   glutInitDisplayMode(GLUT_RGBA | GLUT_DOUBLE | GLUT_DEPTH);
   glutInitWindowPosition(100, 100);
@@ -64,8 +51,7 @@ int main(int argc, char *argv[])
   return 0;
 }
 
-void init()
-{
+void init() {
   glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
   glewInit();
 
@@ -84,20 +70,19 @@ void init()
   glAttachShader(program, fs);
   glLinkProgram(program);
 
-
   // 下面這些不知道在幹麻
   // 好像在設定頂點資料吧
   glGenVertexArrays(1, &triangle_vao);
   glBindVertexArray(triangle_vao);
   glGenBuffers(1, &triangle_buffer);
-	glBindBuffer(GL_ARRAY_BUFFER, triangle_buffer);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(triangle_vertices) * sizeof(float), &triangle_vertices[0], GL_STATIC_DRAW);
-	glVertexAttribPointer(0, 4, GL_FLOAT, GL_FALSE, 0, 0);
-	glEnableVertexAttribArray(0);
+  glBindBuffer(GL_ARRAY_BUFFER, triangle_buffer);
+  glBufferData(GL_ARRAY_BUFFER, sizeof(triangle_vertices) * sizeof(float),
+               &triangle_vertices[0], GL_STATIC_DRAW);
+  glVertexAttribPointer(0, 4, GL_FLOAT, GL_FALSE, 0, 0);
+  glEnableVertexAttribArray(0);
 }
 
-void display()
-{
+void display() {
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
   glUseProgram(program);
   glBindVertexArray(triangle_vao);

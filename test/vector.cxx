@@ -2,8 +2,7 @@
 #include <vector>
 using namespace std;
 
-int main()
-{
+int main() {
   // vector<int> vec(5, 0);
 
   // vec.insert(vec.end(), 1);
@@ -17,8 +16,7 @@ int main()
   vector<int> vec = {0, 1, 2, 3, 4};
 
   vector<int>::iterator begin = vec.begin();
-  while (begin != vec.end())
-  {
+  while (begin != vec.end()) {
     cout << *begin << endl;
     begin++;
   }

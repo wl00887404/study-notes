@@ -1,15 +1,13 @@
 #include <iostream>
 using namespace std;
 
-struct Dog
-{
+struct Dog {
   string name;
   int age;
   Dog() : name("unnamed"), age(0) {}
 };
 
-int main()
-{
+int main() {
   Dog cappuccino;
   cappuccino.name = "cappuccino";
   cappuccino.age = 5;
