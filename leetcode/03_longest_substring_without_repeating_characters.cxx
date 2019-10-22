@@ -2,7 +2,8 @@
 #include <unordered_map>
 using namespace std;
 
-/* abcadedf
+/**
+ * abcadedf
  *             from index length map[c]
  *   a         0    0     1
  *   ab        0    1     2

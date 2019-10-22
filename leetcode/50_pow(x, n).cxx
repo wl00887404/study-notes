@@ -14,7 +14,7 @@ class Solution {
 
     if (n == 1) return x;
 
-    /*
+    /**
      * if n = 17
      * 有 return / 沒有找 8 + 8 + 1 存 cache
      * then if n = 8

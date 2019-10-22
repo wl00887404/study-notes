@@ -1,7 +1,7 @@
 #include <iostream>
 using namespace std;
 
-/*
+/**
  * brute force: cd9542015c
  */
 

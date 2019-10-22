@@ -1,7 +1,8 @@
 #include <iostream>
 #include <vector>
 using namespace std;
-/*
+
+/**
  * https://leetcode.com/articles/stone-game/
  *
  * 如果 Alex 取 1st

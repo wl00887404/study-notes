@@ -2,7 +2,7 @@
 #include <vector>
 using namespace std;
 
-/*
+/**
  * 實作一下 kmp 吧
  * https://youtu.be/cgaPEsMJkSc?t=3116
  *
