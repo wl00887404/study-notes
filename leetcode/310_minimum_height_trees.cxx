@@ -1,79 +1,103 @@
+#include <chrono>
 #include <iostream>
+#include <unordered_set>
 #include <vector>
 using namespace std;
 
-// 列出所有 paths 大爆炸
+/**
+ * 撥洋蔥 RRRR
+ * 可是 128ms 到底是三小
+ */
+
+void log(vector<int>& v) {
+  int size = v.size();
+  cout << "{ ";
+  for (int i = 0; i < size; i++) {
+    cout << v[i];
+    if (i != size - 1) cout << ", ";
+  }
+  cout << " }" << endl;
+}
+
+void log(unordered_set<int>& s) {
+  int size = s.size();
+  int i = 0;
+
+  cout << "{ ";
+  for (auto it = s.begin(); it != s.end(); it++) {
+    cout << *it;
+    i++;
+    if (i != size) cout << ", ";
+  }
+  cout << " }" << endl;
+}
 
 class Solution {
  public:
   vector<int> findMinHeightTrees(int n, vector<vector<int>>& edges) {
-    bool has[n] = {false};
-    int paths[n][n] = {0};
+    vector<int> result;
+    unordered_set<int> nodes[n];
 
-    int length = edges.size();
-    for (int i = 0; i < length; i++) {
+    int size = edges.size();
+    for (int i = 0; i < size; i++) {
       int n1 = edges[i][0];
       int n2 = edges[i][1];
 
-      if (!has[n1] && !has[n2]) {
-        paths[n1][n2] = 1;
-        paths[n2][n1] = 1;
-        has[n1] = true;
-        has[n2] = true;
-        continue;
-      }
-
-      if (!has[n1]) swap(n1, n2);
-      // n2 是新節點
-
-      for (int j = 0; j < n; j++) {
-        if (!has[j]) continue;
-        paths[j][n2] = paths[j][n1] + 1;
-        paths[n2][j] = paths[j][n1] + 1;
-      }
-
-      has[n2] = true;
+      nodes[n1].insert(n2);
+      nodes[n2].insert(n1);
     }
 
-    // 找到最短的的那棵樹
-    int heights[n] = {0};
-    int min = n;
-    for (int i = 0; i < n; i++) {
-      for (int j = 0; j < n; j++)
-        if (paths[i][j] > heights[i]) heights[i] = paths[i][j];
+    unordered_set<int> leave;
+    bool isLeaf[n] = {false};
 
-      if (min > heights[i]) min = heights[i];
+    while (true) {
+      if (leave.size() != 0) leave.clear();
+
+      bool isFinished = true;
+      for (int i = 0; i < n; i++) {
+        if (nodes[i].size() < 2) continue;
+
+        isFinished = false;
+        break;
+      }
+
+      if (isFinished) break;
+
+      for (int i = 0; i < n; i++) {
+        if (nodes[i].size() != 1) continue;
+
+        leave.insert(i);
+      }
+
+      for (auto it = leave.begin(); it != leave.end(); it++) {
+        isLeaf[*it] = true;
+        nodes[*(nodes[*it].begin())].erase(*it);
+        nodes[*it].clear();
+      }
     }
 
-    vector<int> result;
     for (int i = 0; i < n; i++) {
-      if (heights[i] == min) result.push_back(i);
+      if (isLeaf[i]) continue;
+
+      result.push_back(i);
     }
 
     return result;
   }
-
-  void swap(int& x, int& y) {
-    int temp = x;
-    x = y;
-    y = temp;
-  }
 } solution;
 
 int main() {
-  // vector<vector<int>> edges = {{1, 0}, {1, 2}, {1, 3}};
-  // vector<int> result = solution.findMinHeightTrees(4, edges);
+  vector<vector<int>> edges;
+  vector<int> result;
 
-  vector<vector<int>> edges = {{0, 3}, {1, 3}, {2, 3}, {4, 3}, {5, 4}};
-  vector<int> result = solution.findMinHeightTrees(6, edges);
+  // edges = {{1, 0}, {1, 2}, {1, 3}};
+  // result = solution.findMinHeightTrees(4, edges);
 
-  int size = result.size();
-  cout << "{ ";
-  for (int i = 0; i < size; i++) {
-    cout << result[i];
-    if (i != size - 1) cout << ", ";
-  }
-  cout << " }" << endl;
+  edges = {{0, 3}, {1, 3}, {2, 3}, {4, 3}, {5, 4}};
+  result = solution.findMinHeightTrees(6, edges);
+
+  // edges = {{0, 1}};
+  // result = solution.findMinHeightTrees(2, edges);
 
   return 0;
 }
