@@ -2,7 +2,7 @@
 using namespace std;
 
 /**
- * brute force: cd9542015c
+ * brute force: 2e79360
  */
 
 int max(int x, int y) { return x > y ? x : y; }
