@@ -6,58 +6,45 @@ using namespace std;
  * 不用 class 跑分不會比較高
  * 哭哭哭哭哭
  * class 版本的程式碼比較好看
- * commit: 3a64815
  */
 
+class MergedVector {
+ private:
+  vector<int>::iterator begin1;
+  vector<int>::iterator end1;
+  vector<int>::iterator begin2;
+  vector<int>::iterator end2;
+
+ public:
+  MergedVector(vector<int>& nums1, vector<int>& nums2) {
+    this->begin1 = nums1.begin();
+    this->end1 = nums1.end();
+    this->begin2 = nums2.begin();
+    this->end2 = nums2.end();
+  }
+
+  int next() {
+    if (this->begin1 == this->end1) return *(this->begin2++);
+
+    if (this->begin2 == this->end2) return *(this->begin1++);
+
+    return *this->begin1 > *this->begin2 ? *(this->begin2++)
+                                         : *(this->begin1++);
+  };
+};
 
 class Solution {
  public:
   double findMedianSortedArrays(vector<int>& nums1, vector<int>& nums2) {
     bool isOdd = (nums1.size() + nums2.size()) % 2;
     int beforeCenter = (nums1.size() + nums2.size() + isOdd) / 2 - 1;
-    int median1;
-    int median2;
+    MergedVector* mergedVector = new MergedVector(nums1, nums2);
 
-    vector<int>::iterator begin1 = nums1.begin();
-    vector<int>::iterator end1 = nums1.end();
-    vector<int>::iterator begin2 = nums2.begin();
-    vector<int>::iterator end2 = nums2.end();
+    while (beforeCenter--) mergedVector->next();
 
-    while (beforeCenter--) {
-      if (begin1 == end1) {
-        begin2++;
-      } else if (begin2 == end2) {
-        begin1++;
-      } else if (*begin1 > *begin2) {
-        begin2++;
-      } else {
-        begin1++;
-      }
-    }
+    if (isOdd) return mergedVector->next();
 
-    if (begin1 == end1) {
-      median1 = *(begin2++);
-    } else if (begin2 == end2) {
-      median1 = *(begin1++);
-    } else if (*begin1 > *begin2) {
-      median1 = *(begin2++);
-    } else {
-      median1 = *(begin1++);
-    }
-
-    if (isOdd) return median1;
-
-    if (begin1 == end1) {
-      median2 = *(begin2);
-    } else if (begin2 == end2) {
-      median2 = *(begin1);
-    } else if (*begin1 > *begin2) {
-      median2 = *begin2;
-    } else {
-      median2 = *begin1;
-    }
-
-    return (median1 + median2) / 2.0;
+    return (mergedVector->next() + mergedVector->next()) / 2.0;
   }
 } solution;
 
