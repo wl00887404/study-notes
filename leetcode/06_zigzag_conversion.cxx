@@ -37,28 +37,30 @@ class Solution {
 
     int length = s.length();
 
-    string result = "";
+    char result[length + 1];
+    result[length] = '\0';
 
     int triangleLength = numRows * 2 - 2;
+    int k = 0;
 
     for (int i = 0; i < length; i += triangleLength) {
-      result += s[i];
+      result[k++] = s[i];
     }
 
     for (int i = 1; i < numRows - 1; i++) {
       int next = triangleLength - i * 2;
 
       for (int j = i; j < length; j += triangleLength) {
-        result += s[j];
+        result[k++] = s[j];
 
         if (j + next < length) {
-          result += s[j + next];
+          result[k++] = s[j + next];
         }
       }
     }
 
     for (int i = numRows - 1; i < length; i += triangleLength) {
-      result += s[i];
+      result[k++] = s[i];
     }
 
     return result;
@@ -66,11 +68,11 @@ class Solution {
 } solution;
 
 int main() {
-  // cout << solution.convert("PAYPALISHIRING", 3) << endl;
-  // cout << "PAHNAPLSIIGYIR" << endl;
+  cout << solution.convert("PAYPALISHIRING", 3) << endl;
+  cout << "PAHNAPLSIIGYIR" << endl;
 
-  cout << solution.convert("PAYPALISHIRING", 4) << endl;
-  cout << "PINALSIGYAHRPI" << endl;
+  // cout << solution.convert("PAYPALISHIRING", 4) << endl;
+  // cout << "PINALSIGYAHRPI" << endl;
 
   return 0;
 }
