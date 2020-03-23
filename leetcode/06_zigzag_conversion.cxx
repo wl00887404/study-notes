@@ -1,6 +1,4 @@
 #include <iostream>
-#include <vector>
-
 using namespace std;
 
 /**
@@ -9,9 +7,9 @@ using namespace std;
  *
  * 先往下在斜上去
  *
- * P   A   H   N
- * A P L S I I G
- * Y   I   R
+ * P A H N
+ * APLSIIG
+ * Y I R
  *
  * 如果 numRows 為 3 => 可以看 4 個字元型成一個三角形 => 00 1313 22
  *
@@ -27,7 +25,7 @@ using namespace std;
  * numRows 為 4 => 6 => 001515242433
  *
  * 0  0   0
- * 1 51  5
+ * 1 51  51
  * 24 2 4
  * 3  3
  */
@@ -37,22 +35,31 @@ class Solution {
   string convert(string s, int numRows) {
     if (numRows == 1) return s;
 
-    vector<string> rows(numRows);
-
-    for (int i = 0; i < numRows; i++) rows.push_back("");
-
     int length = s.length();
-    int triangleLength = numRows * 2 - 2;
-
-    for (int i = 0; i < length; i++) {
-      int triangleIndex = i % triangleLength;
-      int rowIndex = triangleIndex < numRows ? triangleIndex
-                                             : triangleLength - triangleIndex;
-      rows[rowIndex] += s[i];
-    }
 
     string result = "";
-    for (int i = 0; i < numRows; i++) result += rows[i];
+
+    int triangleLength = numRows * 2 - 2;
+
+    for (int i = 0; i < length; i += triangleLength) {
+      result += s[i];
+    }
+
+    for (int i = 1; i < numRows - 1; i++) {
+      int next = triangleLength - i * 2;
+
+      for (int j = i; j < length; j += triangleLength) {
+        result += s[j];
+
+        if (j + next < length) {
+          result += s[j + next];
+        }
+      }
+    }
+
+    for (int i = numRows - 1; i < length; i += triangleLength) {
+      result += s[i];
+    }
 
     return result;
   }
@@ -60,8 +67,10 @@ class Solution {
 
 int main() {
   // cout << solution.convert("PAYPALISHIRING", 3) << endl;
+  // cout << "PAHNAPLSIIGYIR" << endl;
 
   cout << solution.convert("PAYPALISHIRING", 4) << endl;
+  cout << "PINALSIGYAHRPI" << endl;
 
   return 0;
 }
