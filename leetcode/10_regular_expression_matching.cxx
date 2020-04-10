@@ -36,9 +36,6 @@ class Solution {
     int pLength = p.length();
 
     while (true) {
-      if (i == sLength && j == pLength) return true;
-      if ((i == sLength || j == pLength) && stars.empty()) return false;
-
       while (pLength - 1 - j >= 1 && p[j + 1] == '*') {
         cout << p[j] << p[j + 1] << " push into stack" << endl;
         stars.push(p[j]);
@@ -46,61 +43,55 @@ class Solution {
       }
 
       while (!stars.empty()) {
-
         if (stars.front() == '.') {
+          // .*
           if (j == pLength) return true;
 
+          // .*a
           while (true) {
             if (i == sLength) return false;
 
-            if (s[i] != p[j]) {
-              i++;
-              continue;
+            if ((s[i] == p[j] || p[j] == '.') && isMatch(s, p, i, j)) {
+              return true;
             }
 
-            if (isMatch(s, p, i, j)) return true;
+            cout << "s[" << i << "] fail to match .*" << p[j] << endl;
+
+            i++;
           }
         }
-        
-        if (j != pLength && s[i] == p[j]) {
-          // abccc abc*d*c
-          // abcdc abc*d*c
-          while (!stars.empty() && stars.front() != p[j]) {
-            stars.pop();
-          }
 
-          if (stars.empty()) continue;
-
-          /**
-           * 處理 a*(b*)a
-           *
-           * a*a 不是問題
-           * a 已經 matched 了
-           * a* 直接當 a* 處理
-           *
-           * 問題是 aa 與 aabba
-           * aa aabba 單看開頭根本沒有差呀
-           */
-
-          while (s[i] == p[j]) i++;
-
+        if (stars.front() != s[i]) {
           stars.pop();
-          j++;
-
-          if (isMatch(s, p, i, j)) return true;
-        } else {
-          while (!stars.empty() && stars.front() != s[i]) {
-            stars.pop();
-          }
-
-          if (stars.empty()) return false;
-
-          cout << stars.front() << "* is matched" << endl;
-
-          i++;
           continue;
         }
+
+        // cout << "69: " << stars.front() << endl;
+        // cout << "69: " << p[j] << endl;
+
+        //  a*.
+        //  a*a.
+        //  a*aaa
+
+        if (stars.front() == p[j]) {
+          int k = j;
+
+          while (stars.front() == p[k] && s[i] == p[k]) {
+            i++;
+            k++;
+          }
+
+          while (stars.front() == s[i]) i++;
+
+          if (isMatch(s, p, i, k)) return true;
+        }
+
+        while (stars.front() == s[i]) i++;
+        stars.pop();
       }
+
+      if (i == sLength && j == pLength) return true;
+      if (i == sLength || j == pLength) return false;
 
       cout << "s[" << i << "] (" << s[i] << ")";
       cout << " : ";
@@ -121,7 +112,7 @@ int main() {
   // cout << solution.isMatch("daab", "dc*a*b") << endl;
   // cout << solution.isMatch("aaa", "ab*a*c*a") << endl;
   // cout << solution.isMatch("aaa", "a*a") << endl;
-  cout << solution.isMatch("mississippi", "mis*is*ip*.") << endl;
+  // cout << solution.isMatch("mississippi", "mis*is*ip*.") << endl;
 
   return 0;
 }
