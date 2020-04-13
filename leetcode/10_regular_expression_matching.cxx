@@ -1,5 +1,4 @@
 #include <iostream>
-#include <queue>
 using namespace std;
 
 /**
@@ -27,80 +26,61 @@ using namespace std;
 
 class Solution {
  public:
-  bool isMatch(string s, string p) { return isMatch(s, p, 0, 0); }
+  bool isMatch(string s, string p) {
+    return isMatch(s, removeDuplicateStars(p), 0, 0);
+  }
+  
+  string removeDuplicateStars(string p) {
+    string nextP = "";
+    int j = 0;
+    int pLength = p.length();
+
+    while (j < pLength) {
+      if (j + 3 < pLength && p[j + 1] == '*' && p[j + 3] == '*' &&
+          p[j] == p[j + 2]) {
+        nextP += p[j];
+        nextP += "*";
+        char star = p[j];
+        j += 4;
+
+        while (p[j] == star && p[j + 1] == '*') j += 2;
+      } else {
+        nextP += p[j];
+        j++;
+      }
+    }
+
+    return nextP;
+  }
+
   bool isMatch(string s, string p, int di, int dj) {
-    queue<char> stars;
     int i = 0 + di;
     int j = 0 + dj;
     int sLength = s.length();
     int pLength = p.length();
 
     while (true) {
-      while (pLength - 1 - j >= 1 && p[j + 1] == '*') {
-        cout << p[j] << p[j + 1] << " push into stack" << endl;
-        stars.push(p[j]);
+      if (j + 1 < pLength && p[j + 1] == '*') {
+        int k = 0;
+
+        while (i + k < sLength && (p[j] == s[i + k] || p[j] == '.')) {
+          if (isMatch(s, p, i + k, j + 2)) return true;
+
+          k++;
+        }
+
+        if (isMatch(s, p, i + k, j + 2)) return true;
+
         j += 2;
+      } else {
+        if (i == sLength && j == pLength) return true;
+        if (i == sLength || j == pLength) return false;
+
+        if (s[i] != p[j] && p[j] != '.') return false;
+
+        i++;
+        j++;
       }
-
-      while (!stars.empty()) {
-        if (stars.front() == '.') {
-          // .*
-          if (j == pLength) return true;
-
-          // .*a
-          while (true) {
-            if (i == sLength) return false;
-
-            if ((s[i] == p[j] || p[j] == '.') && isMatch(s, p, i, j)) {
-              return true;
-            }
-
-            cout << "s[" << i << "] fail to match .*" << p[j] << endl;
-
-            i++;
-          }
-        }
-
-        if (stars.front() != s[i]) {
-          stars.pop();
-          continue;
-        }
-
-        // cout << "69: " << stars.front() << endl;
-        // cout << "69: " << p[j] << endl;
-
-        //  a*.
-        //  a*a.
-        //  a*aaa
-
-        if (stars.front() == p[j]) {
-          int k = j;
-
-          while (stars.front() == p[k] && s[i] == p[k]) {
-            i++;
-            k++;
-          }
-
-          while (stars.front() == s[i]) i++;
-
-          if (isMatch(s, p, i, k)) return true;
-        }
-
-        while (stars.front() == s[i]) i++;
-        stars.pop();
-      }
-
-      if (i == sLength && j == pLength) return true;
-      if (i == sLength || j == pLength) return false;
-
-      cout << "s[" << i << "] (" << s[i] << ")";
-      cout << " : ";
-      cout << "p[" << j << "] (" << p[j] << ")" << endl;
-
-      if (s[i] != p[j] && p[j] != '.') return false;
-
-      i++;
-      j++;
     }
   }
 } solution;
@@ -109,9 +89,11 @@ int main() {
   // cout << solution.isMatch("aa", "aa") << endl;
   // cout << solution.isMatch("aa", "a") << endl;
   // cout << solution.isMatch("aa", "b*a*") << endl;
-  // cout << solution.isMatch("daab", "dc*a*b") << endl;
+  // cout << solution.isMatch("aab", "c*a*b") << endl;
   // cout << solution.isMatch("aaa", "ab*a*c*a") << endl;
   // cout << solution.isMatch("aaa", "a*a") << endl;
+  // cout << solution.isMatch("", "c*c*") << endl;
+  // cout << solution.isMatch("mississippi", "mis*is*p*.") << endl;
   // cout << solution.isMatch("mississippi", "mis*is*ip*.") << endl;
 
   return 0;
