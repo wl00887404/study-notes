@@ -3,9 +3,7 @@
 using namespace std;
 
 /**
- * 不用 class 跑分不會比較高
- * 哭哭哭哭哭
- * class 版本的程式碼比較好看
+ * TODO: 研究 model answer
  */
 
 class MergedVector {
