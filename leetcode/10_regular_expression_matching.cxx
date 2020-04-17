@@ -11,8 +11,8 @@ class Solution {
   bool isMatch(string s, string p) { return isMatch(s, p, 0, 0); }
 
   bool isMatch(string s, string p, int di, int dj) {
-    int i = 0 + di;
-    int j = 0 + dj;
+    int i = di;
+    int j = dj;
     int sLength = s.length();
     int pLength = p.length();
 
