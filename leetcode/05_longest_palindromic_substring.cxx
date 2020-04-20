@@ -3,6 +3,8 @@ using namespace std;
 
 /**
  * brute force: 2e79360
+ * 
+ * TODO: Manacher’s Algorithm 
  */
 
 int max(int x, int y) { return x > y ? x : y; }
