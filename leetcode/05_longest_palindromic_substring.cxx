@@ -7,8 +7,6 @@ using namespace std;
  * TODO: Manacher’s Algorithm 
  */
 
-int max(int x, int y) { return x > y ? x : y; }
-
 class Solution {
  public:
   string longestPalindrome(string s) {
