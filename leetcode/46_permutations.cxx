@@ -6,6 +6,8 @@ using namespace std;
 /**
  * 是很常遇到的排列組合題！！
  * 欸欸欸直接傳 STL 容器 都不是傳址耶！！好扯喔！！
+ *
+ * dae35f4: 遞迴法 32ms 哭了
  */
 
 class Solution {
@@ -17,7 +19,7 @@ class Solution {
     if (length == 0) return results;
 
     for (int i = 0; i < length; i++) {
-      auto recursiveResults = permute(nums, {}, {}, nums[i]);
+      auto recursiveResults = permute(nums, {}, i);
 
       results.insert(results.end(), recursiveResults.begin(),
                      recursiveResults.end());
@@ -25,20 +27,18 @@ class Solution {
 
     return results;
   }
-  vector<vector<int>> permute(vector<int>& nums, unordered_set<int> usedNums,
-                              vector<int> tempResult, int value) {
+  vector<vector<int>> permute(vector<int> nums, vector<int> tempResult,
+                              int index) {
+    tempResult.push_back(nums[index]);
+    nums.erase(nums.begin() + index);
     int length = nums.size();
-    usedNums.insert(value);
-    tempResult.push_back(value);
 
-    if (tempResult.size() == length) return {tempResult};
+    if (length == 0) return {tempResult};
 
     vector<vector<int>> results;
 
     for (int i = 0; i < length; i++) {
-      if (usedNums.count(nums[i])) continue;
-
-      auto recursiveResults = permute(nums, usedNums, tempResult, nums[i]);
+      auto recursiveResults = permute(nums, tempResult, i);
 
       results.insert(results.end(), recursiveResults.begin(),
                      recursiveResults.end());
