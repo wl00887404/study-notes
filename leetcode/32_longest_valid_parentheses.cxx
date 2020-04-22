@@ -6,7 +6,7 @@ using namespace std;
  * 自己寫出來 4ms
  * 豪爽喔
  *
- * TODO: leetcode solution 有 4 個解答 有空記得看一下
+ * TODO: 研究 model answer
  */
 
 class Solution {
