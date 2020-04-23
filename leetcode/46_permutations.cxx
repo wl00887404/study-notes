@@ -49,12 +49,9 @@ class Solution {
       permute(results, nums, k - 1);
 
       for (int i = 0; i < k - 1; i++) {
-        if (k % 2 == 0) {
-          swap(nums[i], nums[k - 1]);
-        } else {
-          swap(nums[0], nums[k - 1]);
-        }
+        int swapIndex = k % 2 ? 0 : i;
 
+        swap(nums[swapIndex], nums[k - 1]);
         permute(results, nums, k - 1);
       }
     }
