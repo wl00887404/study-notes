@@ -15,7 +15,7 @@ class Solution {
         digits.insert(begin, 1);
         return digits;
       }
-      
+
       end--;
     }
 

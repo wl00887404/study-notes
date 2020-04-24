@@ -1,4 +1,4 @@
-basic: 
+basic:
 	g++ basic.cxx -o basic.out -lGL -lGLU -lglut
 
 my_first_shader:

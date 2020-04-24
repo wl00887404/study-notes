@@ -5,7 +5,7 @@ using namespace std;
  * 爆擊的成績大概是 24ms
  * 再優化大概就看 sum 會重複遞迴
  * 能否用 cache 的省去這個麻煩
- * 
+ *
  * TODO: 敢不敢再快一點
  */
 

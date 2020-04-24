@@ -33,11 +33,11 @@ class Solution {
         swap(nums[i], nums[k - 1]);
         used.insert(nums[k - 1]);
         permuteUnique(results, nums, k - 1);
-        /** 
+        /**
          * 因為偶數項執行時 nums[0] 會與 nums[1] 交換
          * 所以回到奇數項時
          * 只需要將 nums[0] （原本的 nums[1] ） 與 nums[k-1] 交換即可
-         * 
+         *
          * 但在 used 的情況下，有可能不會交換而卡住，
          * swap back 確保一直原本的組合才不會卡住
          */

@@ -4,7 +4,7 @@ using namespace std;
 
 /**
  * **You may assume no duplicates in the array.**
- * 
+ *
  * TODO: 寫一個 binary search 的版本
  */
 

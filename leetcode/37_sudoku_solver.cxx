@@ -5,7 +5,7 @@ using namespace std;
 
 /**
  *  28ms 實在太慢 = =
- * 
+ *
  *  TODO: 敢不敢再快一點
  */
 

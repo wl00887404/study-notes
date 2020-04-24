@@ -3,8 +3,8 @@ using namespace std;
 
 /**
  * brute force: 2e79360
- * 
- * TODO: Manacher’s Algorithm 
+ *
+ * TODO: Manacher’s Algorithm
  */
 
 class Solution {
