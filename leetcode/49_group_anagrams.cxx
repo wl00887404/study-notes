@@ -7,11 +7,11 @@ using namespace std;
  * 直覺上，質數 hash 就可以解了，
  * 如果 overflow ，可以多分幾段，
  * T1 解是另一種神奇的 hash ，
- * 
+ *
  * 另外發現 unordered_map::begin 好像很慢耶
  * 蠻奇怪的
- * 
- * TODO: 有空研究一下那個 hash 
+ *
+ * TODO: 有空研究一下那個 hash
  */
 
 int primeNums[] = {2,  3,  5,  7,  11, 13, 17, 19, 23, 29, 31, 37,  41,  43,
