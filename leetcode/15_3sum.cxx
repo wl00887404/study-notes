@@ -1,16 +1,15 @@
 #include <iostream>
-#include <unordered_map>
+#include <unordered_set>
 #include <vector>
 using namespace std;
 
 /**
  * 混在一起 352 ms
  * 分成正負 256 ms
- * 改掉 unordered_map::begin() 196 ms
- * 
- * 太多元素會降低 unordered_map 的速度
- * boolean[] 試試看
- * 
+ * 改掉 unordered_map::begin 196 ms
+ *
+ * 應該是太多元素會降低 unordered_map 的速度
+ *
  * TODO: 敢不敢再快一點
  */
 
@@ -22,9 +21,9 @@ class Solution {
 
     if (length < 3) return results;
 
-    unordered_map<int, int> positiveMap;
+    unordered_set<int> onceNums;
+    unordered_set<int> twiceNums;
     vector<int> positiveNums;
-    unordered_map<int, int> negativeMap;
     vector<int> negativeNums;
     int zeroLength = 0;
 
@@ -34,20 +33,20 @@ class Solution {
         continue;
       }
 
-      if (nums[i] > 0) {
-        if (!positiveMap.count(nums[i])) {
-          positiveMap[nums[i]] = 0;
-          positiveNums.push_back(nums[i]);
-        }
+      if (!onceNums.count(nums[i])) {
+        onceNums.insert(nums[i]);
 
-        positiveMap[nums[i]]++;
-      } else {
-        if (!negativeMap.count(nums[i])) {
-          negativeMap[nums[i]] = 0;
+        if (nums[i] > 0) {
+          positiveNums.push_back(nums[i]);
+        } else {
           negativeNums.push_back(nums[i]);
         }
 
-        negativeMap[nums[i]]++;
+        continue;
+      }
+
+      if (!twiceNums.count(nums[i])) {
+        twiceNums.insert(nums[i]);
       }
     }
 
@@ -65,15 +64,15 @@ class Solution {
       if (hasZero && isPositiveSmaller) {
         int complement = 0 - positiveNums[i];
 
-        if (negativeMap.count(complement)) {
+        if (onceNums.count(complement)) {
           results.push_back({complement, 0, positiveNums[i]});
         }
       }
 
-      if (positiveMap[positiveNums[i]] >= 2) {
+      if (twiceNums.count(positiveNums[i])) {
         int complement = 0 - positiveNums[i] - positiveNums[i];
 
-        if (negativeMap.count(complement)) {
+        if (onceNums.count(complement)) {
           results.push_back({complement, positiveNums[i], positiveNums[i]});
         }
       }
@@ -81,7 +80,7 @@ class Solution {
       for (int j = i + 1; j < pLength; j++) {
         int complement = 0 - positiveNums[i] - positiveNums[j];
 
-        if (negativeMap.count(complement)) {
+        if (onceNums.count(complement)) {
           results.push_back({complement, positiveNums[i], positiveNums[j]});
         }
       }
@@ -91,15 +90,15 @@ class Solution {
       if (hasZero && !isPositiveSmaller) {
         int complement = 0 - negativeNums[i];
 
-        if (positiveMap.count(complement)) {
+        if (onceNums.count(complement)) {
           results.push_back({complement, 0, negativeNums[i]});
         }
       }
 
-      if (negativeMap[negativeNums[i]] >= 2) {
+      if (twiceNums.count(negativeNums[i])) {
         int complement = 0 - negativeNums[i] - negativeNums[i];
 
-        if (positiveMap.count(complement)) {
+        if (onceNums.count(complement)) {
           results.push_back({complement, negativeNums[i], negativeNums[i]});
         }
       }
@@ -107,7 +106,7 @@ class Solution {
       for (int j = i + 1; j < nLength; j++) {
         int complement = 0 - negativeNums[i] - negativeNums[j];
 
-        if (positiveMap.count(complement)) {
+        if (onceNums.count(complement)) {
           results.push_back({complement, negativeNums[i], negativeNums[j]});
         }
       }
