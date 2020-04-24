@@ -11,29 +11,6 @@ using namespace std;
  * TODO: 敢不敢快一點
  */
 
-void log(vector<int>& v) {
-  int size = v.size();
-  cout << "{ ";
-  for (int i = 0; i < size; i++) {
-    cout << v[i];
-    if (i != size - 1) cout << ", ";
-  }
-  cout << " }" << endl;
-}
-
-void log(unordered_set<int>& s) {
-  int size = s.size();
-  int i = 0;
-
-  cout << "{ ";
-  for (auto it = s.begin(); it != s.end(); it++) {
-    cout << *it;
-    i++;
-    if (i != size) cout << ", ";
-  }
-  cout << " }" << endl;
-}
-
 class Solution {
  public:
   vector<int> findMinHeightTrees(int n, vector<vector<int>>& edges) {

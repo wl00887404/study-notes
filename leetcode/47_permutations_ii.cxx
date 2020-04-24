@@ -4,7 +4,7 @@
 using namespace std;
 
 /**
- * WTF T1 解釋檢查重複耶
+ * T1 解釋檢查重複耶 WTF
  * TODO: 試試看 seen
  */
 
@@ -50,17 +50,6 @@ class Solution {
 int main() {
   vector<int> nums = {2, 2, 3, 3};
   vector<vector<int>> results = solution.permuteUnique(nums);
-
-  cout << "{" << endl;
-  for (int i = 0; i < results.size(); i++) {
-    cout << "  { ";
-    for (int j = 0; j < results[i].size(); j++) {
-      cout << results[i][j];
-      if (j != results[i].size() - 1) cout << ", ";
-    }
-    cout << " }," << endl;
-  }
-  cout << "}" << endl;
 
   return 0;
 }

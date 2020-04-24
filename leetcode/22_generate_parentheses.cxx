@@ -2,7 +2,15 @@
 #include <unordered_map>
 #include <unordered_set>
 #include <vector>
+
+#include "./log.cxx"
 using namespace std;
+
+/**
+ * 我的答案看起來怪怪的
+ *
+ * TODO: 想辦法除掉那個 set
+ */
 
 /**
  * 1: (1)
@@ -25,7 +33,6 @@ class Solution {
     for (string str : generateParenthesis(n - 1)) set.insert("(" + str + ")");
 
     for (int i = 1; i <= n - i; i++) {
-      cout << n << ": (" << i << ", " << n - i << ")" << endl;
       vector<string> p1 = generateParenthesis(i);
       vector<string> p2 = generateParenthesis(n - i);
 
@@ -48,11 +55,7 @@ class Solution {
 int main() {
   vector<string> result = solution.generateParenthesis(4);
 
-  cout << result.size() << endl;
-
-  for (string str : result) {
-    cout << str << endl;
-  }
+  log(result);
 
   return 0;
 }

@@ -32,5 +32,6 @@ class Solution {
 int main() {
   cout << solution.myPow(2.10000, 3) << endl;
   cout << 2.1 * 2.1 * 2.1 << endl;
+  
   return 0;
 }

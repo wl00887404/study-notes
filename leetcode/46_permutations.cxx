@@ -62,16 +62,5 @@ int main() {
   vector<int> nums = {1, 2, 3, 4};
   vector<vector<int>> results = solution.permute(nums);
 
-  cout << "{" << endl;
-  for (int i = 0; i < results.size(); i++) {
-    cout << "  { ";
-    for (int j = 0; j < results[i].size(); j++) {
-      cout << results[i][j];
-      if (j != results[i].size() - 1) cout << ", ";
-    }
-    cout << " }," << endl;
-  }
-  cout << "}" << endl;
-
   return 0;
 }

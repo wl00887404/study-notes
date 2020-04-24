@@ -2,13 +2,11 @@
 #include <iostream>
 #include <vector>
 using namespace std;
- 
+
 /**
  * 不難
  * 只是遞迴時傳 vector 會複製
- * dfs 應該可以刪掉 研究一下
- *
- * TODO: 把 result 改成 & result
+ * 寫遞迴時要特別注意一下
  */
 
 /**
@@ -49,36 +47,31 @@ class Solution {
  public:
   vector<vector<int>> combinationSum(vector<int>& candidates, int target) {
     vector<vector<int>> results;
+    vector<int> result;
 
     sort(candidates.begin(), candidates.end());
-    combinationSum(results, candidates, target, 0, {});
+    combinationSum(results, candidates, target, 0, result);
 
     return results;
   }
 
   void combinationSum(vector<vector<int>>& results, vector<int>& candidates,
-                      int target, int i, vector<int> result) {
-    int length = candidates.size();
+                      int target, int i, vector<int>& result) {
+    if (target == 0) return results.push_back(result);
+    if (i == candidates.size()) return;
+
+    combinationSum(results, candidates, target, i + 1, result);
+
+    int j = 0;
 
     while (target >= candidates[i]) {
-      // cout << target << " | ";
-      // cout << candidates[i] << " | ";
-      // cout << "[ ";
-      // for (int j = 0; j < result.size(); j++) {
-      //   cout << result[j];
-      //   if (j != result.size() - 1) cout << ", ";
-      // }
-      // cout << " ]" << endl;
-
-      if (i + 1 < length) {
-        combinationSum(results, candidates, target, i + 1, result);
-      }
-
+      j++;
       target -= candidates[i];
       result.push_back(candidates[i]);
-
-      if (target == 0) results.push_back(result);
+      combinationSum(results, candidates, target, i + 1, result);
     }
+
+    while (j--) result.pop_back();
   }
 } solution;
 
@@ -87,17 +80,6 @@ int main() {
   int target = 7;
 
   vector<vector<int>> results = solution.combinationSum(candidates, target);
-
-  cout << "{" << endl;
-  for (int i = 0; i < results.size(); i++) {
-    cout << "  { ";
-    for (int j = 0; j < results[i].size(); j++) {
-      cout << results[i][j];
-      if (j != results[i].size() - 1) cout << ", ";
-    }
-    cout << " }," << endl;
-  }
-  cout << "}" << endl;
 
   return 0;
 }

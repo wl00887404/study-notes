@@ -123,18 +123,5 @@ int main() {
 
   solution.solveSudoku(board);
 
-  cout << "{" << endl;
-  for (int i = 0; i < 9; i++) {
-    cout << "  {";
-    for (int j = 0; j < 9; j++) {
-      cout << board[i][j];
-      if (j != 8) cout << ", ";
-    }
-    cout << "}";
-    if (i != 8) cout << ",";
-    cout << endl;
-  }
-  cout << "}" << endl;
-
   return 0;
 }

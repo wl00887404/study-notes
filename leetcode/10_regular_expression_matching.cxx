@@ -10,9 +10,7 @@ class Solution {
  public:
   bool isMatch(string s, string p) { return isMatch(s, p, 0, 0); }
 
-  bool isMatch(string s, string p, int di, int dj) {
-    int i = di;
-    int j = dj;
+  bool isMatch(string s, string p, int i, int j) {
     int sLength = s.length();
     int pLength = p.length();
 

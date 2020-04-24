@@ -1,31 +1,21 @@
 #include <iostream>
 using namespace std;
 
-struct Entity {
-  string key;
-  int value;
-  Entity(string key, int value) : key(key), value(value) {}
-};
+pair<string, int> pairs[] = {{"M", 1000}, {"CM", 900}, {"D", 500}, {"CD", 400},
+                             {"C", 100},  {"XC", 90},  {"L", 50},  {"XL", 40},
+                             {"X", 10},   {"IX", 9},   {"V", 5},   {"IV", 4},
+                             {"I", 1}};
 
 class Solution {
  public:
   string intToRoman(int num) {
     string result = "";
-    Entity entities[] = {
-        Entity("M", 1000), Entity("CM", 900), Entity("D", 500),
-        Entity("CD", 400), Entity("C", 100),  Entity("XC", 90),
-        Entity("L", 50),   Entity("XL", 40),  Entity("X", 10),
-        Entity("IX", 9),   Entity("V", 5),    Entity("IV", 4),
-        Entity("I", 1),
-    };
 
     while (num != 0) {
       for (int i = 0; i < 13; i++) {
-        Entity entity = entities[i];
-
-        if (num >= entity.value) {
-          num -= entity.value;
-          result += entity.key;
+        if (num >= pairs[i].second) {
+          num -= pairs[i].second;
+          result += pairs[i].first;
           break;
         }
       }
