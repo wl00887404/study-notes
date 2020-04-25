@@ -3,14 +3,18 @@
 using namespace std;
 
 /**
- * 是很常遇到的排列組合題！！
- * 欸欸欸直接傳 STL 容器 都不是傳址耶！！好扯喔！！
+ * #recommend:
+ *   是很常遇到的排列組合題！！
  *
  * dae35f4: 遞迴法 32 ms 哭了
  *
- * 不要閉門造車比較好
+ * 欸欸欸 STL 容器不是傳址耶！！好扯喔！！
+ * 遞迴法不會比較慢
+ * 是dfs 的寫法沒寫好 = =
+ * 
+ * 不要閉門造車:
  * Steinhaus–Johnson–Trotter algorithm:
- * https://en.wikipedia.org/wiki/Steinhaus%E2%80%93Johnson%E2%80%93Trotter_algorithm
+ *   https://en.wikipedia.org/wiki/Steinhaus%E2%80%93Johnson%E2%80%93Trotter_algorithm
  * Heap's algorithm:
  *   https://en.wikipedia.org/wiki/Heap's_algorithm
  *
@@ -30,6 +34,7 @@ using namespace std;
  *
  * 固定後面 交換前面
  * 偶數項前後互換 奇數項首尾互換
+ *
  */
 
 class Solution {
@@ -56,6 +61,36 @@ class Solution {
     }
   }
 } solution;
+
+class RecursiveSolution {
+ public:
+  vector<vector<int>> permute(vector<int>& nums) {
+    vector<vector<int>> results;
+    bool seen[nums.size()];
+    vector<int> result;
+
+    permute(results, seen, nums, result);
+
+    return results;
+  }
+
+  void permute(vector<vector<int>>& results, bool seen[], vector<int>& nums,
+               vector<int>& result) {
+    int length = nums.size();
+
+    if (result.size() == length) return results.push_back(result);
+
+    for (int i = 0; i < length; i++) {
+      if (seen[i]) continue;
+
+      seen[i] = true;
+      result.push_back(nums[i]);
+      permute(results, seen, nums, result);
+      seen[i] = false;
+      result.pop_back();
+    }
+  };
+};
 
 int main() {
   vector<int> nums = {1, 2, 3, 4};

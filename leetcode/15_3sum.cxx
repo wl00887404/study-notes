@@ -45,9 +45,7 @@ class Solution {
         continue;
       }
 
-      if (!twiceNums.count(nums[i])) {
-        twiceNums.insert(nums[i]);
-      }
+      if (!twiceNums.count(nums[i])) twiceNums.insert(nums[i]);
     }
 
     int pLength = positiveNums.size();
