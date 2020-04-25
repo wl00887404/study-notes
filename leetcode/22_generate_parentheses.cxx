@@ -7,48 +7,27 @@
 using namespace std;
 
 /**
- * 我的答案看起來怪怪的
- *
- * TODO: 想辦法除掉那個 set
+ * 結果 brute force 比 recursive 還快
  */
-
-/**
- * 1: (1)
- * 2: (1, 1)
- * 3: (1, 2)
- * 4: (1, 3) (2, 2)
- * 5: (1, 4) (2, 3)
- */
-
-unordered_map<int, vector<string>> cache = {{1, {"()"}}};
 
 class Solution {
  public:
   vector<string> generateParenthesis(int n) {
-    if (cache.count(n)) return cache[n];
+    vector<string> results = {};
 
-    unordered_set<string> set;
-    vector<string> result;
+    generateParenthesis(results, n, n, "");
 
-    for (string str : generateParenthesis(n - 1)) set.insert("(" + str + ")");
+    return results;
+  }
 
-    for (int i = 1; i <= n - i; i++) {
-      vector<string> p1 = generateParenthesis(i);
-      vector<string> p2 = generateParenthesis(n - i);
+  void generateParenthesis(vector<string>& results, int left, int right,
+                           string result) {
+    if (left == 0 && right == 0) return results.push_back(result);
 
-      for (string prefix : p1) {
-        for (string str : p2) {
-          set.insert(str + prefix);
-          set.insert(prefix + str);
-        }
-      }
+    if (left > 0) generateParenthesis(results, left - 1, right, result + "(");
+    if (right > left) {
+      generateParenthesis(results, left, right - 1, result + ")");
     }
-
-    for (string str : set) result.push_back(str);
-
-    cache[n] = result;
-
-    return result;
   }
 } solution;
 
