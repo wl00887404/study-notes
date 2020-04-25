@@ -6,7 +6,7 @@ using namespace std;
  * 是很常遇到的排列組合題！！
  * 欸欸欸直接傳 STL 容器 都不是傳址耶！！好扯喔！！
  *
- * dae35f4: 遞迴法 32ms 哭了
+ * dae35f4: 遞迴法 32 ms 哭了
  *
  * 不要閉門造車比較好
  * Steinhaus–Johnson–Trotter algorithm:

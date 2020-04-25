@@ -6,7 +6,7 @@ using namespace std;
 
 /**
  * 撥洋蔥 RRRR
- * 可是 128ms 到底是三小
+ * 可是 128 ms 到底是三小
  *
  * TODO: 敢不敢快一點
  */

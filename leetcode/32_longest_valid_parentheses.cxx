@@ -3,7 +3,7 @@
 using namespace std;
 
 /**
- * 自己寫出來 4ms
+ * 自己寫出來 4 ms
  * 豪爽喔
  *
  * TODO: 研究 model answer
