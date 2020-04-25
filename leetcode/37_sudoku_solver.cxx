@@ -19,6 +19,7 @@ class Solution {
     for (int i = 0; i < 9; i++)
       for (int j = 0; j < 9; j++) {
         if (board[i][j] == '.') continue;
+        
         int_board[i][j] = c2i(board[i][j]);
       }
 
@@ -32,6 +33,7 @@ class Solution {
       }
 
       int_board[i][j]++;
+
       if (int_board[i][j] == 10) {
         int_board[i][j] = 0;
         k = steps.top();
@@ -61,7 +63,6 @@ class Solution {
       int index = board[row][i] - 1;
 
       if (index == -1) continue;
-
       if (has[index]) return false;
 
       has[index] = true;
@@ -77,7 +78,6 @@ class Solution {
       int index = board[i][column] - 1;
 
       if (index == -1) continue;
-
       if (has[index]) return false;
 
       has[index] = true;
@@ -96,7 +96,6 @@ class Solution {
         int index = board[top + i][left + j] - 1;
 
         if (index == -1) continue;
-
         if (has[index]) return false;
 
         has[index] = true;

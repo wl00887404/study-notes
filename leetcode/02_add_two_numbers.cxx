@@ -39,9 +39,7 @@ class Solution {
       pointer = pointer->next;
     }
 
-    if (pointer->val == 0) {
-      prev->next = nullptr;
-    }
+    if (pointer->val == 0) prev->next = nullptr;
 
     return head;
   }

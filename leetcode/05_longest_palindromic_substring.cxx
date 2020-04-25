@@ -29,7 +29,6 @@ class Solution {
   int getPalindromeLength(string s, int left, int right) {
     while (true) {
       if (left < 0 || right > s.length() - 1) break;
-
       if (s[left] != s[right]) break;
 
       left--;

@@ -15,7 +15,6 @@ class Solution {
     int length = nums.size();
 
     if (length == 0) return 1;
-
     if (length == 1) return nums[0] == 1 ? 2 : 1;
 
     // sort(nums.begin(), nums.end());

@@ -12,6 +12,7 @@ class Solution {
     for (int i = 0; i < length; i++) {
       int x = nums[i];
       int rest = target - x;
+      
       if (map.count(rest)) return {i, map[rest]};
 
       map[nums[i]] = i;

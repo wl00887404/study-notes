@@ -13,6 +13,7 @@ class Solution {
 
     for (int i = 1; i < length; i++) {
       if (nums[i] == nums[i - 1]) continue;
+      
       nums[j] = nums[i];
       j++;
     }

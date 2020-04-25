@@ -6,9 +6,7 @@ class Solution {
  public:
   double myPow(double x, int n) {
     if (n == 0) return 1;
-
     if (n < 0) return 1 / myPow(x, -1 * n);
-
     if (n == 1) return x;
 
     /**
@@ -22,6 +20,7 @@ class Solution {
     double f = x;
     while (n != 0) {
       if (n % 2 == 1) result *= f;
+      
       n >>= 1;
       f *= f;
     }

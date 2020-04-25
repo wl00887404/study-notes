@@ -6,7 +6,6 @@ class Solution {
  public:
   string longestCommonPrefix(vector<string> &strs) {
     if (strs.size() == 0) return "";
-
     if (strs.size() == 1) return strs[0];
 
     const char *pointers[strs.size() - 1];

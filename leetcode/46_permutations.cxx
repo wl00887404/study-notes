@@ -42,18 +42,17 @@ class Solution {
 
     return results;
   }
+
   void permute(vector<vector<int>>& results, vector<int>& nums, int k) {
-    if (k == 1) {
-      results.push_back(nums);
-    } else {
+    if (k == 1) return results.push_back(nums);
+
+    permute(results, nums, k - 1);
+
+    for (int i = 0; i < k - 1; i++) {
+      int swapIndex = k % 2 ? 0 : i;
+
+      swap(nums[swapIndex], nums[k - 1]);
       permute(results, nums, k - 1);
-
-      for (int i = 0; i < k - 1; i++) {
-        int swapIndex = k % 2 ? 0 : i;
-
-        swap(nums[swapIndex], nums[k - 1]);
-        permute(results, nums, k - 1);
-      }
     }
   }
 } solution;

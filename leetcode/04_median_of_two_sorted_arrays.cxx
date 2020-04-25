@@ -23,7 +23,6 @@ class MergedVector {
 
   int next() {
     if (this->begin1 == this->end1) return *(this->begin2++);
-
     if (this->begin2 == this->end2) return *(this->begin1++);
 
     return *this->begin1 > *this->begin2 ? *(this->begin2++)

@@ -18,6 +18,7 @@ class Solution {
       if (steps < 1) return false;
 
       steps--;
+      
       if (nums[i] > steps) steps = nums[i];
     }
 

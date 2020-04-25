@@ -23,9 +23,7 @@ string stringify(vector<string>& xs, int indentation = 0) {
 
     result += xs[i] + ", ";
 
-    if (totalLength > 39) {
-      result += "\n  ";
-    }
+    if (totalLength > 39) result += "\n  ";
   }
 
   result += xs[i] + " ]";

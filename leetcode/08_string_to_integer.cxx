@@ -28,7 +28,6 @@ class Solution {
       result = result * 10 + (charCode - 48) * sign;
 
       if (result > max) return max;
-
       if (result < min) return min;
 
       pointer++;
