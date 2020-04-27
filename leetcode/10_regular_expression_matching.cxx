@@ -10,24 +10,24 @@ class Solution {
  public:
   bool isMatch(string s, string p) { return isMatch(s, p, 0, 0); }
 
-  bool isMatch(string s, string p, int i, int j) {
+  bool isMatch(string& s, string& p, int i, int j) {
     int sLength = s.length();
     int pLength = p.length();
 
     while (true) {
       if (j + 1 < pLength && p[j + 1] == '*') {
         int k = 0;
-        int skipShift = 0;
+        int skip = 0;
 
         // skip p = "a*a*" | ".*a*b*"
-        while (j + skipShift + 3 < pLength &&
-               (p[j] == '.' || p[j + skipShift] == p[j + skipShift + 2]) &&
-               p[j + skipShift + 3] == '*') {
-          skipShift += 2;
+        while (j + skip + 3 < pLength &&
+               (p[j] == '.' || p[j + skip] == p[j + skip + 2]) &&
+               p[j + skip + 3] == '*') {
+          skip += 2;
         }
 
         while (i + k < sLength && (p[j] == s[i + k] || p[j] == '.')) {
-          if (isMatch(s, p, i + k, j + skipShift + 2)) return true;
+          if (isMatch(s, p, i + k, j + skip + 2)) return true;
 
           k++;
         }
@@ -37,18 +37,18 @@ class Solution {
          * L49 的 while 只會跑到 s = "ab" p = "b"
          * 最後補跑 s = "b" p = "b"
          */
-        if (k != 0 && isMatch(s, p, i + k, j + skipShift + 2)) return true;
+        if (k != 0 && isMatch(s, p, i + k, j + skip + 2)) return true;
 
-        j += skipShift + 2;
-      } else {
-        if (i == sLength && j == pLength) return true;
-        if (i == sLength || j == pLength) return false;
-
-        if (s[i] != p[j] && p[j] != '.') return false;
-
-        i++;
-        j++;
+        j += skip + 2;
+        continue;
       }
+
+      if (i == sLength && j == pLength) return true;
+      if (i == sLength || j == pLength) return false;
+      if (s[i] != p[j] && p[j] != '.') return false;
+
+      i++;
+      j++;
     }
   }
 } solution;
