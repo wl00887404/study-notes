@@ -3,7 +3,7 @@
 using namespace std;
 
 /**
- * TODO: 研究 model answer
+ * TODO: 研究 dp answer
  */
 
 class Solution {

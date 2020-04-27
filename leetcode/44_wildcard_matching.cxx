@@ -1,18 +1,31 @@
 #include <iostream>
+#include <regex>
 using namespace std;
 
 /**
  * 後面有一堆超肥的 testcase
  * 正常的 regex 會跑不完
+ *
+ * 我棄權 直接看解答
+ * .* 會 match 任何字串
+ * 只要過了一個就回去了
+ * s = "dogdogcatcat" p = "d*ogc*at"
+ * 結果不會是 d(ogd)ogc(atc)at
+ * 而是 d()og(dogcat)cat
+ * 因此只要不符合時
+ * 只要回到最後一個 star 就行了
+ *
+ * TODO: 研究 dp answer
  */
 
 class Solution {
  public:
   bool isMatch(string s, string p) { return isMatch(s, p, 0, 0); }
 
-  bool isMatch(string& s, string& p, int i, int j) {
+  bool isMatch(string& s, string& p, int i = 0, int j = 0) {
     int sLength = s.size();
     int pLength = p.size();
+    int lastStar[2] = {-1};
 
     while (true) {
       if (p[j] == '*') {
@@ -20,16 +33,23 @@ class Solution {
           j++;
         } while (j < pLength && p[j] == '*');
 
-        while (i < sLength + 1) {
-          if (isMatch(s, p, i++, j)) return true;
-        }
+        lastStar[0] = i;
+        lastStar[1] = j;
 
-        return false;
+        continue;
       }
 
       if (i == sLength && j == pLength) return true;
-      if (i == sLength || j == pLength) return false;
-      if (s[i] != p[j] && p[j] != '?') return false;
+      if (i == sLength && j != pLength) return false;
+
+      if (s[i] != p[j] && p[j] != '?') {
+        if (lastStar[0] == -1) return false;
+
+        lastStar[0]++;
+        i = lastStar[0];
+        j = lastStar[1];
+        continue;
+      }
 
       i++;
       j++;
@@ -38,7 +58,8 @@ class Solution {
 } solution;
 
 int main() {
-  // cout << solution.isMatch("aa", "*b") << endl;
+  // cout << solution.isMatch("aa", "*") << endl;
+  // cout << solution.isMatch("acdcb", "a*c?b") << endl;
   cout << solution.isMatch(
               "abbabaaabbabbaababbabbbbbabbbabbbabaaaaababababbbabababaabbababa"
               "abbbbbbaaaabababbbaabbbbaabbbbababababbaabbaababaabbbababababbbb"
