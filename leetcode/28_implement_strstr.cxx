@@ -5,13 +5,11 @@ using namespace std;
 /**
  * 實作一下 kmp 吧
  * https://youtu.be/cgaPEsMJkSc?t=3116
- *
+ * http://www.csie.ntnu.edu.tw/~u91029/StringSearching.html#2
+
  * 已經 match 的部份
  * 只 shift 1 還是一樣不會 match
- * AGCCTAGCTCATT
- * AGCGG
- *    AGCGG
- *
+ * 
  * AGCCTAGCTCATT
  * AGCCTAC
  * ^    ^

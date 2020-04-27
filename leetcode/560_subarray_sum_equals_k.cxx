@@ -4,7 +4,7 @@
 using namespace std;
 
 /**
- * #recommend:
+ * #recommended:
  *   這題很棒耶
  *   輕鬆完成、困難優化、可以學到東西
  * 

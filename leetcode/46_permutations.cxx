@@ -3,7 +3,7 @@
 using namespace std;
 
 /**
- * #recommend:
+ * #recommended:
  *   是很常遇到的排列組合題！！
  *
  * dae35f4: 遞迴法 32 ms 哭了
@@ -11,7 +11,7 @@ using namespace std;
  * 欸欸欸 STL 容器不是傳址耶！！好扯喔！！
  * 遞迴法不會比較慢
  * 是dfs 的寫法沒寫好 = =
- * 
+ *
  * 不要閉門造車:
  * Steinhaus–Johnson–Trotter algorithm:
  *   https://en.wikipedia.org/wiki/Steinhaus%E2%80%93Johnson%E2%80%93Trotter_algorithm
@@ -66,7 +66,7 @@ class RecursiveSolution {
  public:
   vector<vector<int>> permute(vector<int>& nums) {
     vector<vector<int>> results;
-    bool seen[nums.size()];
+    vector<bool> seen = vector(nums.size(), false);
     vector<int> result;
 
     permute(results, seen, nums, result);
@@ -74,8 +74,8 @@ class RecursiveSolution {
     return results;
   }
 
-  void permute(vector<vector<int>>& results, bool seen[], vector<int>& nums,
-               vector<int>& result) {
+  void permute(vector<vector<int>>& results, vector<bool>& seen,
+               vector<int>& nums, vector<int>& result) {
     int length = nums.size();
 
     if (result.size() == length) return results.push_back(result);
