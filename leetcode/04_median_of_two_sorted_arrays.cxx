@@ -40,7 +40,7 @@ class Solution {
     while (beforeCenter--) mergedVector->next();
 
     if (isOdd) return mergedVector->next();
-
+    
     return (mergedVector->next() + mergedVector->next()) / 2.0;
   }
 } solution;

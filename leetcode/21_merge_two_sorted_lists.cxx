@@ -10,8 +10,8 @@ struct ListNode {
 class Solution {
  public:
   ListNode* mergeTwoLists(ListNode* l1, ListNode* l2) {
-    ListNode* head = new ListNode(0);
-    ListNode* p = head;
+    ListNode head = ListNode(0);
+    ListNode* p = &head;
 
     while (l1 != NULL && l2 != NULL) {
       if (l1->val < l2->val) {
@@ -31,6 +31,6 @@ class Solution {
       p->next = l2;
     }
 
-    return head->next;
+    return head.next;
   }
 };

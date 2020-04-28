@@ -2,7 +2,7 @@
 using namespace std;
 
 int foo;
-int *pointer = nullptr;
+int *pointer = NULL;
 int array[] = {38, 16, 54};
 
 const int *const_pointer1 = &foo;  // 不能改變數值的 pointer
