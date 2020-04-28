@@ -35,7 +35,7 @@ vector<string> toString(vector<int>& xs) {
   vector<string> results;
 
   for (int x : xs) {
-    results.push_back("" + x);
+    results.push_back(to_string(x));
   }
 
   return results;

@@ -1,14 +1,16 @@
 #include <algorithm>
 #include <iostream>
 #include <vector>
+
+#include "./log.cxx"
+
 using namespace std;
 
 /**
  * 一定是前面小的換後面大的
- * 132 1432
- *  ^   ^
+ * 524321
+ *  ^ ^
  * 開始下降的前一位 與後面最接近他的那位交換
- * 然後 sort 後面
  *
  * 竟然有 next_permutation 的內建函數
  * 好扯喔
@@ -22,20 +24,23 @@ class Solution {
 
     while (0 < i && nums[i - 1] >= nums[i]) i--;
 
-    if (i != 0) {
-      int closest = i;
+    reverse(nums.begin() + i, nums.end());
 
-      for (int j = 0; j < length - i; j++) {
-        if (nums[i + j] <= nums[i - 1]) continue;
+    if (i == 0) return;
 
-        int diff = nums[i + j] - nums[i - 1];
+    int j = i;
 
-        if (diff < nums[closest] - nums[i - 1]) closest = i + j;
-        if (diff == 1) break;
-      }
-      swap(nums[i - 1], nums[closest]);
-    };
+    while (nums[j] <= nums[i - 1]) j++;
 
-    sort(nums.begin() + i, nums.end());
-  }
-};
+    swap(nums[i - 1], nums[j]);
+  };
+} solution;
+
+int main() {
+  vector<int> nums = {1, 3, 2};
+  solution.nextPermutation(nums);
+
+  log(nums);
+
+  return 0;
+}
