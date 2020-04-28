@@ -8,8 +8,7 @@ class Solution {
 
     while (copied != 0) {
       converted *= 10;
-      int ones = copied % 10;
-      converted += ones;
+      converted += copied % 10;
       copied /= 10;
     }
 

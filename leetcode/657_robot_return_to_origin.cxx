@@ -11,9 +11,11 @@ class Solution {
   bool judgeCircle(string moves) {
     int x = 0;
     int y = 0;
+    string::iterator begin = moves.begin();
+    string::iterator end = moves.end();
 
-    for (const char* p = moves.c_str(); *p != '\0'; p++) {
-      switch (*p) {
+    while (begin != end) {
+      switch (*begin) {
         case 'R':
           x++;
           break;
@@ -27,6 +29,8 @@ class Solution {
           y--;
           break;
       }
+      
+      begin++;
     }
 
     return x == 0 && y == 0;

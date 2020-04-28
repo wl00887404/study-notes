@@ -5,23 +5,24 @@ using namespace std;
 class Solution {
  public:
   int myAtoi(string str) {
-    const char *pointer = str.c_str();
+    string::iterator begin = str.begin();
+    string::iterator end = str.end();
     long long result = 0;
     int sign = 1;
     const int max = numeric_limits<int>::max();
     const int min = numeric_limits<int>::min();
 
-    while (*pointer == ' ') pointer++;
+    while (*begin == ' ') begin++;
 
-    if (*pointer == '+') {
-      pointer++;
-    } else if (*pointer == '-') {
+    if (*begin == '+') {
+      begin++;
+    } else if (*begin == '-') {
       sign = -1;
-      pointer++;
+      begin++;
     }
 
-    while (*pointer != '\0') {
-      int charCode = (int)*pointer;
+    while (begin != end) {
+      int charCode = (int)*begin;
 
       if (charCode < 48 || charCode > 57) break;
 
@@ -30,7 +31,7 @@ class Solution {
       if (result > max) return max;
       if (result < min) return min;
 
-      pointer++;
+      begin++;
     }
 
     return result;

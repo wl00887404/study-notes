@@ -5,7 +5,8 @@ using namespace std;
 class Solution {
  public:
   int romanToInt(string s) {
-    const char *pointer = s.c_str();
+    string::iterator begin = s.begin();
+    string::iterator end = s.begin();
     int result = 0;
 
     unordered_map<char, int> map = {
@@ -13,45 +14,45 @@ class Solution {
         {'C', 100}, {'D', 500}, {'M', 1000},
     };
 
-    while (*pointer != '\0') {
-      if (*pointer == 'C' && *(pointer + 1) == 'M') {
+    while (begin != end) {
+      if (*begin == 'C' && *(begin + 1) == 'M') {
         result += 900;
-        pointer += 2;
+        begin += 2;
         continue;
       }
 
-      if (*pointer == 'C' && *(pointer + 1) == 'D') {
+      if (*begin == 'C' && *(begin + 1) == 'D') {
         result += 400;
-        pointer += 2;
+        begin += 2;
         continue;
       }
 
-      if (*pointer == 'X' && *(pointer + 1) == 'C') {
+      if (*begin == 'X' && *(begin + 1) == 'C') {
         result += 90;
-        pointer += 2;
+        begin += 2;
         continue;
       }
 
-      if (*pointer == 'X' && *(pointer + 1) == 'L') {
+      if (*begin == 'X' && *(begin + 1) == 'L') {
         result += 40;
-        pointer += 2;
+        begin += 2;
         continue;
       }
 
-      if (*pointer == 'I' && *(pointer + 1) == 'X') {
+      if (*begin == 'I' && *(begin + 1) == 'X') {
         result += 9;
-        pointer += 2;
+        begin += 2;
         continue;
       }
 
-      if (*pointer == 'I' && *(pointer + 1) == 'V') {
+      if (*begin == 'I' && *(begin + 1) == 'V') {
         result += 4;
-        pointer += 2;
+        begin += 2;
         continue;
       }
 
-      result += map[*pointer];
-      pointer++;
+      result += map[*begin];
+      begin++;
     }
 
     return result;

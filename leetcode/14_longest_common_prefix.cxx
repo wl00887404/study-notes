@@ -5,28 +5,29 @@ using namespace std;
 class Solution {
  public:
   string longestCommonPrefix(vector<string> &strs) {
-    if (strs.size() == 0) return "";
-    if (strs.size() == 1) return strs[0];
+    int strsLength = strs.size();
 
-    const char *pointers[strs.size() - 1];
-    const char *ref = strs[0].c_str();
-    string result = "";
+    if (strsLength == 0) return "";
+    if (strsLength == 1) return strs[0];
 
-    for (int i = 0; i < strs.size() - 1; i++) {
-      pointers[i] = strs[i + 1].c_str();
-    }
+    int length = strs[0].size();
+    char cs[length + 1];
 
-    while (*ref != '\0') {
-      for (int i = 1; i < strs.size(); i++) {
-        if (*pointers[i - 1] != *ref) return result;
+    for (int i = 0; i < length; i++) {
+      for (int j = 1; j < strsLength; j++) {
+        if (strs[0][i] == strs[j][i]) continue;
+        
+        cs[i] = '\0';
 
-        pointers[i - 1]++;
+        return string(cs);
       }
 
-      result += *ref;
-      ref++;
+      cs[i] = strs[0][i];
     }
-    return result;
+
+    cs[length] = '\0';
+
+    return string(cs);
   }
 } solution;
 
