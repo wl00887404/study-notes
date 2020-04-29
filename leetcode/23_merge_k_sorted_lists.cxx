@@ -3,8 +3,8 @@
 #include <unordered_map>
 #include <vector>
 
+#include "./ListNode.cxx"
 #include "./log.cxx"
-
 using namespace std;
 
 /**
@@ -23,12 +23,6 @@ using namespace std;
  * T1 解是兩個兩個合併耶
  * 但測試之後也是 32ms 應該也是 O(nlog n)
  */
-
-struct ListNode {
-  int val;
-  ListNode* next;
-  ListNode(int x) : val(x), next(NULL) {}
-};
 
 class Solution {
  public:
@@ -108,35 +102,18 @@ class ReadAllSolution {
 };
 
 int main() {
-  ListNode* l1 = new ListNode(1);
-  l1->next = new ListNode(4);
-  l1->next->next = new ListNode(5);
+  ListNode* l1 = new ListNode({1, 4, 5});
+  ListNode* l2 = new ListNode({1, 3, 4});
+  ListNode* l3 = new ListNode({2, 6});
+  vector<ListNode*> lists1 = {l1, l2, l3};
 
-  ListNode* l2 = new ListNode(1);
-  l2->next = new ListNode(3);
-  l2->next->next = new ListNode(4);
+  log(solution.mergeKLists(lists1));
 
-  ListNode* l3 = new ListNode(2);
-  l3->next = new ListNode(6);
+  ListNode* l4 = new ListNode({1, 2, 2});
+  ListNode* l5 = new ListNode({1, 1, 2});
+  vector<ListNode*> lists2 = {l4, l5};
 
-  vector<ListNode*> lists = {l1, l2, l3};
-  ListNode* p = solution.mergeKLists(lists);
-
-  // ListNode* l1 = new ListNode(1);
-  // l1->next = new ListNode(2);
-  // l1->next->next = new ListNode(2);
-
-  // ListNode* l2 = new ListNode(1);
-  // l2->next = new ListNode(1);
-  // l2->next->next = new ListNode(2);
-
-  // vector<ListNode*> lists = {l1, l2};
-  // ListNode* p = solution.mergeKLists(lists);
-
-  while (p != NULL) {
-    cout << p->val << endl;
-    p = p->next;
-  }
+  log(solution.mergeKLists(lists2));
 
   return 0;
 }

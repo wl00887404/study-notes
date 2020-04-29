@@ -1,11 +1,7 @@
 #include <iostream>
-using namespace std;
 
-struct ListNode {
-  int val;
-  ListNode* next;
-  ListNode(int x) : val(x), next(NULL){};
-};
+#include "./ListNode.cxx"
+using namespace std;
 
 class Solution {
  public:
