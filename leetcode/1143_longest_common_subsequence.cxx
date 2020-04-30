@@ -15,6 +15,7 @@ class Solution {
     int length1 = text1.size();
     int length2 = text2.size();
     int dp[length1 + 1][length2 + 1];
+    
     for (int i = 0; i < length1 + 1; i++) dp[i][0] = 0;
     for (int i = 0; i < length2 + 1; i++) dp[0][i] = 0;
 

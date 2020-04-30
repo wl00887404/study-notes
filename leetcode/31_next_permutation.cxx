@@ -3,7 +3,6 @@
 #include <vector>
 
 #include "./log.cxx"
-
 using namespace std;
 
 /**
