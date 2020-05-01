@@ -12,7 +12,6 @@ class Solution {
     vector<int> result;
 
     sort(candidates.begin(), candidates.end());
-
     combinationSum2(results, candidates, target, 0, result);
 
     return results;
@@ -24,29 +23,14 @@ class Solution {
 
     int length = candidates.size();
 
-    if (i == length) return;
+    for (int j = i; j < length && target >= candidates[j]; j++) {
+      result.push_back(candidates[j]);
+      combinationSum2(results, candidates, target - candidates[j], j + 1,
+                      result);
 
-    int duplicate = 0;
-    while (i + duplicate + 1 < length &&
-           candidates[i + duplicate] == candidates[i + duplicate + 1]) {
-      duplicate++;
-    }
+      while (j + 1 < length && candidates[j] == candidates[j + 1]) j++;
 
-    combinationSum2(results, candidates, target, i + duplicate + 1, result);
-
-    int j = 0;
-    for (; j <= duplicate; j++) {
-      if (target < candidates[i]) break;
-
-      target = target - candidates[i];
-      result.push_back(candidates[i]);
-
-      combinationSum2(results, candidates, target, i + duplicate + 1, result);
-    }
-
-    while (j > 0) {
       result.pop_back();
-      j--;
     }
   }
 } solution;
