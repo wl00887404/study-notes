@@ -63,7 +63,6 @@ class Solution {
     combinationSum(results, candidates, target, i + 1, result);
 
     int j = 0;
-
     while (target >= candidates[i]) {
       j++;
       target -= candidates[i];
