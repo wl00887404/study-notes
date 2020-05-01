@@ -2,7 +2,7 @@
 #include <vector>
 using namespace std;
 
-string stringify(vector<string>& xs, int indentation = 0) {
+string stringify(vector<string>& xs) {
   int length = xs.size();
 
   if (length == 0) return "[]";
@@ -13,14 +13,10 @@ string stringify(vector<string>& xs, int indentation = 0) {
 
   string result = "";
 
-  for (int i = 0; i < indentation; i++) result += " ";
-
   result = "[ ";
   int i = 0;
 
   for (; i < length - 1; i++) {
-    for (int j = 0; j < indentation; j++) result += " ";
-
     result += xs[i] + ", ";
 
     if (totalLength > 39) result += "\n  ";
@@ -41,11 +37,27 @@ vector<string> toString(vector<int>& xs) {
   return results;
 }
 
-string stringify(vector<int>& xs, int indentation = 0) {
+string stringify(vector<int>& xs) {
   vector<string> stringified = toString(xs);
 
-  return stringify(stringified, indentation);
+  return stringify(stringified);
+}
+
+string stringify(vector<vector<int>>& xss) {
+  if (xss.size() == 0) return "[]";
+
+  string result = "[\n";
+
+  for (vector<int> xs : xss) {
+    vector<string> stringified = toString(xs);
+    result += "  " + stringify(stringified) + ",\n";
+  }
+
+  result += "]";
+
+  return result;
 }
 
 void log(vector<int>& xs) { cout << stringify(xs) << endl; }
 void log(vector<string>& xs) { cout << stringify(xs) << endl; }
+void log(vector<vector<int>>& xss) { cout << stringify(xss) << endl; }

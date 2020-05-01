@@ -1,6 +1,9 @@
+#include <algorithm>
 #include <iostream>
 #include <unordered_set>
 #include <vector>
+
+#include "./log.cxx"
 using namespace std;
 
 /**
@@ -8,7 +11,8 @@ using namespace std;
  * 分成正負 256 ms
  * 改掉 unordered_map::begin 196 ms
  *
- * 應該是太多元素會降低 unordered_map 的速度
+ * wiki 有 T1 解
+ * https://zh.wikipedia.org/wiki/3SUM
  *
  * TODO: 敢不敢再快一點
  */
@@ -48,17 +52,17 @@ class Solution {
       if (!twiceNums.count(nums[i])) twiceNums.insert(nums[i]);
     }
 
-    int pLength = positiveNums.size();
-    int nLength = negativeNums.size();
+    int positiveLength = positiveNums.size();
+    int negativeLength = negativeNums.size();
 
     if (zeroLength >= 3) results.push_back({0, 0, 0});
 
-    if (pLength == 0 || nLength == 0) return results;
+    if (positiveLength == 0 || negativeLength == 0) return results;
 
-    bool isPositiveSmaller = pLength < nLength;
+    bool isPositiveSmaller = positiveLength < negativeLength;
     bool hasZero = zeroLength > 0;
 
-    for (int i = 0; i < pLength; i++) {
+    for (int i = 0; i < positiveLength; i++) {
       if (hasZero && isPositiveSmaller) {
         int complement = 0 - positiveNums[i];
 
@@ -67,15 +71,9 @@ class Solution {
         }
       }
 
-      if (twiceNums.count(positiveNums[i])) {
-        int complement = 0 - positiveNums[i] - positiveNums[i];
+      int j = twiceNums.count(positiveNums[i]) ? i : i + 1;
 
-        if (onceNums.count(complement)) {
-          results.push_back({complement, positiveNums[i], positiveNums[i]});
-        }
-      }
-
-      for (int j = i + 1; j < pLength; j++) {
+      for (; j < positiveLength; j++) {
         int complement = 0 - positiveNums[i] - positiveNums[j];
 
         if (onceNums.count(complement)) {
@@ -84,7 +82,7 @@ class Solution {
       }
     }
 
-    for (int i = 0; i < nLength; i++) {
+    for (int i = 0; i < negativeLength; i++) {
       if (hasZero && !isPositiveSmaller) {
         int complement = 0 - negativeNums[i];
 
@@ -93,15 +91,9 @@ class Solution {
         }
       }
 
-      if (twiceNums.count(negativeNums[i])) {
-        int complement = 0 - negativeNums[i] - negativeNums[i];
+      int j = twiceNums.count(negativeNums[i]) ? i : i + 1;
 
-        if (onceNums.count(complement)) {
-          results.push_back({complement, negativeNums[i], negativeNums[i]});
-        }
-      }
-
-      for (int j = i + 1; j < nLength; j++) {
+      for (; j < negativeLength; j++) {
         int complement = 0 - negativeNums[i] - negativeNums[j];
 
         if (onceNums.count(complement)) {
@@ -116,7 +108,10 @@ class Solution {
 
 int main() {
   vector<int> nums = {-1, 0, 1, 2, -1, -4};
+
   vector<vector<int>> results = solution.threeSum(nums);
+
+  log(results);
 
   return 0;
 }
