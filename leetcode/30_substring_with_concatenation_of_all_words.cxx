@@ -1,11 +1,22 @@
 #include <iostream>
 #include <map>
 #include <unordered_map>
-#include <unordered_set>
 #include <vector>
 
 #include "./log.cxx"
 using namespace std;
+
+struct TrieNode {
+  unordered_map<char, TrieNode*> children;
+  string* refer = NULL;
+  int count = 0;
+  int used = 0;
+  bool has(char c) { return children.count(c); }
+  void resetUsed() {
+    used = 0;
+    for (auto p : children) p.second->resetUsed();
+  }
+};
 
 class Solution {
  public:
@@ -17,33 +28,46 @@ class Solution {
 
     int wordLength = words[0].size();
 
-    unordered_map<string, int> frequencyMap;
-    unordered_map<int, string*> matchMap;
+    unordered_map<int, TrieNode*> matchMap;
     vector<int> matchIndexies;
     int limit = sLength - wordLength * wordsLength;
+    TrieNode* root = new TrieNode();
 
     for (string& word : words) {
-      frequencyMap[word]++;
+      TrieNode* p = root;
 
-      if (frequencyMap[word] > 1) continue;
+      for (int i = 0; i < wordLength; i++) {
+        if (!p->has(word[i])) p->children[word[i]] = new TrieNode();
 
-      for (int i = 0; i < sLength; i++) {
-        int j = 0;
+        p = p->children[word[i]];
+      }
 
-        while (j < wordLength && s[i + j] == word[j]) j++;
+      if (p->refer == NULL) p->refer = &word;
+      p->count++;
+    }
 
-        if (j == wordLength) {
-          matchMap[i] = &word;
+    for (int i = 0; i < sLength; i++) {
+      TrieNode* p = root;
+      int j = 0;
+
+      while (true) {
+        if (p->refer != NULL) {
+          matchMap[i] = p;
           if (i <= limit) matchIndexies.push_back(i);
+          break;
         }
+
+        if (!p->has(s[i + j])) break;
+
+        p = p->children[s[i + j]];
+        j++;
       }
     }
 
-    unordered_map<string, int> used;
     vector<int> results;
 
     for (int& begin : matchIndexies) {
-      used.clear();
+      root->resetUsed();
 
       int i = 0;
       for (; i < wordsLength; i++) {
@@ -52,9 +76,9 @@ class Solution {
         if (!matchMap.count(index)) break;
         if (index >= sLength) break;
 
-        used[*matchMap[index]]++;
+        matchMap[index]->used++;
 
-        if (used[*matchMap[index]] > frequencyMap[*matchMap[index]]) break;
+        if (matchMap[index]->used > matchMap[index]->count) break;
       }
 
       if (i == wordsLength) results.push_back(begin);
@@ -66,43 +90,14 @@ class Solution {
 } solution;
 
 int main() {
-  // string s = "barfoothefoobarman";
-  // vector<string> words = {"foo", "bar"};
+  string s = "barfoothefoobarman";
+  vector<string> words = {"foo", "bar"};
 
   // string s = "wordgoodgoodgoodbestword";
   // vector<string> words = {"word", "good", "best", "word"};
 
-  string s = "wordgoodgoodgoodbestword";
-  vector<string> words = {"word", "good", "best", "good"};
-
-  // string s =
-  //     "pjzkrkevzztxductzzxmxsvwjkxpvukmfjywwetvfnujhweiybwvvsrfequzkhossmootkmy"
-  //     "xgjgfordrpapjuunmqnxxdrqrfgkrsjqbszgiqlcfnrpjlcwdrvbumtotzylshdvccdmsqoa"
-  //     "dfrpsvnwpizlwszrtyclhgilklydbmfhuywotjmktnwrfvizvnmfvvqfiokkdprznnnjyctt"
-  //     "prkxpuykhmpchiksyucbmtabiqkisgbhxngmhezrrqvayfsxauampdpxtafniiwfvdufhtwa"
-  //     "jrbkxtjzqjnfocdhekumttuqwovfjrgulhekcpjszyynadxhnttgmnxkduqmmyhzfnjhduce"
-  //     "sctufqbumxbamalqudeibljgbspeotkgvddcwgxidaiqcvgwykhbysjzlzfbupkqunuqtrax"
-  //     "rlptivshhbihtsigtpipguhbhctcvubnhqipncyxfjebdnjyetnlnvmuxhzsdahkrscewabe"
-  //     "jifmxombiamxvauuitoltyymsarqcuuoezcbqpdaprxmsrickwpgwpsoplhugbikbkotzrtq"
-  //     "kscekkgwjycfnvwfgdzogjzjvpcvixnsqsxacfwndzvrwrycwxrcismdhqapoojegggkocyr"
-  //     "dtkzmiekhxoppctytvphjynrhtcvxcobxbcjjivtfjiwmduhzjokkbctweqtigwfhzorjlkp"
-  //     "uuliaipbtfldinyetoybvugevwvhhhweejogrghllsouipabfafcxnhukcbtmxzshoyyufjh"
-  //     "zadhrelweszbfgwpkzlwxkogyogutscvuhcllphshivnoteztpxsaoaacgxyaztuixhunrow"
-  //     "zljqfqrahosheukhahhbiaxqzfmmwcjxountkevsvpbzjnilwpoermxrtlfroqoclexxisrd"
-  //     "hvfsindffslyekrzwzqkpeocilatftymodgztjgybtyheqgcpwogdcjlnlesefgvimwbxcbz"
-  //     "vaibspdjnrpqtyeilkcspknyylbwndvkffmzuriilxagyerjptbgeqgebiaqnvdubrtxibhv"
-  //     "akcyotkfonmseszhczapxdlauexehhaireihxsplgdgmxfvaevrbadbwjbdrkfbbjjkgcztk"
-  //     "cbwagtcnrtqryuqixtzhaakjlurnumzyovawrcjiwabuwretmdamfkxrgqgcdgbrdbnugzec"
-  //     "bgyxxdqmisaqcyjkqrntxqmdrczxbebemcblftxplafnyoxqimkhcykwamvdsxjezkpgdpvo"
-  //     "pddptdfbprjustquhlazkjfluxrzopqdstulybnqvyknrchbphcarknnhhovweaqawdyxsqs"
-  //     "qahkepluypwrzjegqtdoxfgzdkydeoxvrfhxusrujnmjzqrrlxglcmkiykldbiasnhrjbjek"
-  //     "ystzilrwkzhontwmehrfsrzfaqrbbxncphbzuuxeteshyrveamjsfiaharkcqxefghgceeix"
-  //     "kdgkuboupxnwhnfigpkwnqdvzlydpidcljmflbccarbiegsmweklwngvygbqpescpeichmfi"
-  //     "dgsjmkvkofvkuehsmkkbocgejoiqcnafvuokelwuqsgkyoekaroptuvekfvmtxtqshcwsztk"
-  //     "rzwrpabqrrhnlerxjojemcxel";
-  // vector<string> words = {"dhvf", "sind", "ffsl", "yekr", "zwzq", "kpeo",
-  //                         "cila", "tfty", "modg", "ztjg", "ybty", "heqg",
-  //                         "cpwo", "gdcj", "lnle", "sefg", "vimw", "bxcb"};
+  // string s = "wordgoodgoodgoodbestword";
+  // vector<string> words = {"word", "good", "best", "good"};
 
   vector<int> results = solution.findSubstring(s, words);
 
