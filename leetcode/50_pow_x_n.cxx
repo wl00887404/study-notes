@@ -1,4 +1,3 @@
-#include <cmath>
 #include <iostream>
 using namespace std;
 
@@ -20,7 +19,7 @@ class Solution {
     double f = x;
     while (n != 0) {
       if (n % 2 == 1) result *= f;
-      
+
       n >>= 1;
       f *= f;
     }
@@ -31,6 +30,6 @@ class Solution {
 int main() {
   cout << solution.myPow(2.10000, 3) << endl;
   cout << 2.1 * 2.1 * 2.1 << endl;
-  
+
   return 0;
 }
