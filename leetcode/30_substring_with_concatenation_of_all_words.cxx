@@ -1,16 +1,11 @@
 #include <iostream>
+#include <map>
 #include <unordered_map>
 #include <unordered_set>
 #include <vector>
 
 #include "./log.cxx"
 using namespace std;
-
-struct TrieNode {
-  unordered_map<char, TrieNode*> children;
-  bool isWord;
-  TrieNode() : isWord(false) {}
-};
 
 class Solution {
  public:
@@ -22,76 +17,63 @@ class Solution {
 
     int wordLength = words[0].size();
 
-    TrieNode* root = buildTrie(words, wordsLength, wordLength);
+    unordered_map<string, int> frequencyMap;
+    unordered_map<int, string*> matchMap;
+    vector<int> matchIndexies;
+    int limit = sLength - wordLength * wordsLength;
+
+    for (string& word : words) {
+      frequencyMap[word]++;
+
+      if (frequencyMap[word] > 1) continue;
+
+      for (int i = 0; i < sLength; i++) {
+        int j = 0;
+
+        while (j < wordLength && s[i + j] == word[j]) j++;
+
+        if (j == wordLength) {
+          matchMap[i] = &word;
+          if (i <= limit) matchIndexies.push_back(i);
+        }
+      }
+    }
+
+    unordered_map<string, int> used;
     vector<int> results;
 
-    for (int i = 0; i < sLength; i++) {
-      TrieNode* p = root;
-      int j = i;
+    for (int& begin : matchIndexies) {
+      used.clear();
 
-      while (true) {
-        if (!p->children.count(s[j])) break;
+      int i = 0;
+      for (; i < wordsLength; i++) {
+        int index = begin + wordLength * i;
 
-        p = p->children[s[j]];
-        j++;
+        if (!matchMap.count(index)) break;
+        if (index >= sLength) break;
+
+        used[*matchMap[index]]++;
+
+        if (used[*matchMap[index]] > frequencyMap[*matchMap[index]]) break;
       }
 
-      if (p->isWord) results.push_back(i);
+      if (i == wordsLength) results.push_back(begin);
     }
 
     return results;
   };
 
- private:
-  TrieNode* buildTrie(vector<string>& words, int& wordsLength,
-                      int& wordLength) {
-    TrieNode* root = new TrieNode();
-
-    buildTrie(root, wordsLength, wordLength, words, wordsLength);
-
-    return root;
-  }
-
-  void buildTrie(TrieNode* root, int& wordsLength, int& wordLength,
-                 vector<string>& words, int k) {
-    if (k == 1) {
-      TrieNode* p = root;
-
-      for (int i = 0; i < wordsLength; i++) {
-        for (int j = 0; j < wordLength; j++) {
-          if (!p->children.count(words[i][j])) {
-            p->children[words[i][j]] = new TrieNode();
-          }
-
-          p = p->children[words[i][j]];
-        }
-      }
-      p->isWord = true;
-      return;
-    }
-
-    unordered_set<string> used;
-
-    buildTrie(root, wordsLength, wordLength, words, k - 1);
-    used.insert(words[k - 1]);
-
-    for (int i = 0; i < k - 1; i++) {
-      if (used.count(words[i])) continue;
-
-      swap(words[i], words[k - 1]);
-      used.insert(words[k - 1]);
-      buildTrie(root, wordsLength, wordLength, words, k - 1);
-      swap(words[i], words[k - 1]);
-    }
-  }
 } solution;
 
 int main() {
-  string s = "barfoothefoobarman";
-  vector<string> words = {"foo", "bar"};
+  // string s = "barfoothefoobarman";
+  // vector<string> words = {"foo", "bar"};
 
   // string s = "wordgoodgoodgoodbestword";
   // vector<string> words = {"word", "good", "best", "word"};
+
+  string s = "wordgoodgoodgoodbestword";
+  vector<string> words = {"word", "good", "best", "good"};
 
   // string s =
   //     "pjzkrkevzztxductzzxmxsvwjkxpvukmfjywwetvfnujhweiybwvvsrfequzkhossmootkmy"
