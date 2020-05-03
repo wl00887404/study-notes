@@ -6,15 +6,60 @@
 #include "./log.cxx"
 using namespace std;
 
+/**
+ * Trie! Finally! 80 ms!
+ *
+ * TODO: 研究 T1 解
+ */
+
 struct TrieNode {
-  unordered_map<char, TrieNode*> children;
-  string* refer = NULL;
+  vector<int> keys;
+  TrieNode* children[26] = {NULL};
+  bool isWord = false;
   int count = 0;
   int used = 0;
-  bool has(char c) { return children.count(c); }
+
+  bool has(char c) { return has(c - 'a'); }
+  bool has(int i) { return children[i] != NULL; }
+
   void resetUsed() {
     used = 0;
-    for (auto p : children) p.second->resetUsed();
+
+    for (int key : keys) children[key]->resetUsed();
+  }
+
+  void insert(string& str) {
+    string::iterator begin = str.begin();
+    string::iterator end = str.end();
+
+    insert(str, begin, end);
+  }
+  void insert(string& str, string::iterator& begin, string::iterator& end) {
+    if (begin == end) {
+      isWord = true;
+      count++;
+    } else {
+      int index = *begin - 'a';
+
+      if (!has(index)) {
+        keys.push_back(index);
+        children[index] = new TrieNode();
+      }
+
+      children[index]->insert(str, ++begin, end);
+    }
+  }
+
+  TrieNode* match(string::iterator& begin, string::iterator& end) {
+    int index = *begin - 'a';
+
+    if (begin == end || !has(index)) return NULL;
+
+    TrieNode* nextNode = children[index];
+
+    if (nextNode->isWord) return nextNode;
+
+    return nextNode->match(++begin, end);
   }
 };
 
@@ -28,65 +73,51 @@ class Solution {
 
     int wordLength = words[0].size();
 
-    unordered_map<int, TrieNode*> matchMap;
+    TrieNode* cache[sLength];
     vector<int> matchIndexies;
     int limit = sLength - wordLength * wordsLength;
     TrieNode* root = new TrieNode();
-
-    for (string& word : words) {
-      TrieNode* p = root;
-
-      for (int i = 0; i < wordLength; i++) {
-        if (!p->has(word[i])) p->children[word[i]] = new TrieNode();
-
-        p = p->children[word[i]];
-      }
-
-      if (p->refer == NULL) p->refer = &word;
-      p->count++;
-    }
-
-    for (int i = 0; i < sLength; i++) {
-      TrieNode* p = root;
-      int j = 0;
-
-      while (true) {
-        if (p->refer != NULL) {
-          matchMap[i] = p;
-          if (i <= limit) matchIndexies.push_back(i);
-          break;
-        }
-
-        if (!p->has(s[i + j])) break;
-
-        p = p->children[s[i + j]];
-        j++;
-      }
-    }
-
     vector<int> results;
+    string::iterator end = s.end();
 
-    for (int& begin : matchIndexies) {
-      root->resetUsed();
+    for (string& word : words) root->insert(word);
 
-      int i = 0;
-      for (; i < wordsLength; i++) {
-        int index = begin + wordLength * i;
+    bool isSeen[sLength];
+    for (int i = 0; i < sLength; i++) isSeen[i] = false;
 
-        if (!matchMap.count(index)) break;
+    bool shouldResetUsed = false;
+    for (int i = 0; i <= limit; i++) {
+      if (shouldResetUsed) {
+        root->resetUsed();
+        shouldResetUsed = false;
+      }
+
+      int j = 0;
+      for (; j < wordsLength; j++) {
+        int index = i + wordLength * j;
+
         if (index >= sLength) break;
 
-        matchMap[index]->used++;
+        string::iterator begin = s.begin() + index;
 
-        if (matchMap[index]->used > matchMap[index]->count) break;
+        if (!isSeen[index]) {
+          isSeen[index] = true;
+          cache[index] = root->match(begin, end);
+        }
+
+        TrieNode* matched = cache[index];
+
+        if (matched == NULL) break;
+        if (++(matched->used) > matched->count) break;
+
+        shouldResetUsed = true;
       }
 
-      if (i == wordsLength) results.push_back(begin);
+      if (j == wordsLength) results.push_back(i);
     }
 
     return results;
   };
-
 } solution;
 
 int main() {
