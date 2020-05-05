@@ -72,10 +72,10 @@ string toJSON(vector<vector<string>>& xss) {
   for (; i < length - 1; i++) {
     vector<string> xs = xss[i];
 
-    result += toJSON(xs) + ",\n";
+    result += "  " + toJSON(xs) + ",\n";
   }
 
-  result += toJSON(xss[length - 1]) + "]";
+  result += "  " + toJSON(xss[length - 1]) + "\n]";
 
   return result;
 }

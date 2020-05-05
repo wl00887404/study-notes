@@ -1,4 +1,4 @@
-#include <algorithm>
+
 #include <iostream>
 #include <stack>
 #include <vector>
@@ -8,11 +8,11 @@ using namespace std;
 
 class Solution {
  public:
-  vector<vector<string>> solveNQueens(int n) {
+  int totalNQueens(int n) {
     if (n == 2 || n == 3) return {};
 
     vector<string> board;
-    vector<vector<string>> results;
+    int result = 0;
     bool xUsed[n];
     stack<int> xStack;
 
@@ -42,7 +42,7 @@ class Solution {
       board[y][x] = 'Q';
 
       if (y == n - 1) {
-        results.push_back(board);
+        result++;
         board[y][x] = '.';
         x = n;
 
@@ -55,7 +55,7 @@ class Solution {
       x = 0;
     }
 
-    return results;
+    return result;
   }
 
   bool isValid(int& n, vector<string>& board, bool xUsed[], int& y, int& x) {
@@ -74,9 +74,7 @@ class Solution {
 } solution;
 
 int main() {
-  vector<vector<string>> results = solution.solveNQueens(5);
-
-  log(results);
+  cout << solution.totalNQueens(8) << endl;
 
   return 0;
 }
