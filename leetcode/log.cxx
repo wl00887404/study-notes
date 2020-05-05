@@ -2,20 +2,54 @@
 #include <vector>
 using namespace std;
 
-string stringify(vector<string>& xs) {
+string stringify(string& x) { return "\"" + x + "\""; }
+
+string stringify(int& x) { return "" + x; }
+
+vector<string> stringify(vector<string> xs) {
+  vector<string> results;
+
+  for (string x : xs) results.push_back(stringify(x));
+
+  return results;
+}
+
+vector<string> stringify(vector<int> xs) {
+  vector<string> results;
+
+  for (int x : xs) results.push_back(stringify(x));
+
+  return results;
+}
+
+vector<vector<string>> stringify(vector<vector<string>> xss) {
+  vector<vector<string>> resultss;
+
+  for (vector<string> xs : xss) resultss.push_back(stringify(xs));
+
+  return resultss;
+}
+
+vector<vector<string>> stringify(vector<vector<int>> xss) {
+  vector<vector<string>> resultss;
+
+  for (vector<int> xs : xss) resultss.push_back(stringify(xs));
+
+  return resultss;
+}
+
+string toJSON(vector<string>& xs) {
   int length = xs.size();
 
   if (length == 0) return "[]";
 
   int totalLength = 0;
 
-  for (string x : xs) totalLength += x.size();
+  for (string& x : xs) totalLength += x.size();
 
-  string result = "";
+  string result = "[ ";
 
-  result = "[ ";
   int i = 0;
-
   for (; i < length - 1; i++) {
     result += xs[i] + ", ";
 
@@ -27,37 +61,45 @@ string stringify(vector<string>& xs) {
   return result;
 }
 
-vector<string> toString(vector<int>& xs) {
-  vector<string> results;
+string toJSON(vector<vector<string>>& xss) {
+  int length = xss.size();
 
-  for (int x : xs) {
-    results.push_back(to_string(x));
-  }
-
-  return results;
-}
-
-string stringify(vector<int>& xs) {
-  vector<string> stringified = toString(xs);
-
-  return stringify(stringified);
-}
-
-string stringify(vector<vector<int>>& xss) {
-  if (xss.size() == 0) return "[]";
+  if (length == 0) return "[]";
 
   string result = "[\n";
 
-  for (vector<int> xs : xss) {
-    vector<string> stringified = toString(xs);
-    result += "  " + stringify(stringified) + ",\n";
+  int i = 0;
+  for (; i < length - 1; i++) {
+    vector<string> xs = xss[i];
+
+    result += toJSON(xs) + ",\n";
   }
 
-  result += "]";
+  result += toJSON(xss[length - 1]) + "]";
 
   return result;
 }
 
-void log(vector<int>& xs) { cout << stringify(xs) << endl; }
-void log(vector<string>& xs) { cout << stringify(xs) << endl; }
-void log(vector<vector<int>>& xss) { cout << stringify(xss) << endl; }
+void log(vector<int>& xs) {
+  vector<string> stringified = stringify(xs);
+
+  cout << toJSON(stringified) << endl;
+}
+
+void log(vector<string>& xs) {
+  vector<string> stringified = stringify(xs);
+
+  cout << toJSON(stringified) << endl;
+}
+
+void log(vector<vector<int>>& xss) {
+  vector<vector<string>> stringified = stringify(xss);
+
+  cout << toJSON(stringified) << endl;
+}
+
+void log(vector<vector<string>>& xss) {
+  vector<vector<string>> stringified = stringify(xss);
+
+  cout << toJSON(stringified) << endl;
+}

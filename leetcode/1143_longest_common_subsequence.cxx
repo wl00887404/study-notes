@@ -7,6 +7,7 @@ using namespace std;
  * 
  * http://www.csie.ntnu.edu.tw/~u91029/LongestCommonSubsequence.html
  * https://en.wikipedia.org/wiki/Longest_common_subsequence_problem
+ * https://en.wikipedia.org/wiki/Hirschberg%27s_algorithm
  */
 
 class Solution {
