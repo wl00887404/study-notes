@@ -9,6 +9,7 @@ using namespace std;
 class Solution {
  public:
   vector<vector<string>> solveNQueens(int n) {
+    if (n == 1) return {{"Q"}};
     if (n == 2 || n == 3) return {};
 
     vector<string> board;
@@ -22,9 +23,15 @@ class Solution {
     int x = 0;
     int y = 0;
 
+    int mid = n / 2 + n % 2 - 1;
+
     while (true) {
-      if (x == n) {
+      if (x > mid) {
         if (y == 0) break;
+        if (n % 2 && board[0][n / 2] == 'Q' && y == 1) break;
+      }
+
+      if (x == n) {
         y--;
         x = xStack.top();
         xStack.pop();
@@ -43,6 +50,8 @@ class Solution {
 
       if (y == n - 1) {
         results.push_back(board);
+        results.push_back(mirror(n, board));
+
         board[y][x] = '.';
         x = n;
 
@@ -70,6 +79,17 @@ class Solution {
     }
 
     return true;
+  }
+
+  vector<string> mirror(int& n, vector<string>& board) {
+    vector<string> mirrored;
+
+    for (int i = 0; i < n; i++) {
+      mirrored.push_back(board[i]);
+      reverse(mirrored[i].begin(), mirrored[i].end());
+    }
+
+    return mirrored;
   }
 } solution;
 

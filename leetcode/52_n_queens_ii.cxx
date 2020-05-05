@@ -9,6 +9,7 @@ using namespace std;
 class Solution {
  public:
   int totalNQueens(int n) {
+    if (n == 1) return 1;
     if (n == 2 || n == 3) return {};
 
     vector<string> board;
@@ -21,10 +22,15 @@ class Solution {
 
     int x = 0;
     int y = 0;
+    int mid = n / 2 + n % 2 - 1;
 
     while (true) {
-      if (x == n) {
+      if (x > mid) {
         if (y == 0) break;
+        if (n % 2 && board[0][n / 2] == 'Q' && y == 1) break;
+      }
+
+      if (x == n) {
         y--;
         x = xStack.top();
         xStack.pop();
@@ -39,16 +45,13 @@ class Solution {
         continue;
       }
 
-      board[y][x] = 'Q';
-
       if (y == n - 1) {
-        result++;
-        board[y][x] = '.';
+        result += 2;
         x = n;
-
         continue;
       }
 
+      board[y][x] = 'Q';
       xStack.push(x);
       xUsed[x] = true;
       y++;
