@@ -4,7 +4,7 @@ using namespace std;
 
 string stringify(string& x) { return "\"" + x + "\""; }
 
-string stringify(int& x) { return "" + x; }
+string stringify(int& x) { return to_string(x); }
 
 vector<string> stringify(vector<string> xs) {
   vector<string> results;
