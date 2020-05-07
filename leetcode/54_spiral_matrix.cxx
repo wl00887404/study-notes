@@ -5,23 +5,16 @@
 using namespace std;
 
 /**
- * 1 2 3
- * 4 5 6
- *
- * 1 2 3 6 5 4
- *
- * 1 2 3
- * 4 5 6
- * 7 8 9
- *
- * 1 2 3 6 9 8 7 4 5
- *
- *  1  2  3
- *  4  5  6
- *  7  8  9
- * 10 11 12
- *
- * 1 2 3 6 9 12 11 10 7 4 5 8
+ *  1 11
+ *  2 12
+ *  3 13
+ *  4 14
+ *  5 15
+ *  6 16
+ *  7 17
+ *  8 18
+ *  9 19
+ * 10 20
  */
 
 class Solution {
@@ -40,9 +33,9 @@ class Solution {
 
   void spiralOrder(vector<int>& results, vector<vector<int>>& matrix, int top,
                    int left, int right, int bottom) {
-    if (left == right) {
-      if (top == bottom) return results.push_back(matrix[top][left]);
+    if (left > right || top > bottom) return;
 
+    if (left == right) {
       for (int i = top; i <= bottom; i++) results.push_back(matrix[i][left]);
       return;
     }
@@ -51,33 +44,19 @@ class Solution {
       for (int i = left; i <= right; i++) results.push_back(matrix[top][i]);
       return;
     }
-
-    for (int i = left; i < right; i++) {
-      results.push_back(matrix[top][i]);
-    }
-
-    for (int i = top; i < bottom; i++) {
-      results.push_back(matrix[i][right]);
-    }
-
-    for (int i = right; i > 0; i--) {
-      results.push_back(matrix[bottom][i]);
-    }
-
-    for (int i = bottom; i > 0; i--) {
-      results.push_back(matrix[i][left]);
-    }
+    
+    for (int i = left; i <= right; i++) results.push_back(matrix[top][i]);
+    for (int i = top + 1; i < bottom; i++) results.push_back(matrix[i][right]);
+    for (int i = right; left <= i; i--) results.push_back(matrix[bottom][i]);
+    for (int i = bottom - 1; top < i; i--) results.push_back(matrix[i][left]);
 
     spiralOrder(results, matrix, top + 1, left + 1, right - 1, bottom - 1);
   }
 } solution;
 
 int main() {
-  vector<vector<int>> martix = {
-      {1, 2, 3, 4},
-      {5, 6, 7, 8},
-      {9, 10, 11, 12},
-  };
+  vector<vector<int>> martix = {{1, 11}, {2, 12}, {3, 13}, {4, 14}, {5, 15},
+                                {6, 16}, {7, 17}, {8, 18}, {9, 19}, {10, 20}};
 
   vector<int> result = solution.spiralOrder(martix);
 
