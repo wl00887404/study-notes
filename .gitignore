@@ -4,4 +4,4 @@ CMakeFiles
 Makefile
 bin
 *.out
-.vscode
+node_modules

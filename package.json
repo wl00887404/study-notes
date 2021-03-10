@@ -1,0 +1,8 @@
+{
+  "scripts": {
+    "leetcode": "node leetcode/cmd.mjs"
+  },
+  "dependencies": {
+    "axios": "^0.21.1"
+  }
+}
