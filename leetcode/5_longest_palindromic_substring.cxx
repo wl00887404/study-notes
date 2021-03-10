@@ -4,8 +4,6 @@ using namespace std;
 
 /**
  * brute force: 2e79360
- *
- * TODO: Manacher’s Algorithm
  */
 
 class Solution {
@@ -78,8 +76,54 @@ class DpSolution {
   }
 } dpSolution;
 
+// Manacher's Algorithm
+class BestSolution {
+ public:
+  string longestPalindrome(string s) {
+    /**
+     * a => ^#a#$ (1 => 5)
+     * aa => ^#a#a#$ (2 => 7)
+     * aaa => ^#a#a#a#$ (3 => 9)
+     */
+    int length = s.length();
+    int paddedLength = 2 * length + 3;
+    char paddedS[paddedLength];
+    int maxIndex = 2;
+    int maxRadius = 1;
+    paddedS[0] = '^';
+    paddedS[paddedLength - 1] = '$';
+    for (int i = 1; i < paddedLength - 1; i++) {
+      if (i % 2 == 1) {
+        paddedS[i] = '#';
+      } else {
+        paddedS[i] = s[i / 2 - 1];
+      }
+    }
+
+    for (int i = 1; i < paddedLength - 1; i++) {
+      int radius = 0;
+      while (paddedS[i + radius + 1] == paddedS[i - radius - 1]) radius++;
+
+      // cout << i << " " << paddedS[i] << ": " << radius << endl;
+      if (radius <= maxRadius) continue;
+      maxIndex = i;
+      maxRadius = radius;
+    }
+
+    /**
+     *                 # a # b # a # c #  a  #  b  #
+     *                       ^       i          ^
+     * radius          0 1 0 3 0 1 0 5 0  1  0  1  0
+     * padded index    1 2 3 4 5 6 7 8 9 10 11 12 13
+     * original index    0   1   2   3    4     5
+     */
+
+    return s.substr((maxIndex - maxRadius + 1) / 2 - 1, maxRadius);
+  }
+} bestSolution;
+
 int main() {
-  cout << solution.longestPalindrome("babad") << endl;  // bab
+  // cout << solution.longestPalindrome("babad") << endl;  // bab
   // cout << solution.longestPalindrome("cbbd") << endl;   // bb
   // cout << solution.longestPalindrome("ac") << endl;      // a
   // cout << solution.longestPalindrome("ccc") << endl;     // ccc
@@ -87,6 +131,13 @@ int main() {
   // cout << solution.longestPalindrome("abacab") << endl;  // bacab
 
   // cout << solution.getPalindromeLength("abcbar", 2, 2) << endl;
-  // cout << solution.getPalindromeLength("bc", 0, 1) << endl;
+  // cout << solution.getPalindromeLength("bc", 0, 1) << endl;""
+
+  cout << bestSolution.longestPalindrome("babad") << endl;   // bab
+  cout << bestSolution.longestPalindrome("cbbd") << endl;    // bb
+  cout << bestSolution.longestPalindrome("ac") << endl;      // a
+  cout << bestSolution.longestPalindrome("ccc") << endl;     // ccc
+  cout << bestSolution.longestPalindrome("abcba") << endl;   // abcba
+  cout << bestSolution.longestPalindrome("abacab") << endl;  // bacab
   return 0;
 }
