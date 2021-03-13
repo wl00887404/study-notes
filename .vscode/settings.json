@@ -52,7 +52,13 @@
     "map": "cpp",
     "set": "cpp",
     "iomanip": "cpp",
-    "cinttypes": "cpp"
+    "cinttypes": "cpp",
+    "bit": "cpp",
+    "condition_variable": "cpp",
+    "functional": "cpp",
+    "numeric": "cpp",
+    "random": "cpp",
+    "shared_mutex": "cpp"
   },
   "cSpell.words": [
     "leetcode"
