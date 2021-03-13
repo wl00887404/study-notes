@@ -8,34 +8,38 @@
 
 using namespace std;
 
-struct Trie {
+class Trie {
+ private:
+  static int getIndex(char& c) { return c - 'a'; }
+
+ public:
   Trie* children[26] = {NULL};
   bool isWord = false;
 
-  Trie() {}
+  void append(string s) { this->append(s.begin(), s.end()); }
+  void append(string::iterator begin, string::iterator end) {
+    if (begin == end) {
+      this->isWord = true;
+    } else {
+      int index = getIndex(*begin);
+      if (this->children[index] == NULL) this->children[index] = new Trie();
+
+      this->children[index]->append(begin + 1, end);
+    }
+  }
+
+  Trie* getChild(char& c) {
+    int index = c - 'a';
+    return this->children[index];
+  }
 };
 
-int getIndex(string::iterator begin) {
-  char c = *begin;
-  return c - 'a';
-}
-
-void append(string::iterator begin, string::iterator end, Trie* pointer) {
-  if (begin == end) {
-    pointer->isWord = true;
-  } else {
-    int index = getIndex(begin);
-    if (pointer->children[index] == NULL) pointer->children[index] = new Trie();
-
-    append(begin + 1, end, pointer->children[index]);
-  }
-}
 class Solution {
  public:
   bool wordBreak(string s, vector<string>& wordDict) {
     Trie head = Trie();
     for (string& word : wordDict) {
-      append(word.begin(), word.end(), &head);
+      head.append(word.begin(), word.end());
     }
 
     int length = s.length();
@@ -51,14 +55,14 @@ class Solution {
     if (pointer == head && *failPointer == true) return false;
     if (begin == end) return pointer->isWord;
 
-    int index = getIndex(begin);
     if (pointer->isWord && wordBreak(begin, end, failPointer, head, head)) {
       return true;
     }
     if (wordBreak(begin + 1, end, failPointer + 1, head,
-                  pointer->children[index])) {
+                  pointer->getChild(*begin))) {
       return true;
     }
+
     if (pointer == head) *failPointer = true;
     return false;
   }
