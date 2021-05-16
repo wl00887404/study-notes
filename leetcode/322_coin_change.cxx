@@ -1,5 +1,6 @@
 #include <iostream>
 #include <limits>
+#include <unordered_set>
 #include <vector>
 using namespace std;
 
@@ -14,41 +15,41 @@ using namespace std;
  * 分成 60 [13, 1] 與 43 [17, 13, 1]
  */
 
+/**
+ * Time Limit Exceeded 的重點是 BFS
+ * 不應該用 DFS
+ */
+
 class Solution {
  public:
   int coinChange(vector<int>& coins, int amount) {
-    int cache[amount + 1];
-    for (int i = 1; i <= amount; i++) cache[i] = 0;
-
-    return coinChange(cache, coins, amount, 0);
-  }
-
-  int coinChange(int* cache, vector<int>& coins, int amount, int i) {
     if (amount == 0) return 0;
+    unordered_set<int> currentAmounts = {amount};
+    int i = 0;
 
-    if (i == coins.size() - 1) {
-      return amount % coins[i] == 0 ? amount / coins[i] : -1;
+    while (currentAmounts.size() != 0) {
+      i++;
+
+      unordered_set<int> nextAmounts = {};
+      for (int currentAmount : currentAmounts) {
+        for (int j = 0; j < coins.size(); j++) {
+          int nextAmount = currentAmount - coins[j];
+          if (nextAmount == 0) return i;
+          if (nextAmount > 0 && !currentAmounts.count(nextAmount)) {
+            nextAmounts.insert(nextAmount);
+          }
+        }
+      }
+      currentAmounts = nextAmounts;
     }
 
-    int countWithoutCoin = coinChange(cache, coins, amount, i + 1);
-
-    if (amount < coins[i]) return countWithoutCoin;
-    int countWithCoin = coinChange(cache, coins, amount - coins[i], i);
-    if (countWithCoin == -1) return countWithoutCoin;
-
-    countWithCoin++;
-    if (countWithoutCoin == -1) return countWithCoin;
-
-    return min(countWithCoin, countWithoutCoin);
+    return -1;
   }
 } solution;
 
 int main() {
-  vector<int> coins{1, 2, 5};
-  int amount = 11;
-
-  // vector<int> coins{1, 3, 5};
-  // int amount = 4;
+  vector<int> coins = {2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24};
+  int amount = 9999;
 
   cout << solution.coinChange(coins, amount) << endl;
   return 0;
