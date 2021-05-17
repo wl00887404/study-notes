@@ -24,23 +24,32 @@ class Solution {
  public:
   int coinChange(vector<int>& coins, int amount) {
     if (amount == 0) return 0;
-    unordered_set<int> currentAmounts = {amount};
+
+    bool isExecuted[amount + 1];
+    for (int i = 0; i < amount; i++) isExecuted[i + 1] = false;
+    isExecuted[amount] = true;
+
+    vector<int> currentAmounts = {amount};
+
     int i = 0;
-
-    while (currentAmounts.size() != 0) {
+    int length = 1;
+    while (length != 0) {
       i++;
-
-      unordered_set<int> nextAmounts = {};
-      for (int currentAmount : currentAmounts) {
-        for (int j = 0; j < coins.size(); j++) {
-          int nextAmount = currentAmount - coins[j];
+      int lastIndex = currentAmounts.size() - 1;
+      int nextLength = 0;
+      for (int j = 0; j < length; j++) {
+        int currentAmount = currentAmounts[lastIndex - j];
+        for (int k = 0; k < coins.size(); k++) {
+          int nextAmount = currentAmount - coins[k];
           if (nextAmount == 0) return i;
-          if (nextAmount > 0 && !currentAmounts.count(nextAmount)) {
-            nextAmounts.insert(nextAmount);
-          }
+          if (nextAmount < 0 || isExecuted[nextAmount]) continue;
+          isExecuted[nextAmount] = true;
+          currentAmounts.push_back(nextAmount);
+          nextLength++;
         }
       }
-      currentAmounts = nextAmounts;
+
+      length = nextLength;
     }
 
     return -1;
@@ -48,8 +57,10 @@ class Solution {
 } solution;
 
 int main() {
-  vector<int> coins = {2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24};
-  int amount = 9999;
+  // vector<int> coins = {2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24};
+  // int amount = 9999;
+  vector<int> coins = {1, 2, 5};
+  int amount = 11;
 
   cout << solution.coinChange(coins, amount) << endl;
   return 0;
