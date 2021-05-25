@@ -1,6 +1,4 @@
 #include <iostream>
-#include <limits>
-#include <unordered_set>
 #include <vector>
 using namespace std;
 
@@ -18,6 +16,12 @@ using namespace std;
 /**
  * Time Limit Exceeded 的重點是 BFS
  * 不應該用 DFS
+ *
+ * 60 [17, 10, 5]
+ * 1 枚硬幣 => [43, 50, 45]
+ * 2 枚硬幣 => [26, 33, 28] [33, 40, 35] [38, 45, 40]
+ *   33 重複 (17 * 1 + 10 * 1 與 10 * 1 + 17 * 1)
+ *   40 重複 (10* 1 與 5 * 2)
  */
 
 class Solution {

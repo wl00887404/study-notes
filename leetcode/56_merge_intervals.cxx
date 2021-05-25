@@ -1,0 +1,64 @@
+#include <iostream>
+#include <vector>
+using namespace std;
+
+class Solution {
+ public:
+  vector<vector<int>> merge(vector<vector<int>>& intervals) {
+    vector<vector<int>> result;
+    int from = intervals[0][0];  // 入口
+    int fromLimit = from;
+    int portals[10001];
+    for (int i = 0; i < 10001; i++) portals[i] = -1;
+    for (vector<int>& internal : intervals) {
+      // 如果傳送點重複，取大的
+      if (portals[internal[0]] < internal[1]) {
+        portals[internal[0]] = internal[1];
+      }
+      if (internal[0] < from) from = internal[0];
+      if (internal[0] > fromLimit) fromLimit = internal[0];
+    }
+
+    while (from <= fromLimit) {
+      if (portals[from] == -1) {
+        from++;
+      } else {
+        int to = travel(portals, from);
+        result.push_back({from, to});
+        from = to + 1;
+      }
+    }
+
+    return result;
+  }
+
+ private:
+  int travel(int* portals, int& from) {
+    int to = portals[from];
+    if (to == -1) throw "傳送門故障";
+
+    int now = to;
+    portals[from] = -1;  // 關閉傳送門
+
+    while (now != from) {
+      // 找到的傳送門可以到更遠的地方！
+      if (portals[now] > to) {
+        to = travel(portals, now);
+      } else {
+        // 找到的傳送門沒辦法到更遠的地方
+        if (portals[now] != -1) portals[now] = -1;
+      }
+
+      now--;
+    }
+
+    return to;
+  }
+} solution;
+
+int main() {
+  vector<vector<int>> intervals = {{1, 3}, {2, 6}, {8, 10}, {15, 18}};
+
+  solution.merge(intervals);
+  return 0;
+}
