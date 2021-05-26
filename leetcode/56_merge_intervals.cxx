@@ -37,19 +37,13 @@ class Solution {
     int to = portals[from];
     if (to == -1) throw "傳送門故障";
 
-    int now = to;
-    portals[from] = -1;  // 關閉傳送門
+    int now = from;
 
-    while (now != from) {
+    while (now != to) {
+      now++;
+
       // 找到的傳送門可以到更遠的地方！
-      if (portals[now] > to) {
-        to = travel(portals, now);
-      } else {
-        // 找到的傳送門沒辦法到更遠的地方
-        if (portals[now] != -1) portals[now] = -1;
-      }
-
-      now--;
+      if (portals[now] > to) to = portals[now];
     }
 
     return to;
