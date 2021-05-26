@@ -1,8 +1,7 @@
 #include <iostream>
+#include <queue>
 #include <vector>
 using namespace std;
-
-// your code here
 
 /**
  * 貪婪是行不通的 :(
@@ -32,28 +31,27 @@ class Solution {
     bool isExecuted[amount + 1];
     for (int i = 0; i < amount; i++) isExecuted[i + 1] = false;
     isExecuted[amount] = true;
+    int coinsLength = coins.size();
 
-    vector<int> currentAmounts = {amount};
+    queue<int> queue;
+    queue.push(amount);
 
     int i = 0;
-    int length = 1;
-    while (length != 0) {
+    while (queue.size()) {
       i++;
-      int lastIndex = currentAmounts.size() - 1;
-      int nextLength = 0;
-      for (int j = 0; j < length; j++) {
-        int currentAmount = currentAmounts[lastIndex - j];
-        for (int k = 0; k < coins.size(); k++) {
+      int length = queue.size();
+      while (length--) {
+        int currentAmount = queue.front();
+        for (int k = 0; k < coinsLength; k++) {
           int nextAmount = currentAmount - coins[k];
           if (nextAmount == 0) return i;
           if (nextAmount < 0 || isExecuted[nextAmount]) continue;
           isExecuted[nextAmount] = true;
-          currentAmounts.push_back(nextAmount);
-          nextLength++;
+          queue.push(nextAmount);
         }
-      }
 
-      length = nextLength;
+        queue.pop();
+      }
     }
 
     return -1;

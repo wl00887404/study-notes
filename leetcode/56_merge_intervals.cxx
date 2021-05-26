@@ -8,8 +8,10 @@ class Solution {
     vector<vector<int>> result;
     int from = intervals[0][0];  // 入口
     int fromLimit = from;
+
     int portals[10001];
     for (int i = 0; i < 10001; i++) portals[i] = -1;
+
     for (vector<int>& internal : intervals) {
       // 如果傳送點重複，取大的
       if (portals[internal[0]] < internal[1]) {
