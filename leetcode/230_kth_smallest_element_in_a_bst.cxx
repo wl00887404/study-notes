@@ -4,6 +4,10 @@
 #include "./TreeNode.cxx"
 using namespace std;
 
+/**
+ * TODO: 敢不敢再快一點
+ */
+
 class Solution {
  public:
   int kthSmallest(TreeNode* root, int k) {
@@ -19,7 +23,7 @@ class Solution {
       p = parents.top();
 
       if (k == 1) return p->val;
-      
+
       k--;
       parents.pop();
 
