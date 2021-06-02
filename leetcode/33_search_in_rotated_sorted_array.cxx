@@ -1,3 +1,5 @@
+#include <math.h>
+
 #include <iostream>
 #include <vector>
 
@@ -6,6 +8,12 @@ using namespace std;
 
 /**
  * 這題是 hard 吧 = =
+ */
+
+/**
+ * 當初寫是 2020/5/1
+ * 2021/6/2 的我已經看不懂在幹麻了
+ * 那個解答就當做紀念就好
  */
 
 class Solution {
@@ -68,6 +76,68 @@ class Solution {
     return -1;
   }
 } solution;
+
+/**
+ * 超棒的點子：
+ *   https://leetcode.com/problems/search-in-rotated-sorted-array/discuss/14435/Clever-idea-making-it-simple
+ *
+ * nums = [4, 5, 6, 7, 0, 1, 2, 3], length = 8
+ * I 為 Infinity 的縮寫
+ *
+ * 如果 target = 5
+ * 那 nums = [4, 5, 6, 7, I, I, I, I] 可以用 binary search
+ *
+ * 如果 target = 1
+ * 那 nums = [-I, -I, -I, -I, 0, 1, 2, 3] 可以用 binary search
+ * 
+ * 
+ * 選用 nums[0] 判斷的情境為：
+ * 
+ * [0, 1, 2, 3, 4, 5, 6, 7]
+ *  m           0  t
+ * m = Infinity
+ * 
+ * [0, 1, 2, 3, 4, 5, 6, 7]
+ *     t        0     m
+ * m = -Infinity
+ * 
+ * [0, 1, 2, 3, 4, 5, 6, 7]
+ *              0  m     t
+ * m = m
+ */
+
+class BestSolution {
+ public:
+  int search(vector<int>& nums, int target) {
+    int left = 0;
+    int right = nums.size();
+
+    while (left < right) {
+      int mid = (left + right) / 2;
+
+      double num = get(nums, target, mid);
+
+      if (num == target) return mid;
+
+      if (num > target) {
+        right = mid;
+      } else {
+        left = mid + 1;
+      }
+    }
+
+    return -1;
+  }
+
+ private:
+  double get(vector<int>& nums, int& target, int& mid) {
+    // 如果 mid 與 target 在同側（ nums[0] 的解釋看上面 ）
+    if ((nums[mid] < nums[0]) == (target < nums[0])) return nums[mid];
+
+    // 不在同側，使它變成同一側
+    return target < nums[0] ? -INFINITY : INFINITY;
+  }
+};
 
 int main() {
   vector<int> nums = {4, 5, 6, 7, 0, 1, 2};
