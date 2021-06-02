@@ -11,7 +11,7 @@ using namespace std;
  * 分成正負 256 ms
  * 改掉 unordered_map::begin 172 ms
  *
- * wiki 有 T1 解
+ * wiki 有最佳解
  * https://zh.wikipedia.org/wiki/3SUM
  *
  * -4 -1 -1 0 1 2
@@ -32,7 +32,51 @@ using namespace std;
 
 class Solution {
  public:
-  vector<vector<int>> threeSum(vector<int>& nums) {
+  vector<vector<int>> threeSum(vector<int>& nums) { return threeSum1(nums); }
+
+ private:
+  vector<vector<int>> threeSum1(vector<int>& nums) {
+    int length = nums.size();
+    vector<vector<int>> results;
+
+    if (length < 3) return results;
+
+    sort(nums.begin(), nums.end());
+
+    for (int left = 0; left < length - 2; left++) {
+      if (left > 0 && nums[left] == nums[left - 1]) continue;
+
+      // 最小會比 0 大
+      if (nums[left] + nums[left + 1] + nums[left + 2] > 0) break;
+      // 最大會比 0 小
+      if (nums[left] + nums[length - 2] + nums[length - 1] < 0) continue;
+
+      int mid = left + 1;
+      int right = length - 1;
+
+      while (mid < right) {
+        int sum = nums[left] + nums[mid] + nums[right];
+
+        if (sum == 0) results.push_back({nums[left], nums[mid], nums[right]});
+
+        if (sum <= 0) {
+          while (mid < right && nums[mid] == nums[mid + 1]) mid++;
+
+          mid++;
+        }
+
+        if (sum >= 0) {
+          while (mid < right && nums[right - 1] == nums[right]) right--;
+
+          right--;
+        }
+      }
+    }
+
+    return results;
+  }
+
+  vector<vector<int>> threeSum2(vector<int>& nums) {
     int length = nums.size();
     vector<vector<int>> results;
 
@@ -111,50 +155,6 @@ class Solution {
 
         if (onceNums.count(complement)) {
           results.push_back({complement, negativeNums[i], negativeNums[j]});
-        }
-      }
-    }
-
-    return results;
-  }
-};
-
-class Solution {
- public:
-  vector<vector<int>> threeSum(vector<int>& nums) {
-    int length = nums.size();
-    vector<vector<int>> results;
-
-    if (length < 3) return results;
-
-    sort(nums.begin(), nums.end());
-
-    for (int left = 0; left < length - 2; left++) {
-      if (left > 0 && nums[left] == nums[left - 1]) continue;
-
-      // 最小會比 0 大
-      if (nums[left] + nums[left + 1] + nums[left + 2] > 0) break;
-      // 最大會比 0 小
-      if (nums[left] + nums[length - 2] + nums[length - 1] < 0) continue;
-
-      int mid = left + 1;
-      int right = length - 1;
-
-      while (mid < right) {
-        int sum = nums[left] + nums[mid] + nums[right];
-
-        if (sum == 0) results.push_back({nums[left], nums[mid], nums[right]});
-
-        if (sum <= 0) {
-          while (mid < right && nums[mid] == nums[mid + 1]) mid++;
-
-          mid++;
-        }
-
-        if (sum >= 0) {
-          while (mid < right && nums[right - 1] == nums[right]) right--;
-
-          right--;
         }
       }
     }

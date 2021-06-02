@@ -9,7 +9,7 @@ using namespace std;
 /**
  * Trie! Finally! 80 ms!
  *
- * TODO: 研究 T1 解
+ * TODO: 研究最佳解
  */
 
 struct TrieNode {

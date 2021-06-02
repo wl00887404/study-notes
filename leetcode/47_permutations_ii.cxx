@@ -4,7 +4,7 @@
 using namespace std;
 
 /**
- * T1 解釋檢查重複耶 WTF
+ * 最佳解是檢查重複耶 WTF
  * TODO: 試試看 seen
  */
 

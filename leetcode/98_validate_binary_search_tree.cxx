@@ -28,7 +28,7 @@ class Solution {
   }
 } solution;
 
-class T1Solution {
+class BestSolution {
  public:
   int *last = NULL;
   bool isValidBST(TreeNode *root) {
@@ -49,10 +49,3 @@ int main() {
 
   return 0;
 }
-
-/**
- *  3
- *  1                5
- *  0         2      4 6
- *  null null null 3
- */

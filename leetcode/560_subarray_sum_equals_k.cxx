@@ -43,7 +43,7 @@ class Solution {
   }
 };
 
-class T1Solution {
+class BestSolution {
  public:
   int subarraySum(vector<int>& nums, int k) {
     int length = nums.size();
@@ -77,4 +77,4 @@ class T1Solution {
 
     return count;
   }
-} t1Solution;
+};

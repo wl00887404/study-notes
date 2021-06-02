@@ -20,7 +20,7 @@ using namespace std;
  *
  * 用 insert 的不會比較快 慘慘慘
  *
- * T1 解是兩個兩個合併耶
+ * 最佳解是兩個兩個合併耶
  * 但測試之後也是 32ms 應該也是 O(nlog n)
  */
 
