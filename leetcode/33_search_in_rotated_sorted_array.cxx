@@ -89,18 +89,18 @@ class Solution {
  *
  * 如果 target = 1
  * 那 nums = [-I, -I, -I, -I, 0, 1, 2, 3] 可以用 binary search
- * 
- * 
+ *
+ *
  * 選用 nums[0] 判斷的情境為：
- * 
+ *
  * [0, 1, 2, 3, 4, 5, 6, 7]
  *  m           0  t
  * m = Infinity
- * 
+ *
  * [0, 1, 2, 3, 4, 5, 6, 7]
  *     t        0     m
  * m = -Infinity
- * 
+ *
  * [0, 1, 2, 3, 4, 5, 6, 7]
  *              0  m     t
  * m = m
@@ -137,6 +137,50 @@ class BestSolution {
     // 不在同側，使它變成同一側
     return target < nums[0] ? -INFINITY : INFINITY;
   }
+};
+
+class Solution153 {
+ public:
+  int search(vector<int>& nums, int target) {
+    int rotatedLength = getRoatedLength(nums);
+    int length = nums.size();
+    int left = rotatedLength;
+    int right = rotatedLength + length;
+
+    while (left < right) {
+      int mid = (left + right) / 2;
+      int num = nums[mid % length];
+
+      if (num == target) return mid % length;
+      if (num > target) {
+        right = mid;
+      } else {
+        left = mid + 1;
+      }
+    }
+
+    return -1;
+  }
+
+ private:
+  // 找到最小的位置
+  int getRoatedLength(vector<int>& nums) {
+    int left = 0;
+    int right = nums.size();
+
+    while (left < right) {
+      int mid = (left + right) / 2;
+
+      if (mid > 0 && nums[mid - 1] > nums[mid]) return mid;
+      if (nums[mid] > nums[right - 1]) {
+        left = mid + 1;
+      } else {
+        right = mid;
+      }
+    }
+
+    return left;
+  };
 };
 
 int main() {
