@@ -10,24 +10,37 @@ using namespace std;
  * skipChance 不夠到下一個點
  * skipChance 足夠到下一個點
  */
+
+/**
+ * https://www.youtube.com/watch?v=00FmUN1pkGE
+ * 原來是 slide window 解...
+ * window 往右移動
+ * 同時紀錄 window 內字的出現次數
+ * 每當 window 長度 - 現在出現最多次數的字 < k
+ * 頭往後移動且更新 window 內字的出現次數
+ *
+ * TODO: 實作它
+ */
+
 class Solution {
  public:
   int characterReplacement(string s, int k) {
     int length = s.length();
     vector<int> positionsByLetter[26];  // 依據字母的位置列
 
+    int maxIndex = 0;  // 出現最多次的字母
+    int maxTimes = 0;  // 出現最多的次數
     for (int i = 0; i < length; i++) {
-      positionsByLetter[s[i] - 'A'].push_back(i);
+      int letter = s[i] - 'A';
+      positionsByLetter[letter].push_back(i);
+      int times = positionsByLetter[letter].size();
+      if (times > maxTimes) {
+        maxTimes = times;
+        maxIndex = letter;
+      }
     }
 
-    int result = 0;
-    for (int i = 0; i < 26; i++) {
-      if (positionsByLetter[i].empty()) continue;
-      int maxLength = getMaxLength(positionsByLetter[i], k, length);
-      if (maxLength > result) result = maxLength;
-    }
-
-    return result;
+    return getMaxLength(positionsByLetter[maxIndex], k, length);
   }
 
  private:
@@ -35,7 +48,7 @@ class Solution {
     int length = positions.size();
     if (length == 0) return 0;
     if (length == 1) return k + 1;
-    
+
     int maxLength = 0;
 
     for (int i = 0; i < length - 1; i++) {
