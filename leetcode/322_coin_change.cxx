@@ -1,6 +1,7 @@
 #include <iostream>
 #include <queue>
 #include <vector>
+
 using namespace std;
 
 /**
@@ -37,7 +38,7 @@ class Solution {
     queue.push(amount);
 
     int i = 0;
-    while (queue.size()) {
+    while (!queue.empty()) {
       i++;
       int length = queue.size();
       while (length--) {

@@ -11,7 +11,7 @@ class Solution {
     int depth = 0;
     if (root != NULL) queue.push(root);
 
-    while (queue.size()) {
+    while (!queue.empty()) {
       depth++;
       int length = queue.size();
       while (length--) {
