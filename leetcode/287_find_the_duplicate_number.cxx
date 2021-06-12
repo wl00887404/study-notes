@@ -4,7 +4,7 @@ using namespace std;
 
 /**
  * Tortoise and Hare Algorithm
- * http://www.csie.ntnu.edu.tw/~u91029/Function.html#4
+ * http://web.ntnu.edu.tw/~algo/Function.html
  */
 
 class Solution {
