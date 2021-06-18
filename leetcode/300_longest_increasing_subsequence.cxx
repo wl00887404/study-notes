@@ -1,5 +1,6 @@
 #include <math.h>
 
+#include <algorithm>
 #include <iostream>
 #include <unordered_map>
 #include <unordered_set>
@@ -166,7 +167,7 @@ class LCSSolution {
  public:
   int lengthOfLIS(vector<int>& nums) {
     vector<int> distinctNums = distinct(nums);
-    quickSort(distinctNums, 0, distinctNums.size());
+    sort(distinctNums.begin(), distinctNums.end());
 
     return LCS(nums, distinctNums);
   }
@@ -204,32 +205,6 @@ class LCSSolution {
     }
 
     return result;
-  }
-
-  void quickSort(vector<int>& nums, int begin, int end) {
-    if (begin >= end) return;
-    // pivot 是 0
-    int left = begin + 1;
-    int right = end - 1;
-
-    while (true) {
-      while (left < end && nums[left] <= nums[begin]) left++;
-      while (nums[begin] < nums[right]) right--;
-
-      if (left >= right) break;
-
-      swap(nums[left], nums[right]);
-    }
-    swap(nums[begin], nums[right]);
-
-    quickSort(nums, begin, right);
-    quickSort(nums, right + 1, end);
-  }
-
-  void swap(int& num1, int& num2) {
-    int temp = num1;
-    num1 = num2;
-    num2 = temp;
   }
 };
 

@@ -3,7 +3,8 @@
 using namespace std;
 
 /**
- * TODO: 用填的
+ * TODO: 敢不敢再快一點
+ * 好像跟 417 類似
  */
 
 class Solution {

@@ -1,3 +1,4 @@
+#include <algorithm>
 #include <iostream>
 #include <vector>
 using namespace std;
@@ -51,6 +52,31 @@ class Solution {
     return to;
   }
 } solution;
+
+class SortSolution {
+ public:
+  vector<vector<int>> merge(vector<vector<int>>& intervals) {
+    int length = intervals.size();
+    if (length <= 1) return intervals;
+
+    sort(intervals.begin(), intervals.end());
+
+    vector<vector<int>> result;
+
+    for (int i = 0; i < length; i++) {
+      if (result.empty() || result.back()[1] < intervals[i][0]) {
+        result.push_back(intervals[i]);
+        continue;
+      }
+
+      if (result.back()[1] < intervals[i][1]) {
+        result.back()[1] = intervals[i][1];
+      }
+    }
+
+    return result;
+  }
+};
 
 int main() {
   vector<vector<int>> intervals = {{1, 3}, {2, 6}, {8, 10}, {15, 18}};

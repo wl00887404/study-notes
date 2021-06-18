@@ -2,14 +2,6 @@
 #include <vector>
 using namespace std;
 
-/**
- * TODO: 敢不敢更快一點
- */
-
-void logInterval(string label, vector<int>& interval) {
-  cout << label << ": [" << interval[0] << ", " << interval[1] << "]" << endl;
-}
-
 class Solution {
  public:
   vector<vector<int>> insert(vector<vector<int>>& intervals,
@@ -26,20 +18,20 @@ class Solution {
   }
 
  private:
-  void insertLast(vector<vector<int>>& intervals, vector<int>& newInterval) {
-    // logInterval("newInterval", newInterval);
-    int length = intervals.size();
-    if (intervals.size() == 0) return intervals.push_back(newInterval);
+  void insertLast(vector<vector<int>>& result, vector<int>& newInterval) {
+    int length = result.size();
+    if (result.size() == 0) return result.push_back(newInterval);
 
-    vector<int>& lastIntervals = intervals[intervals.size() - 1];
-    // logInterval("lastIntervals", lastIntervals);
+    vector<int>& lastIntervals = result[result.size() - 1];
 
     // 不相交（新頭在範圍外）
     if (lastIntervals[1] < newInterval[0]) {
-      return intervals.push_back(newInterval);
+      return result.push_back(newInterval);
     }
+
     // 包含（新尾在範圍內）
     if (newInterval[1] <= lastIntervals[1]) return;
+
     // 相交（新尾在範圍外）
     lastIntervals[1] = newInterval[1];
   }

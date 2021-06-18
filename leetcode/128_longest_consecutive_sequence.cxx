@@ -8,10 +8,18 @@ using namespace std;
 /**
  * 這題用 sort 反而是最快的
  * 說好的 O(n) 呢？
- * TODO: sort 比我自己寫的 quicksort 還有快耶
  *
  * hash table 數量太大
  * 效能太差了
+ */
+
+/**
+ * sort 比我自己寫的 quicksort 還有快耶
+ * 
+ * 2021/6/17
+ * 內建的 sort 是使用內省排序 Introsort
+ * 可以保證 O(n log n)
+ * TODO: https://liam.page/2018/08/29/introspective-sort/
  */
 
 struct Interval {
@@ -92,13 +100,40 @@ class OnlySetSolution {
   }
 };
 
+void swap(vector<int>::iterator& iterator1, vector<int>::iterator& iterator2) {
+  int temp = *iterator1;
+  *iterator1 = *iterator2;
+  *iterator2 = temp;
+}
+
+void quickSort(vector<int>::iterator begin, vector<int>::iterator end) {
+  if (begin >= end) return;
+
+  // pivot 是 0
+  vector<int>::iterator left = begin + 1;
+  vector<int>::iterator right = end - 1;
+
+  while (true) {
+    while (left < right && *left <= *begin) left++;
+    while (*begin < *right) right--;
+
+    if (left >= right) break;
+
+    swap(left, right);
+  }
+  swap(begin, right);
+
+  quickSort(begin, right);
+  quickSort(right + 1, end);
+}
+
 class SortSolution {
  public:
   int longestConsecutive(vector<int>& nums) {
     int length = nums.size();
     if (length == 0) return 0;
 
-    quickSort(nums, 0, length);
+    quickSort(nums.begin(), nums.end());
 
     int result = 1;
     int nextResult = 1;
@@ -113,33 +148,6 @@ class SortSolution {
     }
 
     return result;
-  }
-
- private:
-  void quickSort(vector<int>& nums, int begin, int end) {
-    if (begin >= end) return;
-    // pivot 是 0
-    int left = begin + 1;
-    int right = end - 1;
-
-    while (true) {
-      while (left < end && nums[left] <= nums[begin]) left++;
-      while (nums[begin] < nums[right]) right--;
-
-      if (left >= right) break;
-
-      swap(nums[left], nums[right]);
-    }
-    swap(nums[begin], nums[right]);
-
-    quickSort(nums, begin, right);
-    quickSort(nums, right + 1, end);
-  }
-
-  void swap(int& num1, int& num2) {
-    int temp = num1;
-    num1 = num2;
-    num2 = temp;
   }
 };
 
