@@ -10,7 +10,7 @@ using namespace std;
  *
  * 欸欸欸 STL 容器不是傳址耶！！好扯喔！！
  * 遞迴法不會比較慢
- * 是dfs 的寫法沒寫好 = =
+ * 是 dfs 的寫法沒寫好 = =
  *
  * 不要閉門造車:
  * Steinhaus–Johnson–Trotter algorithm:
@@ -66,7 +66,7 @@ class RecursiveSolution {
  public:
   vector<vector<int>> permute(vector<int>& nums) {
     vector<vector<int>> results;
-    vector<bool> seen = vector(nums.size(), false);
+    vector<bool> seen = vector<bool>(nums.size(), false);
     vector<int> result;
 
     permute(results, seen, nums, result);

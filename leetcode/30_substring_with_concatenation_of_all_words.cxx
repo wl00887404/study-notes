@@ -14,12 +14,15 @@ using namespace std;
 
 struct TrieNode {
   vector<int> keys;
-  TrieNode* children[26] = {NULL};
+  TrieNode* children[26];
   bool isWord = false;
   int count = 0;
   int used = 0;
 
-  bool has(char c) { return has(c - 'a'); }
+  TrieNode() {
+    for (int i = 0; i < 26; i++) children[i] = NULL;
+  }
+
   bool has(int i) { return children[i] != NULL; }
 
   void resetUsed() {
@@ -32,9 +35,10 @@ struct TrieNode {
     string::iterator begin = str.begin();
     string::iterator end = str.end();
 
-    insert(str, begin, end);
+    insert(begin, end);
   }
-  void insert(string& str, string::iterator& begin, string::iterator& end) {
+
+  void insert(string::iterator& begin, string::iterator& end) {
     if (begin == end) {
       isWord = true;
       count++;
@@ -46,7 +50,7 @@ struct TrieNode {
         children[index] = new TrieNode();
       }
 
-      children[index]->insert(str, ++begin, end);
+      children[index]->insert(++begin, end);
     }
   }
 
