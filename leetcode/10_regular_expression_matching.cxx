@@ -6,6 +6,12 @@ using namespace std;
  * TODO: 研究 dp answer
  */
 
+/**
+ * 2021/9/1
+ * 自從會了 Trie 看 Suffix Tree 比較輕鬆了
+ * 但我還是不知道有什麼用
+ */
+
 class Solution {
  public:
   bool isMatch(string s, string p) { return isMatch(s, p, 0, 0); }
