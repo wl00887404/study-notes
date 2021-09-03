@@ -58,9 +58,27 @@
     "functional": "cpp",
     "numeric": "cpp",
     "random": "cpp",
-    "shared_mutex": "cpp"
+    "shared_mutex": "cpp",
+    "list": "cpp"
   },
   "cSpell.words": [
     "leetcode"
-  ]
+  ],
+  "workbench.colorCustomizations": {
+    "activityBar.activeBackground": "#e04149",
+    "activityBar.activeBorder": "#2ddb24",
+    "activityBar.background": "#e04149",
+    "activityBar.foreground": "#e7e7e7",
+    "activityBar.inactiveForeground": "#e7e7e799",
+    "activityBarBadge.background": "#2ddb24",
+    "activityBarBadge.foreground": "#15202b",
+    "statusBar.background": "#cd212a",
+    "statusBar.foreground": "#e7e7e7",
+    "statusBarItem.hoverBackground": "#e04149",
+    "titleBar.activeBackground": "#cd212a",
+    "titleBar.activeForeground": "#e7e7e7",
+    "titleBar.inactiveBackground": "#cd212a99",
+    "titleBar.inactiveForeground": "#e7e7e799"
+  },
+  "peacock.color": "#cd212a"
 }
