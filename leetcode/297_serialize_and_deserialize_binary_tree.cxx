@@ -20,7 +20,22 @@ using namespace std;
  * 3 => 6 7
  */
 
-class Codec {
+/**
+ * heap
+ *       1
+ *      /
+ *     2
+ *    /
+ *   3
+ *  /
+ * 4
+ *
+ * 這種右側會產生大量的 null
+ * 尷尬慢
+ */
+
+// Not Accepted
+class HeapCodec {
  public:
   string serialize(TreeNode* root) {
     if (root == NULL) return "# ";
@@ -58,26 +73,27 @@ class Codec {
     vector<TreeNode*> nodes;
     string::iterator pointer = data.begin();
     string::iterator end = data.end();
+    int i = 0;
+
     while (pointer != end) {
       string s = "";
       while (*pointer != ' ') s += *pointer++;
       pointer++;  // 移到空白之後
 
-      nodes.push_back(s != "#" ? new TreeNode(stoi(s)) : NULL);
-    }
+      TreeNode* node = s != "#" ? new TreeNode(stoi(s)) : NULL;
+      nodes.push_back(node);
 
-    int length = nodes.size();
-
-    for (int i = 0; i < length; i++) {
-      int leftIndex = i * 2 + 1;
-      if (leftIndex < length && nodes[leftIndex]) {
-        nodes[i]->left = nodes[leftIndex];
+      if (node != NULL) {
+        if (i > 0 && i % 2 == 1) {
+          // 偶數節點
+          nodes[(i - 1) / 2]->left = node;
+        } else if (i > 1 && i % 2 == 0) {
+          // 奇數節點
+          nodes[(i - 2) / 2]->right = node;
+        }
       }
 
-      int rightIndex = i * 2 + 2;
-      if (rightIndex < length && nodes[rightIndex]) {
-        nodes[i]->right = nodes[rightIndex];
-      }
+      i++;
     }
 
     return nodes[0];
