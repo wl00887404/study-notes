@@ -12,9 +12,13 @@
  */
 
 /**
+ * http://web.ntnu.edu.tw/~algo/ConvexHull.html
+ *
  * 這個問題叫做 Convex Hull
  * 自己想出來了 Jarvis' March
  * 真開心
+ * 
+ * TODO: 研究 Andrew's Monotone Chain 
  */
 
 using namespace std;
@@ -39,13 +43,16 @@ class Solution {
     }
 
     result.push_back(trees[from]);
-    isUsed[from] = true;
+    // 開始的 point 因為可以用作關閉圖形
+    // 所以不加入 isUsed
+    int start = from;
+    bool isFinished = false;
 
     vector<int> vec1 = {1, 0};
     double length1 = 1;
 
     double minAngle;
-    double angles[length];
+    int angles[length];
     double length2s[length];
 
     while (true) {
@@ -54,7 +61,8 @@ class Solution {
       int to = -1;
 
       for (int i = 0; i < length; i++) {
-        if (i == from) continue;
+        if (i == from || isUsed[i]) continue;
+
         vector<int> vec2 = {trees[i][0] - trees[from][0],
                             trees[i][1] - trees[from][1]};
 
@@ -69,29 +77,28 @@ class Solution {
       }
 
       for (int i = 0; i < length; i++) {
-        if (i == from || angles[i] != minAngle) continue;
-        if (length2s[to] > length2s[i]) continue;
+        if (i == from || isUsed[i] || angles[i] != minAngle) continue;
 
         to = i;
       }
 
       for (int i = 0; i < length; i++) {
-        if (i == from || angles[i] != minAngle) continue;
-        if (i == to) continue;
-        if (isUsed[i]) continue;
+        if (i == from || isUsed[i] || angles[i] != minAngle) continue;
 
         isUsed[i] = true;
-        result.push_back(trees[i]);
+        if (i == start) {
+          isFinished = true;
+        } else {
+          result.push_back(trees[i]);
+          if (length2s[to] < length2s[i]) to = i;
+        }
       }
 
-      if (isUsed[to]) break;
+      if (isFinished) break;
 
-      isUsed[to] = true;
-      result.push_back(trees[to]);
       vec1[0] = trees[to][0] - trees[from][0];
       vec1[1] = trees[to][1] - trees[from][1];
       length1 = length2s[to];
-
       from = to;
     }
 
@@ -106,9 +113,8 @@ class Solution {
     return vec1[0] * vec2[0] + vec1[1] * vec2[1];
   }
 
-  double getAngle(double& dotProduct, double& length1, double& length2) {
-    return round(acos(max(-1.0, min(1.0, dotProduct / length1 / length2))) *
-                 1000);
+  int getAngle(double& dotProduct, double& length1, double& length2) {
+    return acos(max(-1.0, min(1.0, dotProduct / length1 / length2))) * 1000;
   }
 } solution;
 
