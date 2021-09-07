@@ -11,19 +11,23 @@ using namespace std;
  * m 左側節點全部都要更新
  * n 右側節點也全部都要更新
  * 看起來挺頭痛的
- *
  */
 
-class Solution {
+/**
+ * 距離表 + pedding 沒辦法接上去的節點
+ * 這個做法會超時 😢
+ */
+
+class TimeLimitExceededSolution {
  public:
   vector<int> sumOfDistancesInTree(int n, vector<vector<int>>& edges) {
     if (n == 1) return {0};
 
     bool isUsed[n];
     for (int i = 0; i < n; i++) isUsed[i] = 0;
-    int distances[n][n];
+    vector<vector<int>> distances(n);
     for (int i = 0; i < n; i++) {
-      for (int j = 0; j < n; j++) distances[i][j] = 0;
+      distances[i] = vector<int>(n);
     }
 
     queue<vector<int>*> queue;
@@ -65,11 +69,11 @@ class Solution {
       isUsed[unusedIndex] = true;
     }
 
-    vector<int> result;
+    vector<int> result(n);
     for (int i = 0; i < n; i++) {
       int sum = 0;
       for (int j = 0; j < n; j++) sum += distances[i][j];
-      result.push_back(sum);
+      result[i] = sum;
     }
 
     return result;
