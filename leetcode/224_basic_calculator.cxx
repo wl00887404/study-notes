@@ -27,9 +27,65 @@ using namespace std;
 /**
  * 運算子沒有優先序
  * 感覺是不用這麼麻煩
+ *
+ * - (-4 - (5 - 2) + 10)
+ * + 4 + (- 5 + 2) - 10
  */
 
 class Solution {
+ public:
+  int calculate(string s) {
+    string::iterator pointer = s.begin();
+    string::iterator end = s.end();
+
+    return calclate(pointer, end);
+  }
+
+  int calclate(string::iterator& pointer, string::iterator& end) {
+    int result = 0;
+    int sign = 1;
+
+    while (pointer != end) {
+      char& c = *pointer;
+      if (isDigtal(c)) {
+        result += sign * readInt(pointer, end);
+        continue;
+      }
+
+      pointer++;
+      if (c == ')') break;
+      if (c == ' ') continue;
+
+      if (c == '+') {
+        if (sign == -1) sign = 1;
+      } else if (c == '-') {
+        if (sign == 1) sign = -1;
+      } else if (c == '(') {
+        result += sign * calclate(pointer, end);
+      }
+    }
+
+    return result;
+  }
+
+  bool isDigtal(char& c) { return '0' <= c && c <= '9'; }
+
+  int readInt(string::iterator& pointer, string::iterator& end) {
+    int result = 0;
+
+    while (pointer != end) {
+      char& c = *pointer;
+      if (!isDigtal(c)) break;
+
+      result = result * 10 + (c - '0');
+      pointer++;
+    }
+
+    return result;
+  }
+} solution;
+
+class StackSolution {
  public:
   int calculate(string s) {
     string::iterator pointer = s.begin();
@@ -96,13 +152,15 @@ class Solution {
 
     return result;
   }
-} solution;
+};
 
 int main() {
   // string s = " 2-1 + 2 ";
   // string s = "2147483647";
   // string s = "-2+ 1";
-  string s = "7 + (5)";
+  // string s = " 1 + 1 ";
+  // string s = "7 + (5)";
+  // string s = "(1+(4+5+2)-3)+(6+8)";
   cout << solution.calculate(s) << endl;
 
   return 0;
