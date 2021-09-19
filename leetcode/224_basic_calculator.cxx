@@ -155,7 +155,7 @@ class StackSolution {
 };
 
 int main() {
-  // string s = " 2-1 + 2 ";
+  string s = " 2-1 + 2 ";
   // string s = "2147483647";
   // string s = "-2+ 1";
   // string s = " 1 + 1 ";
