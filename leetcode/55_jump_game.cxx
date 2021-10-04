@@ -2,12 +2,6 @@
 #include <vector>
 using namespace std;
 
-/**
- * T1 是發現 0 後檢查能不能走到這步
- * 是我原本的想法耶 可惜
- * TODO: 敢不敢再快一點
- */
-
 class Solution {
  public:
   bool canJump(vector<int>& nums) {
@@ -15,10 +9,14 @@ class Solution {
     int length = nums.size();
 
     for (int i = 1; i < length; i++) {
+      // 如果沒有步數了就失敗
       if (steps < 1) return false;
 
+      // 往前探索一步
       steps--;
-      
+
+      // 如果這格可以補充的部署比現在還多
+      // 那就補充步數
       if (nums[i] > steps) steps = nums[i];
     }
 

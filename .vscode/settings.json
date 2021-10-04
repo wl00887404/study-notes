@@ -61,9 +61,7 @@
     "shared_mutex": "cpp",
     "list": "cpp"
   },
-  "cSpell.words": [
-    "leetcode"
-  ],
+  "cSpell.words": ["leetcode"],
   "workbench.colorCustomizations": {
     "activityBar.activeBackground": "#e04149",
     "activityBar.activeBorder": "#2ddb24",
@@ -78,7 +76,13 @@
     "titleBar.activeBackground": "#cd212a",
     "titleBar.activeForeground": "#e7e7e7",
     "titleBar.inactiveBackground": "#cd212a99",
-    "titleBar.inactiveForeground": "#e7e7e799"
+    "titleBar.inactiveForeground": "#e7e7e799",
+    "editorGroup.border": "#e04149",
+    "panel.border": "#e04149",
+    "sash.hoverBorder": "#e04149",
+    "sideBar.border": "#e04149",
+    "statusBarItem.remoteBackground": "#cd212a",
+    "statusBarItem.remoteForeground": "#e7e7e7"
   },
   "peacock.color": "#cd212a"
 }

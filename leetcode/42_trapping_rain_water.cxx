@@ -18,10 +18,10 @@ class Solution {
 
     if (length - i <= 2) return 0;
 
-    // skip climbing up
+    // 跳過那種只有爬高的圖
     while (i < length - 1 && height[i] <= height[i + 1]) i++;
-
     if (i == length - 1) return 0;
+    // 2021/10/1 感覺這個步驟不會有顯著的效果
 
     int result = 0;
     int begin = i;
@@ -37,11 +37,11 @@ class Solution {
 
       if (height[i] >= height[begin]) break;
 
-      result -= height[i];
+      result -= height[i]; // 扣除掉下方的淤積
       i++;
     };
 
-    result += height[begin] * (i - begin - 1);
+    result += height[begin] * (i - begin - 1); // 補水
 
     return result + trap(height, i);
   }
