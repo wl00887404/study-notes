@@ -35,6 +35,8 @@ using namespace std;
  * 正負標記法很酷耶
  * 直接用 nums 標記
  * 出現過該 index 直接 * -1
+ * 
+ * 真的是太有創意了
  */
 
 class Solution {
