@@ -15,7 +15,7 @@ using namespace std;
 
 /**
  * sort 比我自己寫的 quicksort 還有快耶
- * 
+ *
  * 2021/6/17
  * 內建的 sort 是使用內省排序 Introsort
  * 可以保證 O(n log n)
@@ -76,7 +76,7 @@ class Solution {
 
     return result;
   }
-} solution;
+};
 
 class OnlySetSolution {
  public:
@@ -106,25 +106,27 @@ void swap(vector<int>::iterator& iterator1, vector<int>::iterator& iterator2) {
   *iterator2 = temp;
 }
 
-void quickSort(vector<int>::iterator begin, vector<int>::iterator end) {
+// https://www.youtube.com/watch?v=uXBnyYuwPe8
+void quickSort(vector<int>::iterator& begin, vector<int>::iterator& end) {
   if (begin >= end) return;
 
-  // pivot 是 0
-  vector<int>::iterator left = begin + 1;
-  vector<int>::iterator right = end - 1;
+  // pivot 是最後一個元素
+  vector<int>::iterator pivot = end - 1;
+  vector<int>::iterator firstBigger = begin;
+  vector<int>::iterator iterator = begin;
 
-  while (true) {
-    while (left < right && *left <= *begin) left++;
-    while (*begin < *right) right--;
-
-    if (left >= right) break;
-
-    swap(left, right);
+  for (; iterator != pivot; iterator++) {
+    if (*iterator < *pivot) {
+      swap(firstBigger, iterator);
+      firstBigger++;
+    }
   }
-  swap(begin, right);
 
-  quickSort(begin, right);
-  quickSort(right + 1, end);
+  swap(firstBigger, pivot);
+
+  quickSort(begin, firstBigger);
+  firstBigger++;
+  quickSort(firstBigger, end);
 }
 
 class SortSolution {
@@ -132,8 +134,10 @@ class SortSolution {
   int longestConsecutive(vector<int>& nums) {
     int length = nums.size();
     if (length == 0) return 0;
-
-    quickSort(nums.begin(), nums.end());
+    
+    vector<int>::iterator begin = nums.begin();
+    vector<int>::iterator end = nums.end();
+    quickSort(begin, end);
 
     int result = 1;
     int nextResult = 1;
@@ -149,11 +153,12 @@ class SortSolution {
 
     return result;
   }
-};
+} solution;
 
 int main() {
   vector<int> nums = {100, 4, 200, 1, 3, 2};
-
+  nums = {-3, 2, 8,  5, 1, 7,  -8, 2, -8, -4, -1, 6, -6, 9,
+          6,  0, -7, 4, 5, -4, 8,  2, 0,  -2, -6, 9, -4, -1};
   solution.longestConsecutive(nums);
 
   return 0;

@@ -8,7 +8,48 @@ using namespace std;
  * TODO: 研究 model answer
  */
 
+/**
+ * 2021/10/7
+ * 後進先出看起來是 stack 吧
+ * 這題是真的蠻簡單的
+ */
+
 class Solution {
+ public:
+  ListNode* reverseKGroup(ListNode* head, int k) {
+    stack<ListNode*> stack;
+    ListNode* dummyHead = new ListNode();
+    dummyHead->next = head;
+    helper(dummyHead, head, k, stack);
+
+    return dummyHead->next;
+  }
+
+  void helper(ListNode* before, ListNode* head, int& k,
+              stack<ListNode*>& stack) {
+    ListNode* pointer = head;
+
+    for (int i = 0; i < k; i++) {
+      if (pointer == NULL) return;
+      stack.push(pointer);
+      pointer = pointer->next;
+    }
+
+    pointer = before;
+    ListNode* after = stack.top()->next;
+
+    while (!stack.empty()) {
+      pointer->next = stack.top();
+      pointer = pointer->next;
+      stack.pop();
+    }
+
+    pointer->next = after;
+    helper(pointer, after, k, stack);
+  }
+};
+
+class OldSolution {
  public:
   ListNode* reverseKGroup(ListNode* head, int k) {
     if (k < 2) return head;
@@ -48,7 +89,7 @@ class Solution {
 } solution;
 
 int main() {
-  ListNode* p = new ListNode({1, 2, 3, 4, 5, 6});
+  ListNode* p = new ListNode({1, 2, 3, 4, 5});
 
   log(solution.reverseKGroup(p, 3));
 

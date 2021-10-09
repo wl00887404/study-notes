@@ -3,6 +3,6 @@
     "leetcode": "node leetcode/cmd.mjs"
   },
   "dependencies": {
-    "axios": "^0.21.1"
+    "axios": "^0.22.0"
   }
 }
