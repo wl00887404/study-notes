@@ -6,6 +6,12 @@
 #include "./log.cxx"
 using namespace std;
 
+/**
+ * 這題重點
+ *   1. 先往左再往右，值不能大於父節點
+ *   2. 先往右再往左，值不能小於父節點
+ */
+
 class Solution {
  public:
   bool isValidBST(TreeNode *root) {
