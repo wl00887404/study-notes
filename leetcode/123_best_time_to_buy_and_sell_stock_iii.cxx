@@ -62,26 +62,22 @@ class Solution {
     int t[size];
 
     h[0] = 0;
+    int smallest = prices[0];
     for (int i = 1; i < size; i++) {
-      h[i] = h[i - 1];
-      for (int j = 0; j < i; j++) {
-        h[i] = max(h[i], prices[i] - prices[j]);
-      }
-
-      if (h[i] > result) result = h[i];
+      smallest = min(smallest, prices[i]);
+      h[i] = max(h[i - 1], prices[i] - smallest);
+      result = max(result, h[i]);
     }
 
     t[size - 1] = 0;
+    int biggest = prices[size - 1];
     for (int i = size - 2; 0 <= i; i--) {
-      t[i] = t[i + 1];
-      for (int j = size - 1; i < j; j--) {
-        t[i] = max(t[i], prices[j] - prices[i]);
-      }
-      if (t[i] > result) result = t[i];
+      biggest = max(biggest, prices[i]);
+      t[i] = max(t[i + 1], biggest - prices[i]);
+      result = max(result, t[i]);
     }
 
     for (int i = 1; i < size - 1; i++) {
-      if (h[i] == 0 || t[i + 1] == 0) continue;
       result = max(result, h[i] + t[i + 1]);
     }
 
@@ -96,10 +92,11 @@ class Solution {
 
 int main() {
   // vector<int> prices = {7, 6, 5, 4, 3, 4, 5};
-  vector<int> prices = {545, 544, 543, 542, 541, 540, 539, 541, 540, 542,
-                        539, 538, 537, 536, 535, 534, 533, 532, 531, 530,
-                        529, 528, 527, 526, 525, 0,   0,   0,   0,   0,
-                        0,   0,   0,   0,   0,   0,   0,   0,   0,   0};
+  vector<int> prices = {3, 3, 5, 0, 0, 3, 1, 4};
+  // vector<int> prices = {545, 544, 543, 542, 541, 540, 539, 541, 540, 542,
+  //                       539, 538, 537, 536, 535, 534, 533, 532, 531, 530,
+  //                       529, 528, 527, 526, 525, 0,   0,   0,   0,   0,
+  //                       0,   0,   0,   0,   0,   0,   0,   0,   0,   0};
 
   solution.maxProfit(prices);
 
