@@ -12,9 +12,9 @@ using namespace std;
 /**
  * 同樣的概念 binary search
  * 只要朝對的移動的方向對就好
- *  
+ *
  * [0, 1, 2, 3, 4, 5, 6] => 往左
- *  0        m         6
+ *  0        m        6
  *
  * [0, 1, 2, 3, 4, 5, 6] => [6, 0, 1, 2, 3, 4, 5] => 往左
  *        m        6  0               m
@@ -31,21 +31,17 @@ class Solution {
     while (left < right) {
       int mid = (left + right) / 2;
 
-      /** 
-       * [3, 1, 2] mid = 0 剛好是答案
-       * 那下一輪會是 left = 0, right = 1, mid = 0
-       * nums[0] > nums[0] == false, right = mid 回傳錯誤結果 3
-       */
-
-      /**
-       * [2, 1] mid = 1 剛好是答案
-       * 那下一輪會是 left = 0, right = 1, mid = 0
-       * nums[0] > nums[0] == false, right = mid 回傳錯誤結果 2
-       */
+      // 如果前一位比較大
+      // 那我就是答案
       if (mid > 0 && nums[mid - 1] > nums[mid]) return nums[mid];
+
       if (nums[mid] > nums[right - 1]) {
+        // 右邊比較小
+        // 往小的那邊去
         left = mid + 1;
       } else {
+        // 右邊比較大
+        // 答案一定在左邊
         right = mid;
       }
     }
