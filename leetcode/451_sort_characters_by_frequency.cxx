@@ -5,6 +5,16 @@
 
 using namespace std;
 
+
+/**
+ * 2021/10/22 的 daily
+ * 原來我寫過
+ * 
+ * 第二次看回想起真的沒救
+ * 一定是跑一次記次數
+ * 再跑一次創造字串
+ */
+
 class Solution {
  public:
   string frequencySort(string s) {
