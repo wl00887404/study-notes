@@ -6,7 +6,7 @@ using namespace std;
 
 /**
  * 我覺得這題是 easy
- * T1 用間隔 n 的兩個 pointer 蠻酷的
+ * 最佳解用間隔 n 的兩個 pointer 蠻酷的
  */
 
 class Solution {

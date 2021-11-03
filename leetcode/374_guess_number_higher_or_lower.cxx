@@ -7,6 +7,10 @@
  * int guess(int num);
  */
 
+/**
+ * 這題就是 AlphaCamp 的猜數字
+ */
+
 int guess(int num);
 
 class Solution {

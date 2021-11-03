@@ -39,6 +39,10 @@ using namespace std;
  *   後 6 項 t1 = max(t2, a6 - a1, a5 - a1, a4 - a1, a3 - a1, a2 - a1)
  */
 
+/**
+ * TODO: 重寫以前的思路以及研究最佳解
+ */
+
 void log(vector<int>& array) {
   for (int i = 0; i < array.size(); i++) {
     cout << array[i] << " ";

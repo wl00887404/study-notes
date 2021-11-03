@@ -49,6 +49,9 @@ using namespace std;
  */
 
 // WIP: 搭配 105
+// 這個作法應該不太可能
+// 105 的重點是裡面的元素的不一樣
+// 遇到一樣的不知道怎麼處理
 class Codec {
  public:
   string serialize(TreeNode* root) {
