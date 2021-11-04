@@ -1,8 +1,8 @@
 
-#include <algorithm>
+#include <string.h>
+
 #include <iostream>
 #include <queue>
-#include <unordered_map>
 #include <vector>
 
 using namespace std;
@@ -64,16 +64,24 @@ using namespace std;
  * 64 / 64 test cases passed, but took too long.
  */
 
+/**
+ * DP 解直接 0ms
+ * 太兇狠了吧
+ *
+ * https://leetcode.com/problems/distinct-subsequences/discuss/37316/7-10-lines-C%2B%2B-Solutions-with-Detailed-Explanations-(O(m*n)-time-and-O(m)-space)
+ */
+
 class Solution {
  public:
   int numDistinct(string s, string t) {
     vector<int> positionsByAlphabets[52];
     int sLength = s.size();
+    int tLength = t.size();
+
     for (int i = 0; i < sLength; i++) {
       positionsByAlphabets[getIndex(s[i])].push_back(i);
     }
 
-    int tLength = t.size();
     vector<int> cache[tLength];
 
     for (int i = 0; i < tLength; i++) {
@@ -86,7 +94,7 @@ class Solution {
       cache[i].resize(positionsSize, -1);
     }
 
-    return helper(cache, tLength, positionsByAlphabets, t, -1, 0);
+    return helper(cache, sLength, tLength, positionsByAlphabets, t, -1, 0);
   }
 
   int getIndex(char& c) {
@@ -107,8 +115,11 @@ class Solution {
 
   // 從 i 開始比對 t[j] 的結果
   // cache[j][positionIndex] = 這個位置的結果
-  int helper(vector<int>* cache, int& tLength,
+  int helper(vector<int>* cache, int& sLength, int& tLength,
              vector<int>* positionsByAlphabets, string& t, int i, int j) {
+    // 剩餘字串不夠多了
+    if (sLength - i < tLength - j) return 0;
+
     // 找到一種組合
     if (j == tLength) return 1;
 
@@ -120,11 +131,12 @@ class Solution {
       int& position = positions[k];
       // 目前的位置不在 i 的後面
       if (position <= i) continue;
+      if (i + tLength - i >= sLength) break;
 
       if (cache[j][k] == -1) {
         // 從 position 找下一個字母的結果
-        cache[j][k] =
-            helper(cache, tLength, positionsByAlphabets, t, position, j + 1);
+        cache[j][k] = helper(cache, sLength, tLength, positionsByAlphabets, t,
+                             position, j + 1);
       }
 
       result += cache[j][k];
