@@ -6,9 +6,10 @@ using namespace std;
 
 /**
  * sum[i ... j] = sum[0, j] - sum[0, i]
+ * subarray 找最大加總
+ *
  * 53 也會用到這個觀念
  * 我印象中蠻多題的
- * 
  */
 
 class Solution {
