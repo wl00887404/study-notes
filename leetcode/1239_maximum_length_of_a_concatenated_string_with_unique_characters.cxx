@@ -1,6 +1,7 @@
 #include <math.h>
 
 #include <iostream>
+#include <queue>
 #include <unordered_map>
 #include <vector>
 
@@ -34,8 +35,18 @@ using namespace std;
  */
 
 /**
- * TODO: 看一下 DP 解
- * 為什麼它比我快啦
+ * 不是 pick 越多 element 就是最佳解
+ *
+ * 假設 strings = ["abc", "d", "e", "defgh", "ijk"]
+ *
+ * pick = 4, abc|d|e|ijk , length = 8
+ * pick = 3, abc|defgh|ijk, length = 12
+ */
+
+/**
+ * 寫法是一樣的
+ * 不用 unordered_map 紀錄 cache 速度反而比較快
+ * cache 處理不定值效能太差了嗎？
  */
 
 class Solution {
@@ -53,45 +64,53 @@ class Solution {
     int values[size];
     int lengths[size];
 
-    for (int i = 0; i < size; i++) {
-      values[i] = 0;
-      lengths[i] = strings[i].size();
-      for (char& c : strings[i]) {
+    // 新的開頭，前面都放淘汰值
+    int i = 0;
+    for (int j = 0; j < size; j++) {
+      values[j] = 0;
+      lengths[j] = strings[j].size();
+      for (char& c : strings[j]) {
         int& bit = bits[c - 'a'];
-        // 自己沒有重複自己
-        if ((values[i] & bit) == 0) {
-          values[i] |= bit;
-        } else {
-          values[i] = 0;
+        // 遇到自己重複自己
+        if ((values[j] & bit) != 0) {
+          values[j] = values[i];
+          lengths[j] = lengths[i];
+          i++;
           break;
         }
+
+        values[j] |= bit;
       }
     }
 
-    // 第 i 位的 bit 值對應的結果
-    unordered_map<int, int> cache[size];
+    int result = 0;
+    helper(result, size, values, i, 0);
 
-    return helper(size, values, lengths, cache, 0, 0);
+    return result;
   }
 
-  int helper(int& size, int* values, int* lengths,
-             unordered_map<int, int>* cache, int i, int value) {
-    if (i == size) return 0;
-    // 一樣分為選的結果與不選的結果
-    if (cache[i].count(value)) return cache[i][value];
+  int countBits(int n) {
+    int result = 0;
+    while (n) {
+      if (n & 1) result++;
+      n = n >> 1;
+    }
+    return result;
+  }
 
-    cache[i][value] = 0;
-    // 如果兩者字串沒有重疊可以選
-    if (values[i] != 0 && (value & values[i]) == 0) {
-      cache[i][value] =
-          max(cache[i][value], lengths[i] + helper(size, values, lengths, cache,
-                                                   i + 1, value | values[i]));
+  void helper(int& result, int& size, int* values, int i, int value) {
+    // 一樣分為選的結果與不選的結果
+    if (i == size) {
+      result = max(result, countBits(value));
+      return;
     }
 
-    cache[i][value] = max(cache[i][value],
-                          helper(size, values, lengths, cache, i + 1, value));
+    // 如果兩者字串沒有重疊可以選
+    if ((value & values[i]) == 0) {
+      helper(result, size, values, i + 1, value | values[i]);
+    }
 
-    return cache[i][value];
+    helper(result, size, values, i + 1, value);
   }
 } solution;
 

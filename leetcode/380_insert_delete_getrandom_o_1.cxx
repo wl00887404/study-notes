@@ -1,6 +1,6 @@
 #include <iostream>
-#include <vector>
 #include <unordered_map>
+#include <vector>
 
 using namespace std;
 
@@ -10,23 +10,27 @@ using namespace std;
  * 看一下討論區不小心就看到答案了 QQ
  */
 
+/**
+ * TODO: 等忘記時再寫一次
+ */
+
 class RandomizedSet {
  public:
   RandomizedSet() {}
   bool insert(int val) {
-    if (m.find(val) != m.end()) return false;
+    if (map.find(val) != map.end()) return false;
     nums.emplace_back(val);
-    m[val] = nums.size() - 1;
+    map[val] = nums.size() - 1;
     return true;
   }
 
   bool remove(int val) {
-    if (m.find(val) == m.end()) return false;
+    if (map.find(val) == map.end()) return false;
     int last = nums.back();
-    m[last] = m[val];
-    nums[m[val]] = last;
+    map[last] = map[val];
+    nums[map[val]] = last;
     nums.pop_back();
-    m.erase(val);
+    map.erase(val);
     return true;
   }
 
@@ -35,5 +39,5 @@ class RandomizedSet {
 
  private:
   vector<int> nums;
-  unordered_map<int, int> m;
+  unordered_map<int, int> map;
 };

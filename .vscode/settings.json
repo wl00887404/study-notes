@@ -59,7 +59,8 @@
     "numeric": "cpp",
     "random": "cpp",
     "shared_mutex": "cpp",
-    "list": "cpp"
+    "list": "cpp",
+    "forward_list": "cpp"
   },
   "cSpell.words": ["leetcode"],
   "workbench.colorCustomizations": {
