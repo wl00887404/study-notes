@@ -1,8 +1,4 @@
-
-#include <string.h>
-
 #include <iostream>
-#include <queue>
 #include <vector>
 
 using namespace std;
@@ -69,6 +65,16 @@ using namespace std;
  * 太兇狠了吧
  *
  * https://leetcode.com/problems/distinct-subsequences/discuss/37316/7-10-lines-C%2B%2B-Solutions-with-Detailed-Explanations-(O(m*n)-time-and-O(m)-space)
+ * TODO: 研究一下吧
+ */
+
+/**
+ * 範圍還是可以縮減
+ * 直接嘗試從後面比對
+ * 就可以知道最後一組的位置！
+ *
+ * 這個作法成功壓到 4ms ！
+ * 超開心！
  */
 
 class Solution {
@@ -77,24 +83,40 @@ class Solution {
     vector<int> positionsByAlphabets[52];
     int sLength = s.size();
     int tLength = t.size();
+    // t[i] 在 s 可能的範圍;
+    int limits[tLength];
+
+    int i = sLength - 1;
+    int j = tLength - 1;
+    while (true) {
+      // 找到符合最後 t 的組合 了
+      if (j == -1) break;
+      // 找不到符合 t 的組合
+      if (i == -1) return 0;
+      // 兩者相符
+      if (s[i] == t[j]) {
+        limits[j] = i + 1;
+        i--;
+        j--;
+        continue;
+      }
+      // 不相符
+      i--;
+    }
 
     for (int i = 0; i < sLength; i++) {
-      positionsByAlphabets[getIndex(s[i])].push_back(i);
+      vector<int>& positions = positionsByAlphabets[getIndex(s[i])];
+      positions.push_back(i);
     }
 
     vector<int> cache[tLength];
+    for (int j = 0; j < tLength; j++) {
+      vector<int>& positions = positionsByAlphabets[getIndex(t[j])];
 
-    for (int i = 0; i < tLength; i++) {
-      char& c = t[i];
-      int positionsSize = positionsByAlphabets[getIndex(c)].size();
-
-      // t 需要的必字元在 s 不存在
-      if (positionsSize == 0) return 0;
-
-      cache[i].resize(positionsSize, -1);
+      cache[j].resize(positions.size(), -1);
     }
 
-    return helper(cache, sLength, tLength, positionsByAlphabets, t, -1, 0);
+    return helper(cache, tLength, limits, positionsByAlphabets, t, -1, 0);
   }
 
   int getIndex(char& c) {
@@ -115,34 +137,49 @@ class Solution {
 
   // 從 i 開始比對 t[j] 的結果
   // cache[j][positionIndex] = 這個位置的結果
-  int helper(vector<int>* cache, int& sLength, int& tLength,
+  int helper(vector<int>* cache, int& tLength, int* limits,
              vector<int>* positionsByAlphabets, string& t, int i, int j) {
-    // 剩餘字串不夠多了
-    if (sLength - i < tLength - j) return 0;
-
     // 找到一種組合
     if (j == tLength) return 1;
 
     char& c = t[j];
     vector<int>& positions = positionsByAlphabets[getIndex(c)];
+    int size = positions.size();
     int result = 0;
-    int positionsSize = positions.size();
-    for (int k = 0; k < positionsSize; k++) {
-      int& position = positions[k];
-      // 目前的位置不在 i 的後面
-      if (position <= i) continue;
-      if (i + tLength - i >= sLength) break;
 
+    int k = findGreaterThanIndex(positions, i);
+
+    while (k < size && positions[k] < limits[j]) {
+      // 從 position 找下一個字母的結果
       if (cache[j][k] == -1) {
-        // 從 position 找下一個字母的結果
-        cache[j][k] = helper(cache, sLength, tLength, positionsByAlphabets, t,
-                             position, j + 1);
+        cache[j][k] = helper(cache, tLength, limits, positionsByAlphabets, t,
+                             positions[k], j + 1);
       }
 
       result += cache[j][k];
+      k++;
     }
 
     return result;
+  }
+
+  int findGreaterThanIndex(vector<int>& positions, int& i) {
+    // 要找到第一個大於 i 的 index
+
+    int left = 0;
+    int right = positions.size();
+
+    while (left < right) {
+      int mid = (left + right) / 2;
+
+      if (positions[mid] > i) {
+        right = mid;
+      } else {
+        left = mid + 1;
+      }
+    }
+
+    return left;
   }
 } solution;
 
