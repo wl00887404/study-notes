@@ -13,7 +13,7 @@ using namespace std;
  * 3 (1->next) => 2
  */
 
-class Solution {
+class OldSolution {
  public:
   ListNode* swapPairs(ListNode* head) {
     ListNode dummyHead = ListNode(0);
@@ -34,6 +34,19 @@ class Solution {
     return dummyHead.next;
   }
 } solution;
+
+class Solution {
+ public:
+  ListNode* swapPairs(ListNode* head) {
+    if (head == NULL || head->next == NULL) return head;
+
+    ListNode* next = head->next;
+    head->next = swapPairs(next->next);
+    next->next = head;
+
+    return next;
+  }
+};
 
 int main() {
   ListNode* l1 = new ListNode({1, 2, 3, 4, 5});
