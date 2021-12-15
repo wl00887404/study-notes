@@ -63,7 +63,9 @@
     "forward_list": "cpp",
     "valarray": "cpp",
     "variant": "cpp",
-    "scoped_allocator": "cpp"
+    "scoped_allocator": "cpp",
+    "future": "cpp",
+    "complex": "cpp"
   },
   "cSpell.words": ["leetcode"],
   "workbench.colorCustomizations": {

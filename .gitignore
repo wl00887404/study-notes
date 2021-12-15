@@ -5,3 +5,4 @@ Makefile
 bin
 *.out
 node_modules
+yarn-error.log

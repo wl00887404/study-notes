@@ -4,5 +4,6 @@
   },
   "dependencies": {
     "axios": "^0.22.0"
-  }
+  },
+  "license": "Beerware"
 }
