@@ -1,3 +1,13 @@
+
+/**
+ * 2021/9/24 寫過
+ */
+
+/**
+ * dp 題組 1-2
+ * 太簡單了不知道有什麼好說的
+ */
+
 class Solution {
  public:
   int tribonacci(int n) {

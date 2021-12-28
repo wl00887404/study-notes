@@ -5,9 +5,10 @@ using namespace std;
  * 這題似乎是字串處理的經典題目呢
  * 直接把解寫在 Hint2 = =
  * 
- * http://www.csie.ntnu.edu.tw/~u91029/LongestCommonSubsequence.html
+ * http://web.ntnu.edu.tw/~algo/Subsequence2.html
  * https://en.wikipedia.org/wiki/Longest_common_subsequence_problem
  * https://en.wikipedia.org/wiki/Hirschberg%27s_algorithm
+ * https://yungshenglu.github.io/2018/05/15/LongestCommonSubsequence1/
  */
 
 class Solution {

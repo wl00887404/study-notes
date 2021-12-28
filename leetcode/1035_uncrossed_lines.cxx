@@ -21,6 +21,13 @@ using namespace std;
  * 還是遞迴解一解就好
  */
 
+/**
+ * TODO:
+ * 看一下討論區
+ * 這題是經典演算法 The Longest Common Subsequence
+ * 跟 72 、 1143 相關
+ */
+
 class Solution {
  public:
   int maxUncrossedLines(vector<int>& nums1, vector<int>& nums2) {
@@ -91,6 +98,18 @@ class Solution {
 
     int chosenResult = nextJ != -1 ? 1 + helper(i + 1, nextJ + 1) : 0;
 
+    /**
+     * TODO:
+     * FIXME: 為什麼不能寫成這樣
+     *
+     * cache[cacheIndex] = helper(i + 1, j);
+     * if(chosenResult) {
+     *   cache[cacheIndex] = max(
+     *     cache[cacheIndex],
+     *     1 + helper(i + 1, nextJ + 1)
+     *   );
+     * }
+     */
     cache[cacheIndex] = max(chosenResult, helper(i + 1, j));
 
     return cache[cacheIndex];

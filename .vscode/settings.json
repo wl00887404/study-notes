@@ -65,7 +65,17 @@
     "variant": "cpp",
     "scoped_allocator": "cpp",
     "future": "cpp",
-    "complex": "cpp"
+    "complex": "cpp",
+    "any": "cpp",
+    "cfenv": "cpp",
+    "charconv": "cpp",
+    "codecvt": "cpp",
+    "csetjmp": "cpp",
+    "csignal": "cpp",
+    "cuchar": "cpp",
+    "mutex": "cpp",
+    "thread": "cpp",
+    "typeindex": "cpp"
   },
   "cSpell.words": ["leetcode"],
   "workbench.colorCustomizations": {

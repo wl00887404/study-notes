@@ -14,8 +14,8 @@ using namespace std;
  * https://medium.com/@ryanyang1221/leetcode-challenge-5-29-course-schedule-%E4%B8%89%E9%83%A8%E6%9B%B2%E5%A4%A7%E7%A6%AE%E5%8C%85-%E4%B8%8A-64d17fa5b1ba
  * 基本上就是拓撲排序
  * https://zh.wikipedia.org/wiki/%E6%8B%93%E6%92%B2%E6%8E%92%E5%BA%8F
- *
  */
+
 class Solution {
  public:
   bool canFinish(int numCourses, vector<vector<int>>& prerequisites) {

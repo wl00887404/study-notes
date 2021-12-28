@@ -31,6 +31,12 @@ using namespace std;
  * 兩兩有機會產生一個等差數列
  */
 
+/**
+ * 2021/12/21
+ * 這題應該也跟 LCS 公共子序列有關係
+ * TODO: 好好想想
+ */
+
 class Solution {
  public:
   int numberOfArithmeticSlices(vector<int>& nums) {
