@@ -1,13 +1,13 @@
-
 /**
- * 這題跟 1009 一樣
- * 只是測試集沒有 0
- * 所以不需要對 0 做特別處理
+ * 與 476 同一題
+ * 只是要對 0 做特別處理
  */
 
 class Solution {
  public:
-  int findComplement(int num) {
+  int bitwiseComplement(int num) {
+    if (num == 0) return 1;
+
     int result = 0;
     int i = 0;
 

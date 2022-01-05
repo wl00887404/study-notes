@@ -3,8 +3,10 @@
 using namespace std;
 
 /**
+ * 龜兔賽跑演算法
  * Tortoise and Hare Algorithm
  * http://web.ntnu.edu.tw/~algo/Function.html
+ * https://zh.wikipedia.org/wiki/Floyd%E5%88%A4%E5%9C%88%E7%AE%97%E6%B3%95
  */
 
 class Solution {
