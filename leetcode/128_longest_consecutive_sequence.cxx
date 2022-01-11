@@ -112,21 +112,21 @@ void quickSort(vector<int>::iterator& begin, vector<int>::iterator& end) {
 
   // pivot 是最後一個元素
   vector<int>::iterator pivot = end - 1;
-  vector<int>::iterator firstBigger = begin;
+  vector<int>::iterator firstGreaterThan = begin;
   vector<int>::iterator iterator = begin;
 
   for (; iterator != pivot; iterator++) {
     if (*iterator < *pivot) {
-      swap(firstBigger, iterator);
-      firstBigger++;
+      swap(firstGreaterThan, iterator);
+      firstGreaterThan++;
     }
   }
 
-  swap(firstBigger, pivot);
+  swap(firstGreaterThan, pivot);
 
-  quickSort(begin, firstBigger);
-  firstBigger++;
-  quickSort(firstBigger, end);
+  quickSort(begin, firstGreaterThan);
+  firstGreaterThan++;
+  quickSort(firstGreaterThan, end);
 }
 
 class SortSolution {
@@ -134,7 +134,7 @@ class SortSolution {
   int longestConsecutive(vector<int>& nums) {
     int length = nums.size();
     if (length == 0) return 0;
-    
+
     vector<int>::iterator begin = nums.begin();
     vector<int>::iterator end = nums.end();
     quickSort(begin, end);

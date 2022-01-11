@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { resolve } from 'path';
 import { readFileSync, writeFileSync, appendFileSync } from 'fs';
+import chalk from 'chalk';
 
 const scriptPath = process.argv[1];
 const action = process.argv[2];
@@ -22,7 +23,7 @@ const main = async () => {
       question => question.stat.frontend_question_id === questionId,
     );
 
-    if (!question) return console.error('question not found');
+    if (!question) return console.error(chalk.red('question not found'));
 
     const questionTitle = question.stat.question__title
       .replace(/[-\s(),]/g, '_')
@@ -34,10 +35,11 @@ const main = async () => {
       scriptPath,
       `../${questionId}_${questionTitle}.cxx`,
     );
+
     return appendFileSync(fileName, '');
   }
 
-  console.error('command not found');
+  console.error(chalk.red('command not found'));
 };
 
 main();

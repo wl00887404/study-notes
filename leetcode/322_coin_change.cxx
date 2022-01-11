@@ -42,7 +42,7 @@ class Solution {
       i++;
       int length = queue.size();
       while (length--) {
-        int currentAmount = queue.front();
+        int& currentAmount = queue.front();
         for (int k = 0; k < coinsLength; k++) {
           int nextAmount = currentAmount - coins[k];
           if (nextAmount == 0) return i;
