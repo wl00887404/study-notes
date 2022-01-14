@@ -41,29 +41,6 @@ using namespace std;
  */
 
 /**
- * const array = [1, 2, 3, 4];
- * const result = [];
- *
- * const foo = (i = 0, string = '') => {
- *   if (i === array.length) {
- *     return result.push(string);
- *   }
- *
- *   if (i === 0) {
- *     foo(i + 1, '' + array[i]);
- *   } else {
- *     foo(i + 1, string + ' + ' + array[i]);
- *     foo(i + 1, string + ' - ' + array[i]);
- *     foo(i + 1, string + ' * ' + array[i]);
- *     foo(i + 1, string + '' + array[i]);
- *   }
- * };
- *
- * foo();
- * console.log(result)
- */
-
-/**
  * 假設 "1234"
  * 4 => + 4 = 4
  *   => - 4 = -4
@@ -108,6 +85,10 @@ using namespace std;
  * 就是上一個 comment 那樣
  */
 
+/**
+ * TODO: 參考 494 改一下 cache 的形式
+ * 以及那個 getProductExpressions 長得有點醜也可以改一下
+ */
 struct getProductExpressions {
   vector<pair<string, int>>* result;
   int numSize;

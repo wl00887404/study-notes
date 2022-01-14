@@ -92,6 +92,7 @@ class BestSolution {
     int maxRadius = 1;
     paddedS[0] = '^';
     paddedS[paddedLength - 1] = '$';
+
     for (int i = 1; i < paddedLength - 1; i++) {
       if (i % 2 == 1) {
         paddedS[i] = '#';
@@ -104,7 +105,6 @@ class BestSolution {
       int radius = 0;
       while (paddedS[i + radius + 1] == paddedS[i - radius - 1]) radius++;
 
-      // cout << i << " " << paddedS[i] << ": " << radius << endl;
       if (radius <= maxRadius) continue;
       maxIndex = i;
       maxRadius = radius;
@@ -117,8 +117,7 @@ class BestSolution {
      * padded index    1 2 3 4 5 6 7 8 9 10 11 12 13
      * original index    0   1   2   3    4     5
      */
-
-    return s.substr((maxIndex - maxRadius + 1) / 2 - 1, maxRadius);
+    return s.substr((maxIndex - maxRadius - 1) / 2, maxRadius);
   }
 } bestSolution;
 
