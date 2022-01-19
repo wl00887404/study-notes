@@ -18,8 +18,6 @@ using namespace std;
  * 
  * 要先進入 * / 模式
  * 再回歸 + - 模式
- * 
- * 
  */
 
 class Solution {
