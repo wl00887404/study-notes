@@ -106,6 +106,12 @@ class Solution {
  * m = m
  */
 
+/**
+ * 上面那個回答的發文者是 StefanPochmann
+ * 他好像超級有名的
+ * 在 378 也可以看到他的文章
+ */
+
 class BestSolution {
  public:
   int search(vector<int>& nums, int target) {
