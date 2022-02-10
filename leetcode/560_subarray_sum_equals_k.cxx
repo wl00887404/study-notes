@@ -50,7 +50,7 @@ class BestSolution {
 
     if (length == 0) return 0;
 
-    // key = pervSums value = count.
+    // key = pervSums, value = count.
     unordered_map<int, int> prevSums;
     int sum = 0;
     int count = 0;
