@@ -75,7 +75,8 @@
     "cuchar": "cpp",
     "mutex": "cpp",
     "thread": "cpp",
-    "typeindex": "cpp"
+    "typeindex": "cpp",
+    "glad.c": "cpp"
   },
   "cSpell.words": ["leetcode"],
   "workbench.colorCustomizations": {
