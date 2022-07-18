@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { resolve } from 'path';
 import { readFileSync, writeFileSync, appendFileSync } from 'fs';
+import { exec } from 'child_process';
 import chalk from 'chalk';
 
 const scriptPath = process.argv[1];
@@ -31,12 +32,14 @@ const main = async () => {
       .replace(/_$/g, '')
       .toLowerCase();
 
-    const fileName = resolve(
+    const filePath = resolve(
       scriptPath,
       `../${questionId}_${questionTitle}.cxx`,
     );
 
-    return appendFileSync(fileName, '');
+    appendFileSync(filePath, '');
+
+    return exec(`code ${filePath}`)
   }
 
   console.error(chalk.red('command not found'));
