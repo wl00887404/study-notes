@@ -18,7 +18,7 @@ class Solution {
       for (int x = 0; x < xLength; x++) {
         if (grid[y][x] == '0') continue;
         result++;
-        destoryIsland(grid, y, x, yLength, xLength);
+       destroyIsland(grid, y, x, yLength, xLength);
       }
     }
 
@@ -26,7 +26,7 @@ class Solution {
   }
 
  private:
-  void destoryIsland(vector<vector<char>>& grid, int& y, int& x, int& yLength,
+  void destroyIsland(vector<vector<char>>& grid, int& y, int& x, int& yLength,
                      int& xLength) {
     grid[y][x] = '0';
     int top = y - 1;
@@ -35,16 +35,16 @@ class Solution {
     int right = x + 1;
 
     if (top >= 0 && grid[top][x] == '1') {
-      destoryIsland(grid, top, x, yLength, xLength);
+      destroyIsland(grid, top, x, yLength, xLength);
     }
     if (bottom < yLength && grid[bottom][x] == '1') {
-      destoryIsland(grid, bottom, x, yLength, xLength);
+      destroyIsland(grid, bottom, x, yLength, xLength);
     }
     if (left >= 0 && grid[y][left] == '1') {
-      destoryIsland(grid, y, left, yLength, xLength);
+      destroyIsland(grid, y, left, yLength, xLength);
     }
     if (right < xLength && grid[y][right] == '1') {
-      destoryIsland(grid, y, right, yLength, xLength);
+      destroyIsland(grid, y, right, yLength, xLength);
     }
   }
 } solution;
