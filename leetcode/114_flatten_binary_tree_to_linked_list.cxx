@@ -69,3 +69,28 @@ class QueueSolution {
     preorder(node->right);
   }
 };
+
+/**
+ * 2022/7/27 又再寫一次
+ */
+class Solution {
+ public:
+  TreeNode* last;
+  void flatten(TreeNode* root) {
+    last = new TreeNode();
+    helper(root);
+  }
+
+  void helper(TreeNode* node) {
+    if (node == nullptr) return;
+
+    last->right = node;
+    last->left = nullptr;
+
+    last = node;
+    TreeNode* originalRight = node->right;
+
+    helper(node->left);
+    helper(originalRight);
+  }
+};

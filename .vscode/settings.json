@@ -76,7 +76,27 @@
     "mutex": "cpp",
     "thread": "cpp",
     "typeindex": "cpp",
-    "glad.c": "cpp"
+    "glad.c": "cpp",
+    "__hash_table": "cpp",
+    "__bit_reference": "cpp",
+    "__bits": "cpp",
+    "__config": "cpp",
+    "__debug": "cpp",
+    "__errc": "cpp",
+    "__locale": "cpp",
+    "__mutex_base": "cpp",
+    "__node_handle": "cpp",
+    "__nullptr": "cpp",
+    "__split_buffer": "cpp",
+    "__string": "cpp",
+    "__threading_support": "cpp",
+    "__tree": "cpp",
+    "__tuple": "cpp",
+    "compare": "cpp",
+    "concepts": "cpp",
+    "ios": "cpp",
+    "locale": "cpp",
+    "__functional_base": "cpp"
   },
   "cSpell.words": ["leetcode"],
   "workbench.colorCustomizations": {
@@ -96,7 +116,8 @@
     "titleBar.inactiveForeground": "#e7e7e799",
     "sash.hoverBorder": "#e04149",
     "statusBarItem.remoteBackground": "#cd212a",
-    "statusBarItem.remoteForeground": "#e7e7e7"
+    "statusBarItem.remoteForeground": "#e7e7e7",
+    "commandCenter.border": "#e7e7e799"
   },
   "peacock.color": "#cd212a"
 }

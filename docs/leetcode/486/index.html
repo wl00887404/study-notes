@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      body {
+        display: flex;
+        justify-content: center;
+        margin: 0;
+        padding: 1em;
+        position: relative;
+      }
+      canvas {
+        position: absolute;
+        top: 0;
+        left: 0;
+      }
+      #root {
+        position: relative;
+        z-index: 1;
+      }
+      .level {
+        display: flex;
+        gap: 2em;
+        position: relative;
+        align-items: center;
+      }
+
+      .level:not(:first-child) {
+        padding-top: 2em;
+      }
+      .node {
+        padding: 1em 2em;
+        border: 1px solid black;
+        border-radius: 4px;
+      }
+    </style>
+  </head>
+  <body>
+    <canvas id="" canvas></canvas>
+    <div id="root"></div>
+    <script>
+      const levels = [[1], [2, 3], [4, 5, 6, 789101112]];
+
+      const root = document.querySelector('#root');
+      const canvas = document.querySelector('canvas');
+      const levelDOMs = levels.map((nodes, index) => {
+        const level = document.createElement('div');
+        level.classList.add('level');
+        level.dataset.level = index;
+
+        level.innerHTML = nodes
+          .map(data => `<div class="node">${data}</div>`)
+          .join('');
+
+        root.append(level);
+
+        return level;
+      });
+
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+      const ctx = canvas.getContext('2d');
+
+      let i = levelDOMs.length - 1;
+      while (i--) {
+        const parentLevel = levelDOMs[i];
+        const childrenLevel = levelDOMs[i + 1];
+
+        Array.from(parentLevel.children).forEach((parent, i) => {
+          const children1 = childrenLevel.children[2 * i];
+          const children2 = childrenLevel.children[2 * i + 1];
+          const childRect1 = children1.getBoundingClientRect();
+          const childRect2 = children2.getBoundingClientRect();
+          const parentRect = parent.getBoundingClientRect();
+
+          const childCenter1 = childRect1.left + childRect1.width / 2;
+          const childCenter2 = childRect2.left + childRect2.width / 2;
+          const parentCenter = parentRect.left + parentRect.width / 2;
+
+          const marginLeft = (childCenter1 + childCenter2) / 2 - parentCenter;
+
+          parent.style.marginLeft = marginLeft + 'px';
+          ctx.beginPath();
+          ctx.moveTo(
+            parentCenter + marginLeft,
+            parentRect.top + parentRect.height,
+          );
+          ctx.lineTo(childCenter1, childRect1.top);
+          ctx.stroke();
+          ctx.beginPath();
+          ctx.moveTo(
+            parentCenter + marginLeft,
+            parentRect.top + parentRect.height,
+          );
+          ctx.lineTo(childCenter2, childRect2.top);
+          ctx.stroke();
+        });
+      }
+    </script>
+  </body>
+</html>

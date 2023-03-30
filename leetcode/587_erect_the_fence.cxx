@@ -17,8 +17,8 @@
  * 這個問題叫做 Convex Hull
  * 自己想出來了 Jarvis' March
  * 真開心
- * 
- * TODO: 研究 Andrew's Monotone Chain 
+ *
+ * TODO: 研究 Andrew's Monotone Chain
  */
 
 using namespace std;
