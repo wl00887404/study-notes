@@ -5,7 +5,6 @@ using namespace std;
 /**
  * brute force: 2e79360
  */
-
 class Solution {
  public:
   string longestPalindrome(string s) {
@@ -76,7 +75,9 @@ class DpSolution {
   }
 } dpSolution;
 
-// Manacher's Algorithm
+/**
+ * Manacher's Algorithm
+ */
 class BestSolution {
  public:
   string longestPalindrome(string s) {
@@ -91,14 +92,12 @@ class BestSolution {
     int maxIndex = 2;
     int maxRadius = 1;
     paddedS[0] = '^';
+    paddedS[1] = '#';
     paddedS[paddedLength - 1] = '$';
 
-    for (int i = 1; i < paddedLength - 1; i++) {
-      if (i % 2 == 1) {
-        paddedS[i] = '#';
-      } else {
-        paddedS[i] = s[i / 2 - 1];
-      }
+    for (int i = 0; i < length; i++) {
+      paddedS[i * 2 + 2] = s[i];
+      paddedS[i * 2 + 3] = '#';
     }
 
     for (int i = 1; i < paddedLength - 1; i++) {
