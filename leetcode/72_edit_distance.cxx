@@ -28,6 +28,11 @@ using namespace std;
  * https://leetcode.com/problems/edit-distance/discuss/25846/C%2B%2B-O(n)-space-DP
  */
 
+
+/**
+ * 2023/4/28 在 839 遇到類似的題目
+ * 72 這題又稱為萊文斯坦距離 Levenshtein distance
+*/
 class Solution {
  public:
   int minDistance(string word1, string word2) {
