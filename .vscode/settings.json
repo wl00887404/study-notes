@@ -98,7 +98,10 @@
     "locale": "cpp",
     "__functional_base": "cpp"
   },
-  "cSpell.words": ["leetcode"],
+  "cSpell.words": [
+    "leetcode",
+    "Subseq"
+  ],
   "workbench.colorCustomizations": {
     "activityBar.activeBackground": "#e04149",
     "activityBar.activeBorder": "#2ddb24",
@@ -119,5 +122,6 @@
     "statusBarItem.remoteForeground": "#e7e7e7",
     "commandCenter.border": "#e7e7e799"
   },
-  "peacock.color": "#cd212a"
+  "peacock.color": "#cd212a",
+  "C_Cpp.default.compilerPath": "/usr/bin/g++"
 }
