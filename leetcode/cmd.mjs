@@ -15,7 +15,8 @@ const main = async () => {
     return writeFileSync(questionsPath, JSON.stringify(data.stat_status_pairs));
   }
   if (action === 'add') {
-    const questionId = parseInt(process.argv[3]);
+    const [rawQuestionId, fileExtension = 'cxx'] = process.argv[3].split('.');
+    const questionId = parseInt(rawQuestionId);
     const questions = JSON.parse(
       readFileSync(questionsPath, { encoding: 'utf-8' }),
     );
@@ -34,12 +35,12 @@ const main = async () => {
 
     const filePath = resolve(
       scriptPath,
-      `../${questionId}_${questionTitle}.cxx`,
+      `../${questionId}_${questionTitle}.${fileExtension}`,
     );
 
     appendFileSync(filePath, '');
 
-    return exec(`code ${filePath}`)
+    return exec(`code ${filePath}`);
   }
 
   console.error(chalk.red('command not found'));
