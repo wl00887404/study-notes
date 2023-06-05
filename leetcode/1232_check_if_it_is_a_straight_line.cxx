@@ -2,7 +2,7 @@
 #include <vector>
 using namespace std;
 
-class Solution {
+class Solution2020 {
  public:
   bool checkStraightLine(vector<vector<int>>& coordinates) {
     int length = coordinates.size();
@@ -56,3 +56,38 @@ int main() {
 
   return 0;
 }
+
+class Solution {
+ public:
+  bool checkStraightLine(vector<vector<int>>& coordinates) {
+    int size = coordinates.size();
+    if (size == 2) return true;
+
+    double slope1 = (double)(coordinates[0][1] - coordinates[1][1]) /
+                    (coordinates[0][0] - coordinates[1][0]);
+
+    if (slope1 == INFINITY || slope1 == -INFINITY) {
+      return isVerticalLine(coordinates);
+    }
+
+    for (int i = 2; i < size; i++) {
+      double slope2 = (double)(coordinates[0][1] - coordinates[i][1]) /
+                      (coordinates[0][0] - coordinates[i][0]);
+      if (slope1 != slope2) return false;
+    }
+
+    return true;
+  }
+
+  bool isVerticalLine(vector<vector<int>>& coordinates) {
+    int size = coordinates.size();
+
+    int x = coordinates[0][0];
+
+    for (int i = 1; i < size; i++) {
+      if (coordinates[i][0] != x) return false;
+    }
+
+    return true;
+  }
+};

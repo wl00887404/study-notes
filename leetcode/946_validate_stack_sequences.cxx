@@ -9,8 +9,7 @@ using namespace std;
  * 還原來這題我在 2022 年寫過
  */
 
-// 2022 年寫的
-class Solution {
+class Solution2022 {
  public:
   bool validateStackSequences(vector<int>& pushed, vector<int>& popped) {
     int i = 0;
@@ -33,7 +32,7 @@ class Solution {
   }
 };
 
-class Y2023Solution {
+class Solution {
  public:
   bool validateStackSequences(vector<int>& pushed, vector<int>& popped) {
     int size = pushed.size();
