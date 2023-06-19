@@ -96,7 +96,9 @@
     "concepts": "cpp",
     "ios": "cpp",
     "locale": "cpp",
-    "__functional_base": "cpp"
+    "__functional_base": "cpp",
+    "__verbose_abort": "cpp",
+    "climits": "cpp"
   },
   "cSpell.words": [
     "leetcode",
