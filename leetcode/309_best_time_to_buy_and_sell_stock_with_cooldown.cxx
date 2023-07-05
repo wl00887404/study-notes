@@ -25,6 +25,7 @@ using namespace std;
  * https://leetcode.com/problems/best-time-to-buy-and-sell-stock-with-cooldown/discuss/75928/Share-my-DP-solution-(By-State-Machine-Thinking)
  *
  * 太神啦
+ * 飛雷神：state machine、狀態機
  */
 
 class RecursiveSolution {

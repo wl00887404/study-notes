@@ -1,5 +1,3 @@
-#include <bits/stdc++.h>
-
 #include <iostream>
 #include <vector>
 
@@ -42,52 +40,37 @@ using namespace std;
  * TODO: 重寫以前的思路以及研究最佳解
  */
 
-void log(vector<int>& array) {
-  for (int i = 0; i < array.size(); i++) {
-    cout << array[i] << " ";
-  }
-  cout << endl;
-}
-
-void log(int* array, int size) {
-  for (int i = 0; i < size; i++) {
-    cout << array[i] << " ";
-  }
-  cout << endl;
-}
-
 class Solution {
  public:
   int maxProfit(vector<int>& prices) {
     int size = prices.size();
     int result = 0;
-    int h[size];
-    int t[size];
+    int h[size];  // head
+    int t[size];  // tail
 
+    // 從頭往後找 maxProfit
+    // 往後的目標是找到更大的值，所以只要紀錄目前最小的值就好
     h[0] = 0;
-    int smallest = prices[0];
+    int minimum = prices[0];
     for (int i = 1; i < size; i++) {
-      smallest = min(smallest, prices[i]);
-      h[i] = max(h[i - 1], prices[i] - smallest);
+      minimum = min(minimum, prices[i]);
+      h[i] = max(h[i - 1], prices[i] - minimum);
       result = max(result, h[i]);
     }
 
+    // 從尾往前找 maxProfit
+    // 往前的目標是找到更小的值，所以只要紀錄目前最大的值就好
     t[size - 1] = 0;
-    int biggest = prices[size - 1];
+    int maximum = prices[size - 1];
     for (int i = size - 2; 0 <= i; i--) {
-      biggest = max(biggest, prices[i]);
-      t[i] = max(t[i + 1], biggest - prices[i]);
+      maximum = max(maximum, prices[i]);
+      t[i] = max(t[i + 1], maximum - prices[i]);
       result = max(result, t[i]);
     }
 
     for (int i = 1; i < size - 1; i++) {
       result = max(result, h[i] + t[i + 1]);
     }
-
-    // log(prices);
-    // log(h, size);
-    // log(t, size);
-    // cout << result << endl;
 
     return result;
   }
