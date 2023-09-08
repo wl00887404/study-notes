@@ -3,26 +3,36 @@
 
 using namespace std;
 
+/**
+ * 回傳結果要包含 nums 所有數字
+ * 也就是把連號刪掉
+ * 濃縮成範圍
+ */
+
 class Solution {
  public:
   vector<string> summaryRanges(vector<int>& nums) {
     int size = nums.size();
-    vector<string> results;
-
     int i = 0;
-    while (i < size) {
-      int j = i + 1;
-      while (j < size && nums[j - 1] + 1 == nums[j]) j++;
+    vector<string> result;
 
-      if (j - i == 1) {
-        results.push_back(to_string(nums[i]));
-      } else {
-        results.push_back(to_string(nums[i]) + "->" + to_string(nums[j - 1]));
+    while (i < size) {
+      string s = to_string(nums[i]);
+      int j = i;
+      // 省略連號
+      while (j + 1 < size && nums[j] + 1 == nums[j + 1]) {
+        j++;
       }
 
-      i = j;
+      if (i != j) {
+        s += "->" + to_string(nums[j]);
+      }
+
+      i = j + 1;
+
+      result.push_back(s);
     }
 
-    return results;
+    return result;
   }
 };
