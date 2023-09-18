@@ -6,6 +6,10 @@
 using namespace std;
 
 /**
+ * 題意：給一個 pushed 與 popped 歷程，要驗證是否為 stack 是否合法
+ */
+
+/**
  * 還原來這題我在 2022 年寫過
  */
 
@@ -63,5 +67,42 @@ class Solution {
     }
 
     return s.empty() && j == size;
+    stack<int> stack;
+
+    while (i < size && j < size) {
+      stack.push(pushed[i]);
+
+      while (!stack.empty() && stack.top() == popped[j]) {
+        j++;
+        stack.pop();
+      }
+
+      i++;
+    }
+
+    return stack.empty();
+  }
+};
+
+class SpaceOnSolution {
+ public:
+  bool validateStackSequences(vector<int>& pushed, vector<int>& popped) {
+    int i = 0;
+    int j = 0;
+    int size = pushed.size();
+
+    while (i < size && j < size) {
+      if (0 <= i && pushed[i] == popped[j]) {
+        j++;
+
+        pushed[i] = -1;  // 改成負值以刪掉數字
+
+        while (0 <= i && pushed[i] < 0) i--;
+      } else {
+        i++;
+      }
+    }
+
+    return i == -1 && j == size;
   }
 };
