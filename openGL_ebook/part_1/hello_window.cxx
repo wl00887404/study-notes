@@ -4,6 +4,7 @@
 // clang-format on
 
 #include <iostream>
+using namespace std;
 
 // 當視窗 resize 的 callback
 void framebuffer_size_callback(GLFWwindow* window, int width, int height) {
@@ -35,7 +36,7 @@ int main() {
 
   // 開失敗了 GG
   if (window == NULL) {
-    std::cout << "Failed to create GLFW window" << std::endl;
+    cout << "Failed to create GLFW window" << endl;
     glfwTerminate();
     return -1;
   }
@@ -43,7 +44,7 @@ int main() {
 
   // 檢查 GLAD 有沒有啟動成功
   if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)) {
-    std::cout << "Failed to initialize GLAD" << std::endl;
+    cout << "Failed to initialize GLAD" << endl;
     return -1;
   }
 

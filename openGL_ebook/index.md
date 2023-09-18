@@ -1,73 +1,34 @@
 # Learn OpenGL - Graphics Programming
 
-> <https://learnopengl.com/>
-> TODO: 還有 <https://thebookofshaders.com/04/?lan=ch> 可以看
+> 我不想再當做 CRUD 的 FE 了啦 QQQQQQQ
+> <https://www.linkedin.com/pulse/%E5%8F%B0%E7%81%A3%E8%BB%9F%E9%AB%94%E7%94%A2%E6%A5%AD%E7%9A%84%E7%8F%BE%E6%B3%81-tamer-abuelata/>
+> 想寫 3D、OpenGL、CUDA 之類 GPU 的酷東西
 
-## Part I - Getting started
+- <https://learnopengl.com/>
 
-### 2. OpenGL
+## 還可以看的資源
 
-- OpenGL 是操作 graphics 與 images 的 API ，更精準的說起來 OpenGL 是一個由 khronos 制定的規格。
-- 可以使用 OpenGL 的版本取決於你的顯卡供應商，如果有 Bug ，更新顯卡驅動程式通常能夠解決。
-- OpenGL 是 state machine ， state 也就是 context ，就跟 Browser Canvas 一樣。
-- 跟 DOM 一樣，在 OpenGL 中是操作 Objects ，表示各種元件，像是 Window 之類的。
+- <https://thebookofshaders.com/04/?lan=ch>
+- <https://www.youtube.com/playlist?list=PLlrATfBNZ98dC-V-N3m0Go4deliWHPFwT>
+- <https://www.pbr-book.org/3ed-2018/contents>
 
-以下是安裝相關：
+## 副檔名
 
-#### C++
+命名方法參考 [這裡](https://stackoverflow.com/a/26531467/15745160)
 
-```bash
-sudo apt-get install build-essential
-```
+- vert: a vertex shader
+- tesc: a tessellation control shader
+- tese: a tessellation evaluation shader
+- geom: a geometry shader
+- frag: a fragment shader
+- comp: a compute shader
 
-#### OpenGL
+## GLSL Jobs in Taiwan
 
-```bash
-sudo apt-get install libgl1-mesa-dev
-sudo apt-get install libglu1-mesa-dev
-```
+<https://www.104.com.tw/job/7hj9t?jobsource=jolist_a_relevance>
+<https://phase.recruitee.com/o/graphics-webgl-engineer>
+<https://www.104.com.tw/job/7d6lj?jobsource=browsed_Job>
 
-#### GLUT (freeglut)
+## Dream Jobs Maybe
 
-```bash
-sudo apt-get install freeglut3-dev
-```
-
-#### GLEW
-
-```bash
-sudo apt-get install libglew-dev
-```
-
-#### GLFW
-
-功能等同於 freeglut
-開視窗、處理 input 等等基本功能
-把 OpenGL 封裝的比較好操作
-
-```bash
-sudo apt-get install libglfw3
-sudo apt-get install libglfw3-dev
-```
-
-#### GLAD
-
-OpenGL 的 driver
-省略掉一堆繁瑣的設定
-
-依據這本書要選擇 gl 3.3 版
-Profile 要選 Core
-
-<https://www.itread01.com/content/1541158995.html>
-
-- Core-profile vs Immediate mode
-  Core 是比較自由、比較難用的模式，但是作者說用這個會學比較好，所以用這個。
-
-### 5. Hello Triangle
-
-- 老樣子 render pipeline ，介紹 shader 渲染器、 OpenGL Shading Language (GLSL) 。
-- 老樣子提了 primitives 形元，也就是 GL_POINTS 、 GL_TRIANGLES 、 GL_LINE_STRIP 。
-- 管理頂點的 Object 叫做 Vertex Buffer Objects (VBO) ，使用 glGenBuffers 產生 。
-- VBO 的 buffer type 選擇 GL_ARRAY_BUFFER ，使用 glBindBuffer 綁定。
-- 最後使用 glBufferData 綁定資料。
-- 這種左是 -1.0 右是 1.0 的座標，稱之為 Normalized Device Coordinates (NDC) ，我記得以前學叫做 Clipping Space ，兩者好像不太一樣。
+<https://careers.google.com/jobs/results/100084294048719558-software-engineer-chrome-os-camera-application/?distance=50&hl=en_US&jlo=en_US&location=Taiwan&q=software>
