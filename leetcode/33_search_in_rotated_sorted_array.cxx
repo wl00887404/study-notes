@@ -16,7 +16,7 @@ using namespace std;
  * 那個解答就當做紀念就好
  */
 
-class Solution {
+class OldSolution {
  public:
   int search(vector<int>& nums, int target) {
     int left = 0;
@@ -94,15 +94,15 @@ class Solution {
  * 選用 nums[0] 判斷的情境為：
  *
  * [0, 1, 2, 3, 4, 5, 6, 7]
- *  m           0  t
+ *  m           0  l
  * m = Infinity
  *
  * [0, 1, 2, 3, 4, 5, 6, 7]
- *     t        0     m
+ *     l        0     m
  * m = -Infinity
  *
  * [0, 1, 2, 3, 4, 5, 6, 7]
- *              0  m     t
+ *              0  m     l
  * m = m
  */
 
@@ -145,10 +145,10 @@ class BestSolution {
   }
 };
 
-class Solution153 {
+class Solution2021 {
  public:
   int search(vector<int>& nums, int target) {
-    int rotatedLength = getRoatedLength(nums);
+    int rotatedLength = getRotatedLength(nums);
     int length = nums.size();
     int left = rotatedLength;
     int right = rotatedLength + length;
@@ -170,7 +170,7 @@ class Solution153 {
 
  private:
   // 找到最小的位置
-  int getRoatedLength(vector<int>& nums) {
+  int getRotatedLength(vector<int>& nums) {
     int left = 0;
     int right = nums.size();
 
@@ -187,6 +187,44 @@ class Solution153 {
 
     return left;
   };
+};
+
+/**
+ * 重新改寫一下 best solution
+ */
+class Solution {
+ public:
+  int search(vector<int>& nums, int target) {
+    if (target == nums[0]) return 0;
+
+    int left = 0;
+    int right = nums.size();
+
+    while (left < right) {
+      int mid = (left + right) / 2;
+
+      int num = get(nums, target, mid);
+
+      if (num == target) return mid;
+
+      if (num > target) {
+        right = mid;
+      } else {
+        left = mid + 1;
+      }
+    }
+
+    return -1;
+  }
+
+ private:
+  int get(vector<int>& nums, int& target, int index) {
+    if (target > nums[0]) {
+      return nums[index] < nums[0] ? 10001 : nums[index];
+    }
+
+    return nums[index] > nums[0] ? -10001 : nums[index];
+  }
 };
 
 int main() {
