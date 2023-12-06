@@ -1,6 +1,6 @@
 #include <iostream>
 #include <queue>
-#include <unordered_set>
+#include <unordered_map>
 
 using namespace std;
 
@@ -30,9 +30,9 @@ using namespace std;
  * *2 => 1000
  *
  * Example 3: 3 = 11, 10 = 1010
- *
- * 6 = 110
- *
+ * *2 => 110
+ * -1 => 101
+ * *2 => 1010
  *
  * 目標的 tail 0 可以直接砍掉
  * 因為用 *2 就可以達成了
@@ -48,7 +48,37 @@ using namespace std;
  * 101011 來自 101100
  */
 
+/**
+ * 2023/9/25 看來是沒什麼想法 XDD
+ * 觀察看上次出錯的答案
+ * 難過一點就暴搜
+ *
+ * 如果 startValue > target 的話
+ * 應該就只能一直 -1 吧
+ */
+
 class Solution {
  public:
-  int brokenCalc(int startValue, int target) { return 0; }
+  int brokenCalc(int startValue, int target) {
+    this->target = target;
+
+    return helper(startValue);
+  }
+
+  int target;
+  unordered_map<int, int> cache;
+
+  int helper(int startValue) {
+    if (startValue >= target) return startValue - target;
+
+    if (cache.count(startValue)) return cache[startValue];
+
+    cache[startValue] = 1 + helper(startValue * 2);
+
+    if (startValue != 1) {
+      cache[startValue] = min(cache[startValue], 1 + cache[startValue - 1]);
+    }
+
+    return cache[startValue];
+  }
 };
