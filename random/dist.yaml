@@ -1,0 +1,389 @@
+---
+immersed
+ɪˈmɜːst
+沉浸
+This cycle of reaction and rendering happens at a rapid enough rate that the viewer does not see individual images, but rather becomes immersed in a dynamic process.
+---
+terminology
+tɜːʳmɪnɒlədʒi
+術語
+We will not be able to cover every topic in depth, so our goal is to present key concepts and terminology.
+---
+ambient
+æmbiənt
+週遭
+We discuss ambient and directional occlusion and methods for rendering global illumination effects on diffuse and specular surfaces, as well as some promising unified approaches.
+---
+phenomena
+fɪnɒmɪnə
+現象
+The simulated phenomena range from large-scale atmospheric effects down to light scattering within thin hair fibers.
+---
+translucency
+trænzluːsənt
+半透明的
+The building is roofed entirely with translucent corrugated plastic.
+---
+appendix
+əpendɪks
+附錄
+For a more thorough explanation of many of the terms used in the section, and throughout this book, get our linear algebra appendix at realtimerendering.com.
+---
+ambiguity
+æmbɪgjuːɪti
+歧義
+Sometimes we use only three-element vectors and points, but we try to avoid any ambiguity as to which type is being used.
+---
+topping
+tɒpɪŋ
+醬料
+One preparing the bread, another adding meat, another adding toppings.
+---
+coarse
+kɔːʳs
+粗略
+A coarse division of the real-time rendering pipeline into four main stages.
+---
+collision
+kəlɪʒən
+碰撞
+I saw a head-on collision between two airplanes.
+---
+detection
+dɪtekʃən
+偵測
+They are cheating but are sophisticated enough to avoid detection.
+---
+cull
+kʌl
+撲殺
+The wildlife park is planning to cull 2,000 elephants.
+---
+dedicate
+dedɪkeɪt
+奉獻
+The vertex shader is now a more general unit dedicated to setting up the data associated with each vertex.
+---
+facilitate
+fəsɪlɪteɪt
+促進
+To facilitate projection and clipping, the camera and all the models are transformed with the view transform.
+---
+semantic
+sɪmæntɪk
+語義學
+The difference is mostly semantic, as transform between one and the other is simple.
+---
+canonical
+kənɒnɪkəl
+規範化
+The unit cube is called the canonical view volume.
+---
+concatenate
+kɒnˈkætɪˌneɪt
+串聯
+Note that projection is expressed as a matrix and so it may sometimes be concatenated with the rest of the geometry transform.
+---
+tessellation
+ˌtɛsɪˈleɪʃən
+密鋪
+---
+silhouette
+sɪluet
+輪廓
+Your ball may look good from 5 meters away, but up close the individual triangles, especially along the silhouette, become visible.
+---
+predate
+priːdeɪt
+早於…存在
+This shader predates the tessellation shader and so is more commonly found on GPUs.
+---
+latency
+ˋletnsɪ
+延遲
+To begin with, latency is a concern that all processors face.
+---
+resident
+rezɪdənt
+居民
+In our example, we assume that two thousand thread can all be resident on the GPU at one time.
+---
+mesh
+meʃ
+網格
+Surface normals are defined at mesh vertices as well, witch may seem like an odd choice.
+---
+vertex
+ˈvɜːtɛks
+頂點
+---
+interpolate
+ɪntɜːʳpəleɪt
+插入
+Every vertex passed in is processed by the vertex shader program, which then outputs a number of values that are interpolated across a triangle or line.
+---
+consist
+kənsɪst
+組成
+The object typically consists of triangles in a strip, a line segment, or simply a point.
+---
+opaque
+oʊpeɪk
+不透明的
+For opaque surfaces there is no real blending involved, as the fragment's color simply replaces the previously stored color.
+---
+practitioner
+præktɪʃənəʳ
+從業者
+For the computer graphics practitioner, it is extremely important to master transforms.
+---
+affine transform
+ˈæfaɪn trænsfɔːʳm
+仿射變換
+---
+endure
+ɪndjʊəʳ
+忍受；存在
+The reason The Lion King has endured is because the inspiration that we're getting from it is universal.
+---
+novice
+nɒvɪs
+初學者
+For the experienced reader, this can be used as a reference manual for simple transforms, and for the novice, it can serve as an introduction to the subject.
+---
+slanted
+slɑːnt
+使傾斜
+The carpenter slanted the roof to allow water to run off.
+---
+psychedelic
+saɪkədelɪk
+迷幻
+These can, for example, be used in games to distort an entire scene to create a psychedelic effect or otherwise warp a model's appearance.
+---
+perpendicular
+pɜːʳpəndɪkjʊləʳ
+垂直
+The sides of the loch are almost perpendicular.
+---
+slightly
+slaɪtli
+少量地
+You can also use slightly different kind of shear matrix.
+---
+subtle
+sʌtəl
+不易察覺的
+However, many of them are too subtle to catch with a lint rule anyway.
+---
+thesis
+θiːsɪs
+論文
+I conclude that when I'm done with my thesis, life will be better.
+---
+overzealous
+ˌəʊvəˈzɛləs
+過度熱心
+People get used to seeing the linter as an overzealous noisy gatekeeper rather than a helpful tool.
+---
+lull
+lʌl
+麻痺
+It lulls me into  a false sense of accomplishment without improving my code.
+---
+distract
+dɪstrækt
+分心
+Don't get distracted by imaginary problems.
+---
+concentrate
+kɒnsəntreɪt
+專心
+---
+cub
+kʌb
+幼獸
+---
+motto
+mɒtoʊ
+座右銘
+---
+skim
+skɪm
+撇去……表面的浮物；瀏覽
+You should also at least skim how to draw multiple things to give you some idea of how more typical WebGL apps are structured because unfortunately nearly all the examples only draw one thing and so do not show that structure.
+---
+exit
+egzɪt
+離開
+---
+intimate
+verb. ɪntɪmeɪt adj. ɪntɪmət
+親密
+If you intimate something, you say it in an indirect way.
+---
+elaborating
+cite
+practitioner
+synthetic
+extent
+encyclopedia
+outgrown
+immerse
+exhaustive
+shutter
+illuminate
+flicker
+criterion
+qualify
+sufficient
+robust
+comprehension
+orthonormal
+comprise
+---
+homogeneous coordinate
+---
+anti-aliasing
+---
+arbitrary
+---
+singular
+If this determinant is zero, the matrix is singular, and the inverse does not exist.
+---
+circumstances
+Putting it all together, the original transform itself can also be used directly to transform normals under these circumstances.
+---
+tangent
+Tangent vectors are different than normals in nature, and are always directly transformed by the original matrix.
+---
+orthogonal
+---
+suite
+---
+access
+---
+variable
+---
+algorithm
+---
+error
+---
+derive
+---
+intuitive
+---
+depicted
+---
+tilt
+---
+potentially
+---
+aviation
+---
+vehicle
+---
+alternate
+These are some of the reasons that using alternate orientation representations such as quaternions, discussed later in the chapter, are worth pursuing.
+---
+pursue
+---
+instability
+The simple method outlined above can result in problems with numerical instability, which is avoidable at some cost in speed.
+---
+nonetheless
+Euler angles nonetheless are commonly used, as animators prefer curve editors to specify how angles change over time.
+---
+wrench
+---
+grip
+---
+bolt
+---
+assumption
+---
+retrieve
+The task of retrieving various transforms from a concatenated matrix is called matrix decomposition.
+---
+this
+---
+align
+---
+render
+---
+margin
+---
+grid
+---
+ubuntu
+---
+fortunately
+---
+articles
+---
+commutative
+交換律
+---
+rasterization
+---
+hue
+---
+saturation
+---
+luminance
+---
+demystify
+I hope these posts have helped demystify matrix math.
+---
+eternity
+His wife endured the absolute eternity that it took to produce this book.
+---
+tendency 
+His general tendency to generate lots of interesting ideas for large-scale projects that are initiated and then dropped a quarter of the way through.
+---
+indirect
+間接的
+---
+inherit
+ɪnherɪt
+---
+tremendous
+trɪmendəs
+---
+carpet
+kɑːʳpɪt
+---
+philosophy
+While our use case is different, a similar philosophy applies to effects.
+---
+resilient
+---
+arbitrary
+While it's a good idea to have some consistent rules applied across a project, a lot of them ar arbitrary.
+---
+exotic
+The syntax for all of this seams a bit exotic.
+---
+interior
+In this example, we pass dst and src as the arguments on the interior, and strcpy as the function.
+---
+
+n ㄣ
+ng ㄤ
+
+ㄢ ㄤ 不分
+開口歐 音很像芋仔
+
+x e
+ax æ
+
+pitch ɪ
+peach i
+
+go o
+on ɔ
+
+her ɜ lower
+bed tell head
+get e higher, long sound
+say came April
