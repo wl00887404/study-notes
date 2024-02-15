@@ -40,7 +40,7 @@ class Solution {
 int main() {
   vector<int> nums = {2, 1, 1, 2, 1, 4};
   //                  ^     ^  ^
-  
+
   cout << solution.jump(nums) << endl;
 
   return 0;
