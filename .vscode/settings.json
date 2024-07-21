@@ -103,7 +103,16 @@
     "xhash": "cpp",
     "xtree": "cpp",
     "xstring": "cpp",
-    "xutility": "cpp"
+    "xutility": "cpp",
+    "xfacet": "cpp",
+    "xiosbase": "cpp",
+    "xlocale": "cpp",
+    "xlocinfo": "cpp",
+    "xmemory": "cpp",
+    "xstddef": "cpp",
+    "xtr1common": "cpp",
+    "ranges": "cpp",
+    "span": "cpp"
   },
   "cSpell.words": ["Khronos", "leetcode", "nums", "Subarray", "Subseq"],
   "workbench.colorCustomizations": {
@@ -126,5 +135,6 @@
     "statusBarItem.remoteForeground": "#e7e7e7",
     "commandCenter.border": "#e7e7e799"
   },
-  "peacock.color": "#cd212a"
+  "peacock.color": "#cd212a",
+  "C_Cpp.default.compilerPath": "cl.exe"
 }

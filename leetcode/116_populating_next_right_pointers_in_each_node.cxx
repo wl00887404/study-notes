@@ -52,14 +52,20 @@ class QueueSolution {
  * 右側的 next = 自己 next 的左側啦幹
  */
 
-class DisscussSolution {
+/**
+ * 2024/3/10 update
+ * 因為他是 perfect binary tree ，所以不會有跳過節點的問題
+ * 117 就不是 perfect binary tree 了
+ */
+
+class ForumSolution {
  public:
   Node* connect(Node* root) {
     if (!root) return NULL;
     if (root->left) {
       root->left->next = root->right;
       if (root->next) {
-        root->right->next = root->next->left;
+        root->right->next = root->next->left;  // 跨 parent 連結
       }
     }
     connect(root->left);
