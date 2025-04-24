@@ -113,7 +113,8 @@
     "xtr1common": "cpp",
     "ranges": "cpp",
     "span": "cpp",
-    "execution": "cpp"
+    "execution": "cpp",
+    "print": "cpp"
   },
   "cSpell.words": ["Khronos", "leetcode", "nums", "Subarray", "Subseq"],
   "workbench.colorCustomizations": {

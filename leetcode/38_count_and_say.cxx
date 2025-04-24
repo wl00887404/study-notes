@@ -3,6 +3,36 @@ using namespace std;
 
 class Solution {
  public:
+  unordered_map<int, string> map = {{1, "1"}};
+
+  string countAndSay(int n) {
+    if (map.count(n)) return map[n];
+
+    string s = countAndSay(n - 1);
+    map[n] = "";
+    int size = s.size();
+
+    int i = 0;
+    while (i < size) {
+      char& c = s[i];
+      int count = 1;
+      i++;
+
+      while (i < size && s[i] == c) {
+        count++;
+        i++;
+      }
+
+      map[n] += '0' + count;
+      map[n] += c;
+    }
+
+    return map[n];
+  }
+};
+
+class Solution2019 {
+ public:
   string countAndSay(int n) {
     if (n == 1) return "1";
 
