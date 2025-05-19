@@ -1627,3 +1627,118 @@ clientele
 represen
 imperative
 semiconductor engineer
+
+---
+
+what
+who
+where
+which
+how
+
+experience
+period
+
+我們公司做什麼
+我的糖果專案
+
+verified
+
+colleague
+
+instructions
+
+characteristics
+preferences
+
+candidate / candlaer
+competitive
+
+abroad
+exhaustion
+
+period /ˈpɪr.i.əd/
+pyramid /ˈpɪr.ə.mɪd/
+
+effortlessly
+
+comparison
+
+similarities
+
+apparent
+
+prompt payment
+authentic
+
+genuine
+undisputed
+
+purchases
+
+supplier ? 供應商
+
+honesty
+
+to save money for a rainy day
+
+meringue
+apricot
+
+Austrains
+
+Austrailian Austrains
+
+apricot
+
+Sachertorte
+Sa-ker-torte
+
+prince's
+
+Vienna
+recipe
+unsweetened
+whipped cream
+flour
+grease
+eggs yolks
+fahrenheit
+definitely
+
+eliminate 驅逐
+
+korea
+
+commertial 商業？
+
+colleague
+
+abbreviation
+
+exact
+
+We ned to undergo surgery when we encounter a car accident
+
+patients / 耐心怎麼念
+
+surgeon
+varies
+variations
+
+abacus
+civilizations
+
+complicated
+
+solving
+
+mathematics
+
+beads
+rods
+varoius
+
+flow
+
+alarm
