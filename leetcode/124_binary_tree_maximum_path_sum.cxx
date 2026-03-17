@@ -24,7 +24,7 @@ using namespace std;
  * 所以 return 0 是沒問題的
  */
 
-class Solution {
+class Solution2021 {
  public:
   int maxPathSum(TreeNode* root) {
     int result = root->val;
@@ -71,6 +71,53 @@ class Solution {
 
     return finalResult;
   }
+};
+
+class Solution {
+public:
+    int result;
+    int maxPathSum(TreeNode* root) {
+        result = root->val;
+        helper(root);
+
+        return result;
+    }
+
+    int helper(TreeNode* node) {
+        int& val = node->val;
+
+        if (node->left == NULL && node->right == NULL) {
+            result = max(result, val);
+            return val;
+        }
+
+        if (node->left == NULL || node->right == NULL) {
+            TreeNode* child = node->left != NULL ? node->left : node->right;
+
+            int thisResult = max(val,                // 自己
+                                 val + helper(child) // 自己 + 往下走
+            );
+
+            result = max(result, thisResult);
+            return thisResult;
+        }
+
+        int leftResult = helper(node->left);
+        int rightResult = helper(node->right);
+
+        int thisResult = max(val,             // 自己
+                             val + leftResult // 僅走左側
+        );
+        thisResult = max(thisResult,
+                         val + rightResult // 僅走右側
+        );
+
+        result = max(max(result, thisResult),
+                     val + leftResult + rightResult // 兩側都走
+        );
+
+        return thisResult;
+    }
 };
 
 int main() { return 0; }
