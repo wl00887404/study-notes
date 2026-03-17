@@ -4,12 +4,28 @@
 using namespace std;
 
 class Solution {
- public:
-  int rangeSumBST(TreeNode* root, int& low, int& high) {
-    if (root == NULL) return 0;
+public:
+    int low;
+    int high;
+    int result = 0;
 
-    return (low <= root->val && root->val <= high ? root->val : 0) +
-           rangeSumBST(root->left, low, high) +
-           rangeSumBST(root->right, low, high);
-  }
+    int rangeSumBST(TreeNode* root, int low, int high) {
+        this->low = low;
+        this->high = high;
+
+        inorder(root);
+        return result;
+    }
+
+    void inorder(TreeNode* node) {
+        if (node == nullptr) return;
+
+        if (node->val > low) inorder(node->left);
+
+        if (low <= node->val && node->val <= high) {
+            result += node->val;
+        }
+
+        if (node->val < high) inorder(node->right);
+    }
 };
