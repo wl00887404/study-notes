@@ -31,3 +31,8 @@
 <https://www.ptt.cc/bbs/Soft_Job/M.1640090008.A.A88.html>
 
 <https://docs.google.com/presentation/d/e/2PACX-1vQ17_XtJHkJnASHbmmuDgUr0hr6bN5c7A6VHMCZTz1PTE8Rkv9R-0qMeTImoyZEfeYAr-T7GXyhLhGD/pub?slide=id.g5afa9841e9_0_985>
+
+## STL
+
+<https://www.sczyh30.com/posts/C-C/cpp-stl-hashmap/>
+<http://www.360doc.com/content/10/0814/11/2595782_45943931.shtml>
